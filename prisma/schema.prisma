@@ -1,0 +1,180 @@
+// --- CONFIGURAÇÕES GERAIS ---
+
+// Define o gerador do cliente. Isso cria os arquivos JavaScript/TypeScript 
+// dentro de 'node_modules' para que seu código possa conversar com o banco.
+generator client {
+  provider = "prisma-client-js"
+}
+
+// Configura a conexão com o banco de dados.
+// Aqui estamos usando SQLite (arquivo local) e lendo a URL do arquivo .env.
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// --- MODELOS DE DADOS (TABELAS) ---
+
+// Modelo Usuario: Representa quem faz login no sistema (Administradores ou Jogadores).
+model Usuario {
+  // ID único gerado automaticamente no formato UUID (ex: "550e8400-e29b...").
+  id        String   @id @default(uuid())
+  
+  // Nome real do usuário do sistema.
+  nome      String
+  
+  // E-mail usado para login. O @unique impede dois usuários com o mesmo e-mail.
+  email     String   @unique
+  
+  // Senha do usuário (geralmente salva criptografada/hash).
+  senha     String
+  
+  // Define o nível de acesso. Padrão é "USER", mas pode ser "ADMIN".
+  role      String   @default("USER")
+  
+  // Data de criação do usuário. Padrão é o momento atual (now).
+  criadoEm  DateTime @default(now())
+
+  // Relacionamento inverso com Botonista. 
+  // O "?" indica que um usuário pode existir sem ter um perfil de botonista vinculado ainda.
+  botonista Botonista? 
+
+  // Define que o nome da tabela no banco de dados será "usuarios" (plural).
+  @@map("usuarios")
+}
+
+// Modelo Botonista: Representa o perfil do jogador de futebol de mesa (atleta).
+model Botonista {
+  // Identificador único do botonista.
+  id        String   @id @default(uuid())
+  
+  // Nome do botonista (ex: Apelido ou Nome de jogo).
+  nome      String
+  
+  // URL/Caminho para a foto do perfil (opcional).
+  fotoUrl   String?
+  
+  // Texto descritivo sobre o jogador (opcional).
+  descricao String?
+  
+  // Time que o botonista representa. Padrão: "Sport".
+  time      String?  @default("Sport")
+  
+  // Categoria do jogador (ex: Adulto, Master). Padrão: "ADULTO".
+  categoria String   @default("ADULTO")
+  
+  // Data de cadastro do perfil.
+  criadoEm  DateTime @default(now())
+
+  // --- RELACIONAMENTO COM USUARIO ---
+  // Chave estrangeira: Guarda o ID do usuário de login vinculado a este perfil.
+  // @unique garante 1 Usuário para 1 Botonista (relação 1:1).
+  usuarioId String?  @unique 
+  
+  // Configuração do relacionamento: conecta o campo 'usuarioId' deste modelo ao campo 'id' do modelo Usuario.
+  usuario   Usuario? @relation(fields: [usuarioId], references: [id])
+  
+  // Relacionamento: Um botonista pode ter vários resultados em campeonatos (Lista de Resultados).
+  resultados Resultado[]
+
+  // Nome da tabela no banco: "botonistas".
+  @@map("botonistas")
+}
+
+// Modelo Campeonato: Representa as competições/torneios.
+model Campeonato {
+  id        String   @id @default(uuid())
+  nome      String
+  fotoUrl   String?
+  descricao String?
+  
+  // Data do campeonato.
+  data      DateTime @default(now())
+  
+  // Peso do campeonato para ranking (ex: 1.0, 1.5).
+  peso      Float    @default(1.0)
+  
+  // Tipo define regras de pontuação (ex: INTERNO, ABERTO).
+  tipo      String   @default("INTERNO")
+   
+  // Um campeonato gera múltiplos resultados (um para cada participante).
+  resultados Resultado[]
+
+  @@map("campeonatos")
+}
+
+// Modelo Resultado: Tabela pivô que guarda as estatísticas de um jogador em um campeonato específico.
+model Resultado {
+  id         String   @id @default(uuid())
+  
+  // Posição final do jogador no campeonato (1º, 2º, etc.).
+  colocacao  Int
+  
+  // Divisão disputada (ex: 1ª divisão = 1, 2ª divisão = 2).
+  divisao    Int      @default(1)
+   
+  // --- ESTATÍSTICAS DETALHADAS ---
+  jogos      Int      @default(0) // Quantidade de partidas jogadas
+  vitorias   Int      @default(0)
+  empates    Int      @default(0)
+  derrotas   Int      @default(0)
+  golsPro    Int      @default(0) // Gols marcados
+  golsContra Int      @default(0) // Gols sofridos
+  
+  // Data do registro.
+  data       DateTime @default(now())
+   
+  // Relacionamento: A qual Botonista esses números pertencem?
+  botonistaId String
+  botonista   Botonista  @relation(fields: [botonistaId], references: [id])
+   
+  // Relacionamento: Em qual Campeonato isso aconteceu?
+  campeonatoId String
+  campeonato   Campeonato @relation(fields: [campeonatoId], references: [id])
+
+  @@map("resultados")
+}
+
+// Modelo Pagina: Conteúdo estático editável (Ex: "Sobre Nós", "Regulamento").
+model Pagina {
+  id        String   @id @default(uuid())
+  
+  // "Slug" é o identificador amigável na URL (ex: meusite.com/sobre). Deve ser único.
+  slug      String   @unique 
+  
+  titulo    String
+  conteudo  String   // Texto longo (pode conter HTML/Markdown).
+  
+  // @updatedAt atualiza este campo automaticamente sempre que o registro for modificado.
+  updatedAt DateTime @updatedAt 
+}
+
+// Modelo Conquista: Galeria de troféus ou títulos do clube.
+model Conquista {
+  id        String   @id @default(uuid())
+  nome      String   // Título (ex: Campeão Brasileiro).
+  ano       String   // Ano da conquista.
+  imagemUrl String?  // Foto do troféu.
+  
+  // Tipo da conquista para filtros (ESTADUAL, NACIONAL, etc).
+  tipo      String   @default("ESTADUAL") 
+  
+  criadoEm  DateTime @default(now())
+}
+
+// Modelo Noticia: Blog ou feed de novidades.
+model Noticia {
+  id        String   @id @default(uuid())
+  titulo    String
+  subtitulo String?
+  conteudo  String   // Corpo da notícia.
+  imagemUrl String?  // Imagem de capa da notícia.
+  
+  // Link externo opcional (ex: link para vídeo do Youtube ou matéria em outro site).
+  link      String?  
+  
+  data      DateTime @default(now())
+  
+  // Se false, a notícia fica salva mas não aparece no site (rascunho).
+  publicada Boolean  @default(true) 
+}
