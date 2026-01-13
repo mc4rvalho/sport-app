@@ -1,94 +1,283 @@
 import { prisma } from "@/lib/prisma";
+import Link from "next/link";
+import { gerarRanking } from "@/lib/ranking-logic";
 
-// Esta função roda no SERVIDOR. Nada de API externa!
-async function getDashboardData() {
-  // 1. Próximo Campeonato
-  const proximoCamp = await prisma.campeonato.findFirst({
-    where: { data: { gte: new Date() } },
-    orderBy: { data: "asc" },
-  });
-
-  // 2. Últimos Jogos (Buscando Resultados)
-  const ultimosJogos = await prisma.resultado.findMany({
-    take: 5,
-    orderBy: { id: "desc" },
-    include: { botonista: true, campeonato: true },
-  });
-
-  return { proximoCamp, ultimosJogos };
+function formatarFoto(url: string | null | undefined) {
+  if (!url) return "";
+  if (url.includes("drive.google.com") && url.includes("/file/d/")) {
+    try {
+      const id = url.split("/file/d/")[1].split("/")[0];
+      return `https://drive.google.com/thumbnail?id=${id}&sz=w400`;
+    } catch {
+      return url;
+    }
+  }
+  return url;
 }
 
 export default async function Home() {
-  const dados = await getDashboardData();
+  const proximoJogo = {
+    data: "24/01",
+    nome: "1º INTERNO DO SPORT",
+  };
+
+  const rankingCompleto = await gerarRanking();
+  const top3 = rankingCompleto.slice(0, 3);
+
+  const ultimosResultados = await prisma.resultado.findMany({
+    take: 5,
+    orderBy: { data: "desc" },
+    include: { botonista: true, campeonato: true },
+  });
+
+  const ultimaNoticia = await prisma.noticia.findFirst({
+    where: { publicada: true },
+    orderBy: { data: "desc" },
+  });
 
   return (
-    <div className="min-h-screen">
-      {/* BANNER HERO */}
-      <div
-        style={{
-          backgroundImage:
-            "linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Ilha_do_Retiro_-_Sport_x_Botafogo.jpg/1200px-Ilha_do_Retiro_-_Sport_x_Botafogo.jpg')",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-        className="w-full py-20 text-center border-b-4 border-(--leao-vermelho)"
-      >
-        <h3 className="text-white tracking-[4px] text-xl mb-4 font-bold">
-          PRÓXIMO COMPROMISSO
-        </h3>
+    <main className="min-h-screen pb-12 bg-[#0a0a0a]">
+      {/* HERO SECTION COMPACTA */}
+      <section className="bg-black border-b-4 border-(--leao-vermelho) py-10 text-center relative overflow-hidden shadow-xl z-10">
+        <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-40 mix-blend-overlay"></div>
 
-        {dados.proximoCamp ? (
-          <div>
-            <h1 className="text-6xl font-bold text-(--leao-amarelo) drop-shadow-md my-4">
-              {dados.proximoCamp.data.toLocaleDateString("pt-BR", {
-                day: "2-digit",
-                month: "2-digit",
-              })}
-            </h1>
-            <div className="text-3xl font-bold uppercase text-white">
-              {dados.proximoCamp.nome}
+        <div className="relative z-10 flex flex-col items-center">
+          <span className="inline-block bg-zinc-900/80 border border-zinc-700 px-3 py-1 rounded-full text-gray-400 text-[10px] font-bold tracking-[3px] uppercase mb-2">
+            Próxima Partida
+          </span>
+          <h1 className="text-(--leao-amarelo) font-barlow text-7xl md:text-8xl font-black leading-none mb-1 drop-shadow-[0_2px_10px_rgba(255,215,0,0.3)]">
+            {proximoJogo.data}
+          </h1>
+          <h2 className="text-white font-barlow text-2xl md:text-4xl uppercase font-bold tracking-wider max-w-2xl leading-tight">
+            {proximoJogo.nome}
+          </h2>
+        </div>
+      </section>
+
+      {/* CONTAINER PRINCIPAL */}
+      <div className="max-w-6xl mx-auto px-4 mt-12 relative z-20">
+        {/* PÓDIO */}
+        {top3.length > 0 && (
+          <div className="mb-16 border-b border-zinc-900/50 pb-8">
+            {/* TÍTULO LÍDERES */}
+            <div className="text-center mb-16">
+              <h3 className="font-barlow text-3xl uppercase font-bold text-white inline-flex items-center gap-3 before:h-px before:w-12 before:bg-zinc-700 after:h-px after:w-12 after:bg-zinc-700 tracking-wider">
+                <span className="text-(--leao-amarelo) text-xl">♛</span> Líderes
+                da Temporada
+              </h3>
             </div>
-          </div>
-        ) : (
-          <div className="text-gray-400 italic">Aguardando calendário...</div>
-        )}
-      </div>
 
-      <main className="max-w-6xl mx-auto p-8">
-        <h2 className="text-center text-3xl font-bold text-(--leao-amarelo) mb-10 border-b border-gray-800 pb-4">
-          Painel do Sport
-        </h2>
-
-        {/* LISTA DE JOGOS */}
-        <div className="grid gap-4">
-          <h3 className="text-xl text-white font-bold border-l-4 border-(--leao-vermelho) pl-3">
-            ÚLTIMOS RESULTADOS
-          </h3>
-
-          {dados.ultimosJogos.length === 0 ? (
-            <p className="text-gray-500">Nenhum jogo registrado.</p>
-          ) : (
-            dados.ultimosJogos.map((jogo) => (
-              <div
-                key={jogo.id}
-                className="bg-zinc-900 p-4 rounded border border-zinc-800 flex justify-between items-center"
-              >
-                <div>
-                  <strong className="text-white block uppercase">
-                    {jogo.botonista.nome}
-                  </strong>
-                  <span className="text-gray-500 text-sm">
-                    {jogo.campeonato.nome}
+            <div className="flex justify-center items-end gap-4 md:gap-12">
+              {/* 2º LUGAR */}
+              {top3[1] && (
+                <div className="flex flex-col items-center group relative top-0">
+                  <Link
+                    href={`/atleta/${top3[1].id}`}
+                    className="relative mb-2 transition-transform group-hover:-translate-y-1 cursor-pointer"
+                  >
+                    <div className="w-8 h-8 absolute -top-2 -left-2 bg-zinc-400 text-black rounded-full flex items-center justify-center font-black text-xs border-2 border-[#0a0a0a] z-10 shadow-lg">
+                      2º
+                    </div>
+                    <div className="w-24 h-24 md:w-28 md:h-28 rounded-full border-4 border-zinc-400 overflow-hidden bg-zinc-900 shadow-xl">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={formatarFoto(top3[1].fotoUrl)}
+                        alt=""
+                        className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
+                      />
+                    </div>
+                  </Link>
+                  <Link
+                    href={`/atleta/${top3[1].id}`}
+                    className="font-barlow font-bold uppercase text-lg text-gray-300 text-center leading-tight truncate w-32 hover:text-white transition-colors cursor-pointer"
+                  >
+                    {top3[1].nome}
+                  </Link>
+                  <span className="text-xs text-zinc-500 font-bold mt-1 bg-zinc-900 px-2 py-0.5 rounded-full border border-zinc-800">
+                    {top3[1].pontosRanking} Pts
                   </span>
                 </div>
-                <div className="text-2xl font-bold text-(--leao-amarelo)">
-                  {jogo.colocacao}º
+              )}
+
+              {/* 1º LUGAR */}
+              {top3[0] && (
+                <div className="flex flex-col items-center z-10 relative -top-6">
+                  <Link
+                    href={`/atleta/${top3[0].id}`}
+                    className="relative mb-3 transition-transform hover:-translate-y-2 scale-110 cursor-pointer group"
+                  >
+                    <div className="w-10 h-10 absolute -top-3 -right-3 bg-(--leao-amarelo) text-black rounded-full flex items-center justify-center font-black text-lg border-4 border-[#0a0a0a] z-10 shadow-md">
+                      1º
+                    </div>
+
+                    <div className="absolute -top-10 left-1/2 -translate-x-1/2 text-4xl text-(--leao-amarelo) drop-shadow-md animate-pulse">
+                      ♔
+                    </div>
+
+                    <div className="w-32 h-32 md:w-36 md:h-36 rounded-full border-4 border-(--leao-amarelo) overflow-hidden bg-zinc-900 shadow-[0_0_30px_rgba(255,215,0,0.2)] ring-4 ring-(--leao-amarelo)/10 ring-offset-4 ring-offset-black group-hover:ring-(--leao-amarelo)/40 transition-all">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={formatarFoto(top3[0].fotoUrl)}
+                        alt=""
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  </Link>
+                  <Link
+                    href={`/atleta/${top3[0].id}`}
+                    className="font-barlow font-black uppercase text-3xl text-(--leao-amarelo) mb-1 text-center leading-none drop-shadow-md tracking-wide truncate w-48 hover:underline cursor-pointer"
+                  >
+                    {top3[0].nome}
+                  </Link>
+                  <div className="text-sm bg-(--leao-vermelho) px-4 py-1 rounded-full font-bold shadow-lg uppercase tracking-widest text-white border border-red-900">
+                    {top3[0].pontosRanking} PONTOS
+                  </div>
                 </div>
+              )}
+
+              {/* 3º LUGAR */}
+              {top3[2] && (
+                <div className="flex flex-col items-center group relative top-0">
+                  <Link
+                    href={`/atleta/${top3[2].id}`}
+                    className="relative mb-2 transition-transform group-hover:-translate-y-1 cursor-pointer"
+                  >
+                    <div className="w-8 h-8 absolute -top-2 -right-2 bg-[#cd7f32] text-black rounded-full flex items-center justify-center font-black text-xs border-2 border-[#0a0a0a] z-10 shadow-lg">
+                      3º
+                    </div>
+                    <div className="w-24 h-24 md:w-28 md:h-28 rounded-full border-4 border-[#cd7f32] overflow-hidden bg-zinc-900 shadow-xl">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={formatarFoto(top3[2].fotoUrl)}
+                        alt=""
+                        className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
+                      />
+                    </div>
+                  </Link>
+                  <Link
+                    href={`/atleta/${top3[2].id}`}
+                    className="font-barlow font-bold uppercase text-lg text-gray-300 text-center leading-tight truncate w-32 hover:text-white transition-colors cursor-pointer"
+                  >
+                    {top3[2].nome}
+                  </Link>
+                  <span className="text-xs text-zinc-500 font-bold mt-1 bg-zinc-900 px-2 py-0.5 rounded-full border border-zinc-800">
+                    {top3[2].pontosRanking} Pts
+                  </span>
+                </div>
+              )}
+            </div>
+          </div>
+        )}
+
+        {/* RESTO DO CONTEÚDO */}
+        <div className="grid lg:grid-cols-2 gap-10 mt-8">
+          {/* ÚLTIMOS JOGOS */}
+          <div>
+            <div className="flex items-center justify-between mb-6 border-l-4 border-(--leao-vermelho) pl-4 bg-linear-to-r from-zinc-900 to-transparent py-2 rounded-r-lg">
+              <h3 className="font-barlow text-2xl uppercase font-bold tracking-wide text-white">
+                Últimos Resultados
+              </h3>
+              <Link
+                href="/ranking"
+                className="text-[10px] font-bold text-zinc-400 hover:text-(--leao-amarelo) uppercase tracking-wider flex items-center gap-1 transition-colors border border-zinc-800 px-2 py-0.5 rounded hover:border-(--leao-amarelo)"
+              >
+                Ver Ranking →
+              </Link>
+            </div>
+
+            <div className="flex flex-col gap-3">
+              {ultimosResultados.map((jogo, index) => (
+                <div
+                  key={jogo.id}
+                  className={`bg-[#111] border border-zinc-800/60 p-3 rounded-lg flex items-center justify-between hover:border-zinc-600 hover:bg-[#161616] transition-all group shadow-md ${
+                    index === 0 ? "border-l-4 border-l-(--leao-amarelo)" : ""
+                  }`}
+                >
+                  <div className="flex items-center gap-4">
+                    <div className="w-10 h-10 bg-zinc-900 rounded flex items-center justify-center text-lg group-hover:scale-105 transition-transform shadow-inner border border-zinc-800">
+                      {jogo.campeonato.tipo === "COPA" ? "🏆" : "⚽"}
+                    </div>
+                    <div>
+                      <Link
+                        href={`/atleta/${jogo.botonista.id}`}
+                        className="text-white block uppercase font-barlow text-xl leading-none mb-1 group-hover:text-(--leao-amarelo) transition-colors tracking-tight hover:underline"
+                      >
+                        {jogo.botonista.nome}
+                      </Link>
+                      <span className="text-[10px] text-zinc-500 uppercase font-bold tracking-widest">
+                        {jogo.campeonato.nome}
+                      </span>
+                    </div>
+                  </div>
+                  <div className="flex flex-col items-end">
+                    <span className="text-3xl font-black font-barlow text-white leading-none italic group-hover:text-(--leao-amarelo) transition-colors">
+                      {jogo.colocacao}º
+                    </span>
+                    <span className="text-[8px] text-zinc-600 uppercase font-bold mt-0.5 tracking-widest">
+                      Colocação
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* DESTAQUE */}
+          <div>
+            <div className="flex items-center justify-between mb-6 border-l-4 border-(--leao-vermelho) pl-4 bg-linear-to-r from-zinc-900 to-transparent py-2 rounded-r-lg">
+              <h3 className="font-barlow text-2xl uppercase font-bold tracking-wide text-white">
+                Destaque do Leão
+              </h3>
+              <Link
+                href="/noticias"
+                className="text-[10px] font-bold text-zinc-400 hover:text-(--leao-amarelo) uppercase tracking-wider flex items-center gap-1 transition-colors border border-zinc-800 px-2 py-0.5 rounded hover:border-(--leao-amarelo)"
+              >
+                Mais Notícias →
+              </Link>
+            </div>
+
+            {ultimaNoticia ? (
+              <Link
+                href={ultimaNoticia.link || "/noticias"}
+                target={ultimaNoticia.link ? "_blank" : "_self"}
+                className="block bg-[#111] border border-zinc-800 rounded-2xl overflow-hidden group hover:border-(--leao-amarelo)/40 transition-all shadow-lg hover:shadow-(--leao-amarelo)/10 relative top-0 hover:-top-1"
+              >
+                <div className="h-64 overflow-hidden relative">
+                  {ultimaNoticia.imagemUrl && (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                      src={formatarFoto(ultimaNoticia.imagemUrl)}
+                      alt=""
+                      className="w-full h-full object-cover group-hover:scale-105 group-hover:rotate-1 transition-transform duration-700 ease-out"
+                    />
+                  )}
+
+                  <div className="absolute inset-0 bg-linear-to-t from-black via-black/70 to-transparent opacity-90"></div>
+
+                  <div className="absolute bottom-0 left-0 w-full p-6">
+                    <span className="inline-block bg-(--leao-vermelho) text-white text-[9px] font-black uppercase px-3 py-1 rounded mb-3 tracking-widest shadow-sm">
+                      {new Date(ultimaNoticia.data).toLocaleDateString("pt-BR")}
+                    </span>
+                    <h4 className="text-white font-barlow text-4xl font-black uppercase leading-none mb-2 group-hover:text-(--leao-amarelo) transition-colors drop-shadow-md">
+                      {ultimaNoticia.titulo}
+                    </h4>
+                    <p className="text-gray-300 text-xs line-clamp-2 max-w-lg leading-relaxed font-medium">
+                      {ultimaNoticia.subtitulo}
+                    </p>
+                  </div>
+                </div>
+              </Link>
+            ) : (
+              <div className="h-64 bg-[#111] border border-dashed border-zinc-800 rounded-2xl flex flex-col items-center justify-center text-zinc-500 gap-3">
+                <span className="text-4xl grayscale opacity-30">📰</span>
+                <p className="font-bold uppercase text-xs tracking-widest opacity-50">
+                  Sem notícias no momento.
+                </p>
               </div>
-            ))
-          )}
+            )}
+          </div>
         </div>
-      </main>
-    </div>
+      </div>
+    </main>
   );
 }

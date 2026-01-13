@@ -1,8 +1,8 @@
 import { gerarRanking } from "@/lib/ranking-logic";
-import { ItemRanking } from "@/types/ranking"; // Importação do Tipo
+import Link from "next/link";
 
-// Função para corrigir links do Google Drive
-function formatarFoto(url: string | null | undefined) {
+// Componente para formatar foto... (mantenha a função formatarFoto aqui)
+function formatarFoto(url: string | null) {
   if (!url) return "";
   if (url.includes("drive.google.com") && url.includes("/file/d/")) {
     try {
@@ -15,140 +15,148 @@ function formatarFoto(url: string | null | undefined) {
   return url;
 }
 
-export default async function RankingPage() {
-  // Busca os dados direto do banco (Server Side)
-  const lista = await gerarRanking();
+// O componente agora recebe searchParams para saber qual aba está ativa
+export default async function RankingPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ filtro?: string }>;
+}) {
+  const params = await searchParams;
+  const filtroAtual =
+    (params.filtro as "GERAL" | "INTERNO" | "ADULTO" | "MASTER") || "GERAL";
+
+  const ranking = await gerarRanking(filtroAtual);
+
+  const abas = [
+    { id: "GERAL", label: "Geral" },
+    { id: "INTERNO", label: "Interno" },
+    { id: "ADULTO", label: "Adulto" },
+    { id: "MASTER", label: "Master" },
+  ];
 
   return (
-    <div className="max-w-7xl mx-auto p-8">
-      {/* CABEÇALHO */}
-      <div className="text-center mb-10">
-        <h1 className="font-barlow text-5xl text-(--leao-amarelo) uppercase mb-0">
-          Classificação Oficial
-        </h1>
-        <div className="w-20 h-1 bg-(--leao-vermelho) mx-auto mt-2"></div>
-      </div>
-
-      {/* TABELA */}
-      <div className="overflow-x-auto border-t-4 border-(--leao-amarelo) bg-[#111] rounded-lg shadow-lg">
-        <table className="w-full min-w-225 border-collapse">
-          <thead>
-            <tr className="bg-black border-b-2 border-[#333] text-sm uppercase font-barlow text-gray-400">
-              <th className="p-4 text-center w-12 text-white">#</th>
-              <th className="p-4 text-left text-white">Atleta</th>
-              <th
-                className="p-4 text-center text-(--leao-amarelo) text-lg"
-                title="Pontos Ranking"
-              >
-                P
-              </th>
-              <th className="p-4 text-center" title="Jogos">
-                J
-              </th>
-              <th className="p-4 text-center" title="Vitórias">
-                V
-              </th>
-              <th className="p-4 text-center" title="Empates">
-                E
-              </th>
-              <th className="p-4 text-center" title="Derrotas">
-                D
-              </th>
-              <th className="p-4 text-center" title="Saldo Gols">
-                SG
-              </th>
-              <th className="p-4 text-center" title="Aproveitamento">
-                A%
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {/* AQUI ESTÁ A CORREÇÃO: Tipagem explícita no map */}
-            {lista.map((item: ItemRanking, index: number) => {
-              const posicao = index + 1;
-              const ehG4 = posicao <= 4;
-              const ehZ4 = posicao > lista.length - 4 && lista.length > 4;
-
-              // Cor da posição
-              let corPosicao = "text-white";
-              if (ehG4) corPosicao = "text-(--leao-amarelo)";
-              if (ehZ4) corPosicao = "text-(--leao-vermelho)";
-
-              return (
-                <tr
-                  key={item.nome}
-                  className="even:bg-[#1a1a1a] odd:bg-[#222] border-b border-[#333] hover:bg-[#2a2a2a] transition-colors"
+    <main className="min-h-screen bg-[#0a0a0a] pb-20 pt-10">
+      <div className="max-w-7xl mx-auto px-4">
+        {" "}
+        {/* Aumentei para 7xl para caber as colunas */}
+        <div className="text-center mb-10">
+          <h1 className="font-barlow text-5xl text-white uppercase font-black">
+            Classificação Oficial
+          </h1>
+        </div>
+        {/* ABAS DE NAVEGAÇÃO */}
+        <div className="flex justify-center gap-2 mb-8 flex-wrap">
+          {abas.map((aba) => (
+            <Link
+              key={aba.id}
+              href={`/ranking?filtro=${aba.id}`}
+              className={`px-6 py-2 rounded-full font-bold uppercase text-xs tracking-widest border transition-all ${
+                filtroAtual === aba.id
+                  ? "bg-(--leao-vermelho) text-white border-red-900"
+                  : "bg-zinc-900 text-zinc-500 border-zinc-800 hover:text-white"
+              }`}
+            >
+              {aba.label}
+            </Link>
+          ))}
+        </div>
+        <div className="bg-[#111] border border-zinc-800 rounded-xl overflow-hidden shadow-2xl overflow-x-auto">
+          <table className="w-full text-left border-collapse min-w-225">
+            <thead>
+              <tr className="bg-zinc-900 text-zinc-400 text-[10px] uppercase tracking-wider font-bold">
+                <th className="p-4 text-center w-12">#</th>
+                <th className="p-4">Atleta</th>
+                <th className="p-4 text-center text-white bg-zinc-800/50">
+                  PTS
+                </th>
+                <th className="p-4 text-center">J</th>
+                <th className="p-4 text-center text-green-500">V</th>
+                <th className="p-4 text-center text-zinc-500">E</th>
+                <th className="p-4 text-center text-red-500">D</th>
+                <th className="p-4 text-center">GP</th>
+                <th className="p-4 text-center">GC</th>
+                <th className="p-4 text-center font-bold text-white">SG</th>
+                <th
+                  className="p-4 text-center text-blue-400"
+                  title="Média Gols Pró"
                 >
-                  {/* POSIÇÃO */}
-                  <td
-                    className={`text-center p-3 font-bold text-lg ${corPosicao}`}
-                  >
-                    {posicao}
+                  MG+
+                </th>
+                <th
+                  className="p-4 text-center text-red-400"
+                  title="Média Gols Contra"
+                >
+                  MG-
+                </th>
+                <th className="p-4 text-center text-(--leao-amarelo)">%</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-zinc-800 text-sm">
+              {ranking.map((atleta, index) => (
+                <tr
+                  key={atleta.id}
+                  className="hover:bg-zinc-800/50 transition-colors group"
+                >
+                  <td className="p-4 text-center font-bold font-barlow text-lg text-zinc-600">
+                    {index + 1}
                   </td>
-
-                  {/* NOME + FOTO */}
-                  <td className="p-3 flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-[#333] overflow-hidden border border-[#555] shrink-0">
-                      {item.fotoUrl ? (
-                        // eslint-disable-next-line @next/next/no-img-element
+                  <td className="p-4">
+                    <Link
+                      href={`/atleta/${atleta.id}`}
+                      className="flex items-center gap-3"
+                    >
+                      <div className="w-8 h-8 rounded-full overflow-hidden border border-zinc-700">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img
-                          src={formatarFoto(item.fotoUrl)}
-                          alt={item.nome}
+                          src={formatarFoto(atleta.fotoUrl)}
+                          alt=""
                           className="w-full h-full object-cover"
                         />
-                      ) : (
-                        <span className="block text-center leading-10 text-lg">
-                          👤
-                        </span>
-                      )}
-                    </div>
-                    <div>
-                      <div className="text-white font-bold font-barlow text-lg uppercase leading-none">
-                        {item.nome}
                       </div>
-                      <div className="flex items-center gap-1 mt-1 opacity-70 text-xs uppercase">
-                        <span className="text-[10px]">⚽</span>{" "}
-                        {item.time || "Sport"}
-                      </div>
-                    </div>
+                      <span className="font-bold text-white uppercase group-hover:text-(--leao-amarelo) transition-colors">
+                        {atleta.nome}
+                      </span>
+                    </Link>
                   </td>
-
-                  {/* PONTOS (DESTAQUE) */}
-                  <td className="text-center p-3 font-bold text-(--leao-amarelo) text-xl bg-[rgba(255,215,0,0.05)]">
-                    {item.pontosRanking}
+                  <td className="p-4 text-center font-black text-lg bg-zinc-800/30 text-white">
+                    {atleta.pontosRanking}
                   </td>
-
-                  {/* ESTATÍSTICAS */}
-                  <td className="text-center p-3 text-gray-300">
-                    {item.jogos}
+                  <td className="p-4 text-center font-mono text-zinc-400">
+                    {atleta.jogos}
                   </td>
-                  <td className="text-center p-3 text-white font-bold">
-                    {item.vitorias}
+                  <td className="p-4 text-center font-mono text-green-500 font-bold">
+                    {atleta.vitorias}
                   </td>
-                  <td className="text-center p-3 text-gray-400">
-                    {item.empates}
+                  <td className="p-4 text-center font-mono text-zinc-500">
+                    {atleta.empates}
                   </td>
-                  <td className="text-center p-3 text-red-400">
-                    {item.derrotas}
+                  <td className="p-4 text-center font-mono text-red-500">
+                    {atleta.derrotas}
                   </td>
-
-                  <td
-                    className={`text-center p-3 font-bold ${
-                      item.sg >= 0 ? "text-green-500" : "text-red-500"
-                    }`}
-                  >
-                    {item.sg > 0 ? `+${item.sg}` : item.sg}
+                  <td className="p-4 text-center font-mono text-zinc-400">
+                    {atleta.golsPro}
                   </td>
-
-                  <td className="text-center p-3 text-gray-400 text-sm">
-                    {item.aproveitamento}%
+                  <td className="p-4 text-center font-mono text-zinc-400">
+                    {atleta.golsContra}
+                  </td>
+                  <td className="p-4 text-center font-mono text-white font-bold">
+                    {atleta.saldoGols}
+                  </td>
+                  <td className="p-4 text-center font-mono text-blue-400 text-xs">
+                    {atleta.mediaPro}
+                  </td>
+                  <td className="p-4 text-center font-mono text-red-400 text-xs">
+                    {atleta.mediaContra}
+                  </td>
+                  <td className="p-4 text-center font-mono text-(--leao-amarelo) font-bold">
+                    {atleta.aproveitamento}%
                   </td>
                 </tr>
-              );
-            })}
-          </tbody>
-        </table>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
-    </div>
+    </main>
   );
 }
