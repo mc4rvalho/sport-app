@@ -2,13 +2,13 @@ import { prisma } from "@/lib/prisma";
 import { salvarBotonista, excluirBotonista } from "./actions";
 import Link from "next/link";
 
-// Formata URL de foto
+// Formata URL de foto (CORRIGIDO PARA LINK DIRETO)
 function formatarFoto(url: string | null) {
   if (!url) return "";
   if (url.includes("drive.google.com") && url.includes("/file/d/")) {
     try {
       const id = url.split("/file/d/")[1].split("/")[0];
-      return `https://drive.google.com/thumbnail?id=${id}&sz=w200`;
+      return `https://drive.google.com/uc?export=view&id=${id}`;
     } catch {
       return url;
     }
@@ -27,7 +27,7 @@ export default async function AdminJogadores({
   // Busca jogadores
   const jogadores = await prisma.botonista.findMany({
     orderBy: { nome: "asc" },
-    include: { usuario: true }, // Inclui dados do usuário vinculado para mostrar no form
+    include: { usuario: true },
   });
 
   // Se tiver editId, busca o jogador específico para preencher o form
@@ -125,10 +125,10 @@ export default async function AdminJogadores({
               <label className="text-xs text-(--leao-amarelo) uppercase font-bold block mb-1">
                 🔐 Vincular Login (Área do Atleta)
               </label>
-              {/* CORREÇÃO AQUI: Troquei aspas duplas por simples */}
+              {/* CORREÇÃO: Usando &quot; para aspas duplas, que é o padrão seguro do HTML */}
               <p className="text-[10px] text-gray-500 mb-2">
                 Digite o e-mail do usuário cadastrado para que ele veja este
-                perfil ao clicar em 'Meu Perfil'.
+                perfil ao clicar em &quot;Meu Perfil&quot;.
               </p>
               <input
                 name="emailVinculo"

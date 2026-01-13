@@ -1,8 +1,6 @@
 import { prisma } from "@/lib/prisma";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 
-// Formata URL de foto
 function formatarFoto(url: string | null) {
   if (!url) return "";
   if (url.includes("drive.google.com") && url.includes("/file/d/")) {
@@ -38,10 +36,6 @@ export default async function PerfilAtleta({ params }: PageProps) {
 
   // Cálculos Gerais
   const totalJogos = atleta.resultados.reduce((acc, r) => acc + r.jogos, 0);
-  const totalVitorias = atleta.resultados.reduce(
-    (acc, r) => acc + r.vitorias,
-    0
-  );
   const totalTitulos = atleta.resultados.filter(
     (r) => r.colocacao === 1
   ).length;
@@ -123,7 +117,6 @@ export default async function PerfilAtleta({ params }: PageProps) {
         <div className="flex flex-col gap-4">
           {atleta.resultados.map((resultado) => {
             // Cálculos por linha
-            const pts = resultado.vitorias * 3 + resultado.empates;
             const saldo = resultado.golsPro - resultado.golsContra;
             const aproveitamento =
               resultado.jogos > 0
