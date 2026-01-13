@@ -1,31 +1,23 @@
 @import "tailwindcss";
-@import "tw-animate-css";
 
 :root {
-  /* Cores Oficias do Sport */
   --leao-vermelho: #d30915;
   --leao-preto: #111111;
   --leao-amarelo: #ffd700;
   --leao-verde: #009b3a;
 
-  --foreground-rgb: 255, 255, 255;
-  --background-start-rgb: 17, 17, 17;
-  --background-end-rgb: 0, 0, 0;
+  --font-barlow: 'Barlow Condensed', sans-serif;
+  --font-roboto: 'Roboto', sans-serif;
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: var(--leao-preto);
+  background-color: var(--leao-preto);
   background-image: url("https://www.transparenttextures.com/patterns/carbon-fibre.png");
+  color: white;
   font-family: Arial, Helvetica, sans-serif;
   min-height: 100vh;
 }
 
-/* Fontes de Título */
-h1,
-h2,
-h3 {
-  font-family: sans-serif;
-  text-transform: uppercase;
-  letter-spacing: 1px;
+.font-barlow {
+  font-family: var(--font-barlow);
 }
