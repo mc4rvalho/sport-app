@@ -2,7 +2,7 @@ import { prisma } from "@/lib/prisma";
 import { salvarBotonista, excluirBotonista } from "./actions";
 import Link from "next/link";
 
-// Formata URL de foto (CORRIGIDO PARA LINK DIRETO)
+// Formata URL de foto
 function formatarFoto(url: string | null) {
   if (!url) return "";
   if (url.includes("drive.google.com") && url.includes("/file/d/")) {
@@ -30,7 +30,6 @@ export default async function AdminJogadores({
     include: { usuario: true },
   });
 
-  // Se tiver editId, busca o jogador específico para preencher o form
   const jogadorEditando = editId
     ? jogadores.find((j) => j.id === editId)
     : null;
@@ -50,19 +49,19 @@ export default async function AdminJogadores({
           </h1>
         </div>
 
-        {/* FORMULÁRIO (Criação ou Edição) */}
+        {/* FORMULÁRIO PADRONIZADO (Dark Card) */}
         <div
-          className={`p-6 rounded-lg border border-zinc-800 mb-10 ${
+          className={`p-8 rounded-xl border border-zinc-800 mb-12 shadow-xl ${
             jogadorEditando
               ? "bg-yellow-900/10 border-yellow-700"
-              : "bg-[#1a1a1a]"
+              : "bg-[#141414]"
           }`}
         >
-          <div className="flex justify-between items-center mb-4 border-b border-zinc-700 pb-2">
-            <h3 className="text-white font-bold uppercase">
+          <div className="flex justify-between items-center mb-6 border-b border-zinc-700 pb-4">
+            <h3 className="text-white font-bold uppercase text-lg flex items-center gap-2">
               {jogadorEditando
                 ? `✏️ Editando: ${jogadorEditando.nome}`
-                : "+ Novo Contratado"}
+                : "➕ Novo Contratado"}
             </h3>
             {jogadorEditando && (
               <Link
@@ -78,30 +77,29 @@ export default async function AdminJogadores({
             action={salvarBotonista}
             className="grid grid-cols-1 md:grid-cols-2 gap-6 items-end"
           >
-            {/* Campo Oculto ID (para edição) */}
             <input type="hidden" name="id" value={jogadorEditando?.id || ""} />
 
             <div>
-              <label className="text-xs text-gray-400 uppercase font-bold block mb-1">
+              <label className="text-xs text-zinc-500 uppercase font-bold block mb-2 tracking-wider">
                 Nome do Atleta
               </label>
               <input
                 name="nome"
                 defaultValue={jogadorEditando?.nome}
                 required
-                className="w-full bg-black border border-zinc-700 text-white p-3 rounded focus:border-(--leao-amarelo) outline-none"
+                className="w-full bg-black border border-zinc-800 text-white p-3 rounded-lg focus:border-(--leao-amarelo) outline-none transition-all placeholder:text-zinc-700"
                 placeholder="Nome Completo"
               />
             </div>
 
             <div>
-              <label className="text-xs text-gray-400 uppercase font-bold block mb-1">
+              <label className="text-xs text-zinc-500 uppercase font-bold block mb-2 tracking-wider">
                 Categoria
               </label>
               <select
                 name="categoria"
                 defaultValue={jogadorEditando?.categoria || "ADULTO"}
-                className="w-full bg-black border border-zinc-700 text-white p-3 rounded focus:border-(--leao-amarelo) outline-none"
+                className="w-full bg-black border border-zinc-800 text-white p-3 rounded-lg focus:border-(--leao-amarelo) outline-none transition-all cursor-pointer"
               >
                 <option value="ADULTO">Adulto</option>
                 <option value="MASTER">Master</option>
@@ -109,103 +107,113 @@ export default async function AdminJogadores({
             </div>
 
             <div className="md:col-span-2">
-              <label className="text-xs text-gray-400 uppercase font-bold block mb-1">
-                URL da Foto (Perfil)
+              <label className="text-xs text-zinc-500 uppercase font-bold block mb-2 tracking-wider">
+                URL da Foto (Google Drive)
               </label>
               <input
                 name="fotoUrl"
                 defaultValue={jogadorEditando?.fotoUrl || ""}
-                className="w-full bg-black border border-zinc-700 text-white p-3 rounded focus:border-(--leao-amarelo) outline-none"
+                className="w-full bg-black border border-zinc-800 text-white p-3 rounded-lg focus:border-(--leao-amarelo) outline-none transition-all placeholder:text-zinc-700"
                 placeholder="https://drive.google.com/..."
               />
             </div>
 
-            {/* VINCULAR USUÁRIO */}
-            <div className="md:col-span-2 bg-zinc-900 p-4 rounded border border-zinc-800">
-              <label className="text-xs text-(--leao-amarelo) uppercase font-bold block mb-1">
+            {/* CARD DE VÍNCULO */}
+            <div className="md:col-span-2 bg-zinc-900/50 p-5 rounded-lg border border-zinc-800 border-dashed mt-2">
+              <label className="text-xs text-(--leao-amarelo) uppercase font-bold block mb-2 tracking-wider">
                 🔐 Vincular Login (Área do Atleta)
               </label>
-              {/* CORREÇÃO: Usando &quot; para aspas duplas, que é o padrão seguro do HTML */}
-              <p className="text-[10px] text-gray-500 mb-2">
+              <p className="text-[10px] text-zinc-500 mb-3">
                 Digite o e-mail do usuário cadastrado para que ele veja este
                 perfil ao clicar em &quot;Meu Perfil&quot;.
               </p>
               <input
                 name="emailVinculo"
                 defaultValue={jogadorEditando?.usuario?.email || ""}
-                className="w-full bg-black border border-zinc-700 text-white p-3 rounded focus:border-(--leao-amarelo) outline-none"
+                className="w-full bg-black border border-zinc-800 text-white p-3 rounded-lg focus:border-(--leao-amarelo) outline-none transition-all placeholder:text-zinc-700"
                 placeholder="Ex: email@jogador.com"
               />
             </div>
 
-            <button
-              type="submit"
-              className="md:col-span-2 bg-(--leao-verde) text-white font-bold uppercase p-4 rounded hover:brightness-110 transition-all cursor-pointer"
-            >
-              {jogadorEditando ? "💾 Salvar Alterações" : "📝 Contratar Atleta"}
-            </button>
+            {/* BOTÃO PADRONIZADO (Preto/Amarelo -> Vermelho) */}
+            <div className="md:col-span-2 flex justify-end mt-4">
+              <button
+                type="submit"
+                className="w-full md:w-auto bg-black text-(--leao-amarelo) border-2 border-(--leao-amarelo) font-black uppercase px-8 py-3 rounded-lg hover:bg-(--leao-vermelho) hover:text-white hover:border-(--leao-vermelho) transition-all cursor-pointer shadow-lg tracking-widest"
+              >
+                {jogadorEditando ? "Salvar Alterações" : "Contratar Atleta"}
+              </button>
+            </div>
           </form>
         </div>
 
         {/* LISTA DE JOGADORES */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {jogadores.map((j) => (
-            <div
-              key={j.id}
-              className={`bg-[#111] border p-4 rounded flex items-center gap-4 group transition-colors ${
-                jogadorEditando?.id === j.id
-                  ? "border-(--leao-amarelo) bg-yellow-900/10"
-                  : "border-zinc-800 hover:border-zinc-600"
-              }`}
-            >
-              <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-zinc-700 bg-zinc-900 shrink-0">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={formatarFoto(j.fotoUrl)}
-                  alt=""
-                  className="w-full h-full object-cover"
-                />
-              </div>
+          {jogadores.map((j) => {
+            const avatarUrl = formatarFoto(j.fotoUrl);
 
-              <div className="flex-1 overflow-hidden">
-                <strong className="text-white block uppercase truncate">
-                  {j.nome}
-                </strong>
-                <span className="text-xs text-zinc-500 uppercase block">
-                  {j.categoria}
-                </span>
-                {j.usuario ? (
-                  <span className="text-[10px] text-green-500 flex items-center gap-1 mt-1">
-                    🔗 {j.usuario.email}
+            return (
+              <div
+                key={j.id}
+                className={`bg-[#111] border p-4 rounded-xl flex items-center gap-4 group transition-colors ${
+                  jogadorEditando?.id === j.id
+                    ? "border-(--leao-amarelo) bg-yellow-900/10"
+                    : "border-zinc-800 hover:border-zinc-600"
+                }`}
+              >
+                <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-zinc-700 bg-zinc-900 shrink-0 flex items-center justify-center">
+                  {avatarUrl ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                      src={avatarUrl}
+                      alt=""
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <span className="text-2xl text-zinc-600">👤</span>
+                  )}
+                </div>
+
+                <div className="flex-1 overflow-hidden">
+                  <strong className="text-white block uppercase truncate font-barlow text-lg">
+                    {j.nome}
+                  </strong>
+                  <span className="text-[10px] bg-zinc-800 text-zinc-400 px-2 py-0.5 rounded uppercase font-bold tracking-wider">
+                    {j.categoria}
                   </span>
-                ) : (
-                  <span className="text-[10px] text-zinc-600 mt-1 block">
-                    Sem vínculo
-                  </span>
-                )}
-              </div>
+                  {j.usuario ? (
+                    <div className="text-[9px] text-green-500 flex items-center gap-1 mt-1 font-mono font-bold">
+                      🔗 {j.usuario.email}
+                    </div>
+                  ) : (
+                    <div className="text-[9px] text-zinc-600 mt-1 block font-mono">
+                      Sem vínculo
+                    </div>
+                  )}
+                </div>
 
-              <div className="flex flex-col gap-2">
-                <Link
-                  href={`/admin/jogadores?editId=${j.id}`}
-                  className="bg-zinc-800 hover:bg-zinc-700 text-white text-[10px] uppercase font-bold px-3 py-1.5 rounded text-center"
-                >
-                  Editar
-                </Link>
+                <div className="flex flex-col gap-2">
+                  <Link
+                    href={`/admin/jogadores?editId=${j.id}`}
+                    className="bg-zinc-800 hover:bg-zinc-700 text-white text-[10px] uppercase font-bold px-3 py-1.5 rounded text-center transition-colors"
+                  >
+                    Editar
+                  </Link>
 
-                <form
-                  action={async () => {
-                    "use server";
-                    await excluirBotonista(j.id);
-                  }}
-                >
-                  <button className="bg-red-900/30 hover:bg-red-900 text-red-500 text-[10px] uppercase font-bold px-3 py-1.5 rounded w-full">
-                    Demitir
-                  </button>
-                </form>
+                  <form
+                    action={async () => {
+                      "use server";
+                      await excluirBotonista(j.id);
+                    }}
+                  >
+                    <button className="bg-red-900/20 hover:bg-red-900 text-red-500 hover:text-white text-[10px] uppercase font-bold px-3 py-1.5 rounded w-full transition-colors cursor-pointer">
+                      Demitir
+                    </button>
+                  </form>
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </div>

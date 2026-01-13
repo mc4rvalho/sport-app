@@ -3,8 +3,9 @@ import { pegarSessao } from "@/lib/auth";
 import { redirect } from "next/navigation";
 
 export default async function AdminDashboard() {
-  // 9. PROTEÇÃO: Se não for ADMIN, chuta para fora
   const sessao = await pegarSessao();
+
+  // Proteção: Apenas ADMIN
   if (!sessao || sessao.role !== "ADMIN") {
     redirect("/");
   }
@@ -30,7 +31,7 @@ export default async function AdminDashboard() {
       desc: "Gerenciar elenco",
       href: "/admin/jogadores",
       color: "border-zinc-800 bg-zinc-900",
-    }, // Verifique se a pasta é 'jogadores' ou 'botonistas'
+    },
     {
       label: "Notícias",
       icon: "📰",

@@ -199,7 +199,7 @@ export function Navbar() {
                 href="/login"
                 className="flex items-center gap-2 text-(--leao-amarelo) border-2 border-(--leao-amarelo) px-6 py-2 rounded-full hover:bg-(--leao-amarelo) hover:text-black transition-all uppercase font-black font-barlow text-sm tracking-wider hover:shadow-[0_0_15px_rgba(255,215,0,0.4)]"
               >
-                <span>🔐</span> Área Restrita
+                <span>🦁</span> Login
               </Link>
             </li>
           </>
