@@ -1,13 +1,29 @@
 import { prisma } from "@/lib/prisma";
-import Link from "next/link";
+import { Metadata } from "next";
 
-// Função auxiliar para formatar imagem
+export const metadata: Metadata = {
+  title: "Notícias | Sport Club do Recife - Futebol de Mesa",
+  description:
+    "Fique por dentro das últimas novidades, resultados e eventos do futebol de mesa do Leão.",
+};
+
+function formatarData(data: Date) {
+  return new Intl.DateTimeFormat("pt-BR", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  }).format(data);
+}
+
+// CORREÇÃO DEFINITIVA DE IMAGEM
 function formatarImagem(url: string | null) {
   if (!url) return "";
   if (url.includes("drive.google.com") && url.includes("/file/d/")) {
     try {
       const id = url.split("/file/d/")[1].split("/")[0];
-      return `https://drive.google.com/thumbnail?id=${id}&sz=w800`;
+      // MUDANÇA: Usamos 'thumbnail' com sz=w1000 (largura 1000px).
+      // Isso garante alta qualidade sem os bloqueios de download do Google.
+      return `https://drive.google.com/thumbnail?id=${id}&sz=w1000`;
     } catch {
       return url;
     }
@@ -22,78 +38,91 @@ export default async function NoticiasPage() {
   });
 
   return (
-    <main className="min-h-screen bg-[#0a0a0a] pb-20 pt-10">
-      <div className="max-w-6xl mx-auto px-6">
+    <main className="min-h-screen bg-[#0a0a0a] py-20 px-6">
+      <div className="max-w-6xl mx-auto">
         {/* CABEÇALHO */}
         <div className="text-center mb-16">
-          <h1 className="font-barlow text-5xl md:text-6xl text-(--leao-amarelo) uppercase font-black mb-4">
-            Notícias do <span className="text-(--leao-vermelho)">Leão</span>
+          <h1 className="font-barlow text-5xl md:text-6xl text-white uppercase font-black mb-4 tracking-tight">
+            <span className="text-(--leao-amarelo)">Últimas</span>{" "}
+            {/* CORREÇÃO: Faltava fechar o parêntese aqui */}
+            <span className="text-(--leao-vermelho)">Notícias</span>
           </h1>
-          <p className="text-zinc-500 text-sm font-bold uppercase tracking-widest">
-            Fique por dentro de tudo que rola no departamento
+          <div className="w-24 h-1 bg-(--leao-vermelho) mx-auto mb-6"></div>
+          <p className="text-zinc-400 text-lg max-w-2xl mx-auto">
+            Acompanhe o dia a dia, resultados dos torneios e novidades do nosso
+            departamento.
           </p>
         </div>
 
         {/* GRID DE NOTÍCIAS */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {noticias.map((item) => (
-            <Link
-              key={item.id}
-              href={item.link || "#"}
-              target={item.link ? "_blank" : "_self"}
-              className="group bg-[#111] border border-zinc-800 rounded-xl overflow-hidden hover:-translate-y-2 transition-transform duration-300 shadow-lg hover:shadow-(--leao-vermelho)/20 block"
-            >
-              {/* IMAGEM DE CAPA */}
-              <div className="h-56 overflow-hidden relative">
-                <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors z-10"></div>
-                {item.imagemUrl ? (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img
-                    src={formatarImagem(item.imagemUrl)}
-                    alt={item.titulo}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                  />
-                ) : (
-                  <div className="w-full h-full bg-zinc-900 flex items-center justify-center">
-                    <span className="text-4xl grayscale opacity-20">📰</span>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {noticias.map((noticia, index) => {
+            const imgUrl = formatarImagem(noticia.imagemUrl);
+            const destaqueClass =
+              index === 0 ? "md:col-span-2 lg:col-span-3" : "";
+            const alturaImagem = index === 0 ? "h-80 md:h-[500px]" : "h-72";
+
+            return (
+              <article
+                key={noticia.id}
+                className={`bg-[#111] border border-zinc-800 rounded-2xl overflow-hidden flex flex-col group hover:border-(--leao-amarelo) transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_10px_30px_-10px_rgba(0,0,0,0.5)] ${destaqueClass}`}
+              >
+                {/* ÁREA DA IMAGEM */}
+                <div
+                  className={`${alturaImagem} bg-black relative overflow-hidden flex items-center justify-center`}
+                >
+                  {imgUrl ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                      src={imgUrl}
+                      alt={noticia.titulo}
+                      referrerPolicy="no-referrer"
+                      className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-700"
+                    />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center bg-zinc-900/50">
+                      <span className="text-5xl grayscale opacity-20">🦁</span>
+                    </div>
+                  )}
+
+                  {/* Data */}
+                  <div className="absolute top-4 left-4 bg-(--leao-vermelho) text-white text-xs font-bold uppercase px-3 py-1.5 rounded-full shadow-lg z-10">
+                    {formatarData(noticia.data)}
                   </div>
-                )}
-              </div>
-
-              {/* CONTEÚDO */}
-              <div className="p-6">
-                <span className="text-[10px] font-bold text-(--leao-amarelo) uppercase tracking-wider mb-2 block">
-                  {new Date(item.data).toLocaleDateString("pt-BR")}
-                </span>
-
-                <h3 className="text-white font-barlow text-2xl font-bold uppercase leading-none mb-3 group-hover:text-(--leao-vermelho) transition-colors line-clamp-2">
-                  {item.titulo}
-                </h3>
-
-                <p className="text-zinc-500 text-sm line-clamp-3 leading-relaxed">
-                  {item.subtitulo}
-                </p>
-
-                <div className="mt-6 pt-4 border-t border-zinc-800 flex justify-between items-center">
-                  <span className="text-xs font-bold text-zinc-600 uppercase group-hover:text-white transition-colors">
-                    Ler mais
-                  </span>
-                  <span className="text-zinc-600 group-hover:translate-x-1 transition-transform">
-                    →
-                  </span>
                 </div>
-              </div>
-            </Link>
-          ))}
-        </div>
 
-        {noticias.length === 0 && (
-          <div className="text-center py-20 border border-dashed border-zinc-800 rounded-xl">
-            <p className="text-zinc-600 font-bold uppercase">
-              Nenhuma notícia publicada.
-            </p>
-          </div>
-        )}
+                {/* CONTEÚDO */}
+                <div className="p-6 flex-1 flex flex-col">
+                  <h2 className="text-white font-barlow text-2xl uppercase font-bold leading-tight mb-3 group-hover:text-(--leao-amarelo) transition-colors">
+                    {noticia.titulo}
+                  </h2>
+                  <p className="text-zinc-400 text-sm line-clamp-3 mb-6 flex-1">
+                    {noticia.subtitulo}
+                  </p>
+
+                  {noticia.link && (
+                    <a
+                      href={noticia.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 text-(--leao-amarelo) font-bold uppercase text-sm tracking-wider hover:underline w-fit"
+                    >
+                      Leia mais <span className="text-lg">↗</span>
+                    </a>
+                  )}
+                </div>
+              </article>
+            );
+          })}
+
+          {noticias.length === 0 && (
+            <div className="col-span-full text-center py-20 p-8 border border-dashed border-zinc-800 rounded-xl">
+              <p className="text-zinc-500 text-xl font-barlow uppercase font-bold">
+                Nenhuma notícia publicada no momento.
+              </p>
+            </div>
+          )}
+        </div>
       </div>
     </main>
   );

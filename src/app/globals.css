@@ -2,9 +2,9 @@
 
 :root {
   /* Cores Oficiais do Sport */
-  --leao-vermelho: #d30915;
-  --leao-preto: #111111;
-  --leao-amarelo: #ffd700;
+  --leao-vermelho: #c60000;
+  --leao-preto: #000000;
+  --leao-amarelo: #ffcc00;
   --leao-verde: #009b3a;
 
   --font-barlow: "Barlow Condensed", sans-serif;
@@ -54,4 +54,21 @@ body {
 }
 ::-webkit-scrollbar-thumb:hover {
   background: var(--leao-vermelho);
+}
+
+@import "tailwindcss";
+
+@theme {
+  --font-barlow: var(--font-barlow);
+  --font-roboto: var(--font-roboto); /* Adicionada */
+
+  --color-leao-amarelo: #ffcc00; /* Amarelo Sport */
+  --color-leao-vermelho: #c60000; /* Vermelho Sport */
+  --color-leao-preto: #000000;
+}
+
+@layer components {
+  .btn-sport {
+    @apply bg-(--leao-vermelho) text-(--leao-preto) rounded-md px-6 py-3 font-barlow font-bold uppercase tracking-wider transition-all duration-300 hover:bg-(--leao-amarelo) hover:text-black hover:border-(--leao-amarelo) cursor-pointer;
+  }
 }

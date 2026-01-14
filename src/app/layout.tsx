@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import { Barlow_Condensed, Roboto } from "next/font/google";
+import { Barlow, Roboto } from "next/font/google";
 import "./globals.css";
-import { Navbar } from "../components/Navbar"; 
-import { Footer } from "../components/Footer";
+import { Navbar } from "@/components/Navbar";
+import { Footer } from "@/components/Footer";
 
-const barlow = Barlow_Condensed({
+const barlow = Barlow({
   subsets: ["latin"],
   weight: ["400", "700", "900"],
   variable: "--font-barlow",
@@ -12,13 +12,13 @@ const barlow = Barlow_Condensed({
 
 const roboto = Roboto({
   subsets: ["latin"],
-  weight: ["400", "700"],
+  weight: ["400", "500", "700"],
   variable: "--font-roboto",
 });
 
 export const metadata: Metadata = {
-  title: "Futebol de Mesa - Sport Club do Recife",
-  description: "Sistema oficial do Sport Futmesa",
+  title: "Sport Club do Recife - Futebol de Mesa",
+  description: "Sistema oficial do departamento de futebol de mesa.",
 };
 
 export default function RootLayout({
@@ -27,13 +27,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-BR">
-      <body className={`${barlow.variable} ${roboto.variable} font-sans`}>
-        <div className="flex flex-col min-h-screen">
-          <Navbar />
-          <div className="flex-1">{children}</div>
-          <Footer />
-        </div>
+    <html lang="pt-BR" className={`${barlow.variable} ${roboto.variable}`}>
+      <body className="bg-[#0a0a0a] text-zinc-300 font-roboto antialiased flex flex-col min-h-screen">
+        <Navbar />
+        {children}
+        <Footer />
       </body>
     </html>
   );

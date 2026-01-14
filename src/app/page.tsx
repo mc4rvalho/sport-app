@@ -2,12 +2,13 @@ import { prisma } from "@/lib/prisma";
 import Link from "next/link";
 import { gerarRanking } from "@/lib/ranking-logic";
 
+// Função para formatar a foto
 function formatarFoto(url: string | null | undefined) {
-  if (!url) return "";
+  if (!url) return null;
   if (url.includes("drive.google.com") && url.includes("/file/d/")) {
     try {
       const id = url.split("/file/d/")[1].split("/")[0];
-      return `https://drive.google.com/thumbnail?id=${id}&sz=w400`;
+      return `https://drive.google.com/thumbnail?id=${id}&sz=w1000`;
     } catch {
       return url;
     }
@@ -16,11 +17,33 @@ function formatarFoto(url: string | null | undefined) {
 }
 
 export default async function Home() {
-  const proximoJogo = {
-    data: "24/01",
-    nome: "1º INTERNO DO SPORT",
-  };
+  // 1. LÓGICA DA PRÓXIMA PARTIDA
+  const hoje = new Date();
+  hoje.setHours(0, 0, 0, 0);
 
+  const proximoCampeonato = await prisma.campeonato.findFirst({
+    where: {
+      data: {
+        gte: hoje,
+      },
+    },
+    orderBy: {
+      data: "asc",
+    },
+  });
+
+  const dataDisplay = proximoCampeonato
+    ? new Date(proximoCampeonato.data).toLocaleDateString("pt-BR", {
+        day: "2-digit",
+        month: "2-digit",
+      })
+    : "EM BREVE";
+
+  const nomeDisplay = proximoCampeonato
+    ? proximoCampeonato.nome
+    : "Calendário a definir";
+
+  // 2. DADOS DO PÓDIO E NOTÍCIAS
   const rankingCompleto = await gerarRanking();
   const top3 = rankingCompleto.slice(0, 3);
 
@@ -35,6 +58,14 @@ export default async function Home() {
     orderBy: { data: "desc" },
   });
 
+  // Prepara as URLs (Evita erro no JSX)
+  const imgTop1 = top3[0] ? formatarFoto(top3[0].fotoUrl) : null;
+  const imgTop2 = top3[1] ? formatarFoto(top3[1].fotoUrl) : null;
+  const imgTop3 = top3[2] ? formatarFoto(top3[2].fotoUrl) : null;
+  const imgNoticia = ultimaNoticia
+    ? formatarFoto(ultimaNoticia.imagemUrl)
+    : null;
+
   return (
     <main className="min-h-screen pb-12 bg-[#0a0a0a]">
       {/* HERO SECTION COMPACTA */}
@@ -46,10 +77,10 @@ export default async function Home() {
             Próxima Partida
           </span>
           <h1 className="text-(--leao-amarelo) font-barlow text-7xl md:text-8xl font-black leading-none mb-1 drop-shadow-[0_2px_10px_rgba(255,215,0,0.3)]">
-            {proximoJogo.data}
+            {dataDisplay}
           </h1>
-          <h2 className="text-white font-barlow text-2xl md:text-4xl uppercase font-bold tracking-wider max-w-2xl leading-tight">
-            {proximoJogo.nome}
+          <h2 className="text-white font-barlow text-2xl md:text-4xl uppercase font-bold tracking-wider max-w-2xl leading-tight px-4">
+            {nomeDisplay}
           </h2>
         </div>
       </section>
@@ -59,7 +90,6 @@ export default async function Home() {
         {/* PÓDIO */}
         {top3.length > 0 && (
           <div className="mb-16 border-b border-zinc-900/50 pb-8">
-            {/* TÍTULO LÍDERES */}
             <div className="text-center mb-16">
               <h3 className="font-barlow text-3xl uppercase font-bold text-white inline-flex items-center gap-3 before:h-px before:w-12 before:bg-zinc-700 after:h-px after:w-12 after:bg-zinc-700 tracking-wider">
                 <span className="text-(--leao-amarelo) text-xl">♛</span> Líderes
@@ -78,13 +108,19 @@ export default async function Home() {
                     <div className="w-8 h-8 absolute -top-2 -left-2 bg-zinc-400 text-black rounded-full flex items-center justify-center font-black text-xs border-2 border-[#0a0a0a] z-10 shadow-lg">
                       2º
                     </div>
-                    <div className="w-24 h-24 md:w-28 md:h-28 rounded-full border-4 border-zinc-400 overflow-hidden bg-zinc-900 shadow-xl">
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img
-                        src={formatarFoto(top3[1].fotoUrl)}
-                        alt=""
-                        className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
-                      />
+                    <div className="w-24 h-24 md:w-28 md:h-28 rounded-full border-4 border-zinc-400 overflow-hidden bg-zinc-900 shadow-xl flex items-center justify-center">
+                      {imgTop2 ? (
+                        // ADICIONADO: referrerPolicy="no-referrer"
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img
+                          src={imgTop2}
+                          alt=""
+                          referrerPolicy="no-referrer"
+                          className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
+                        />
+                      ) : (
+                        <span className="text-4xl text-zinc-600">👤</span>
+                      )}
                     </div>
                   </Link>
                   <Link
@@ -109,18 +145,22 @@ export default async function Home() {
                     <div className="w-10 h-10 absolute -top-3 -right-3 bg-(--leao-amarelo) text-black rounded-full flex items-center justify-center font-black text-lg border-4 border-[#0a0a0a] z-10 shadow-md">
                       1º
                     </div>
-
                     <div className="absolute -top-10 left-1/2 -translate-x-1/2 text-4xl text-(--leao-amarelo) drop-shadow-md animate-pulse">
                       ♔
                     </div>
-
-                    <div className="w-32 h-32 md:w-36 md:h-36 rounded-full border-4 border-(--leao-amarelo) overflow-hidden bg-zinc-900 shadow-[0_0_30px_rgba(255,215,0,0.2)] ring-4 ring-(--leao-amarelo)/10 ring-offset-4 ring-offset-black group-hover:ring-(--leao-amarelo)/40 transition-all">
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img
-                        src={formatarFoto(top3[0].fotoUrl)}
-                        alt=""
-                        className="w-full h-full object-cover"
-                      />
+                    <div className="w-32 h-32 md:w-36 md:h-36 rounded-full border-4 border-(--leao-amarelo) overflow-hidden bg-zinc-900 shadow-[0_0_30px_rgba(255,215,0,0.2)] ring-4 ring-(--leao-amarelo)/10 ring-offset-4 ring-offset-black group-hover:ring-(--leao-amarelo)/40 transition-all flex items-center justify-center">
+                      {imgTop1 ? (
+                        // ADICIONADO: referrerPolicy="no-referrer"
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img
+                          src={imgTop1}
+                          alt=""
+                          referrerPolicy="no-referrer"
+                          className="w-full h-full object-cover"
+                        />
+                      ) : (
+                        <span className="text-5xl text-zinc-600">👤</span>
+                      )}
                     </div>
                   </Link>
                   <Link
@@ -145,13 +185,19 @@ export default async function Home() {
                     <div className="w-8 h-8 absolute -top-2 -right-2 bg-[#cd7f32] text-black rounded-full flex items-center justify-center font-black text-xs border-2 border-[#0a0a0a] z-10 shadow-lg">
                       3º
                     </div>
-                    <div className="w-24 h-24 md:w-28 md:h-28 rounded-full border-4 border-[#cd7f32] overflow-hidden bg-zinc-900 shadow-xl">
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img
-                        src={formatarFoto(top3[2].fotoUrl)}
-                        alt=""
-                        className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
-                      />
+                    <div className="w-24 h-24 md:w-28 md:h-28 rounded-full border-4 border-[#cd7f32] overflow-hidden bg-zinc-900 shadow-xl flex items-center justify-center">
+                      {imgTop3 ? (
+                        // ADICIONADO: referrerPolicy="no-referrer"
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img
+                          src={imgTop3}
+                          alt=""
+                          referrerPolicy="no-referrer"
+                          className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
+                        />
+                      ) : (
+                        <span className="text-4xl text-zinc-600">👤</span>
+                      )}
                     </div>
                   </Link>
                   <Link
@@ -169,7 +215,6 @@ export default async function Home() {
           </div>
         )}
 
-        {/* RESTO DO CONTEÚDO */}
         <div className="grid lg:grid-cols-2 gap-10 mt-8">
           {/* ÚLTIMOS JOGOS */}
           <div>
@@ -219,6 +264,11 @@ export default async function Home() {
                   </div>
                 </div>
               ))}
+              {ultimosResultados.length === 0 && (
+                <div className="text-zinc-500 text-center py-4 text-xs uppercase font-bold">
+                  Nenhum resultado recente.
+                </div>
+              )}
             </div>
           </div>
 
@@ -242,14 +292,17 @@ export default async function Home() {
                 target={ultimaNoticia.link ? "_blank" : "_self"}
                 className="block bg-[#111] border border-zinc-800 rounded-2xl overflow-hidden group hover:border-(--leao-amarelo)/40 transition-all shadow-lg hover:shadow-(--leao-amarelo)/10 relative top-0 hover:-top-1"
               >
-                <div className="h-64 overflow-hidden relative">
-                  {ultimaNoticia.imagemUrl && (
+                <div className="h-64 overflow-hidden relative flex items-center justify-center bg-black">
+                  {imgNoticia ? (
                     // eslint-disable-next-line @next/next/no-img-element
                     <img
-                      src={formatarFoto(ultimaNoticia.imagemUrl)}
+                      src={imgNoticia}
                       alt=""
+                      referrerPolicy="no-referrer"
                       className="w-full h-full object-cover group-hover:scale-105 group-hover:rotate-1 transition-transform duration-700 ease-out"
                     />
+                  ) : (
+                    <span className="text-5xl grayscale opacity-20">📰</span>
                   )}
 
                   <div className="absolute inset-0 bg-linear-to-t from-black via-black/70 to-transparent opacity-90"></div>
