@@ -100,7 +100,91 @@ export default function SobrePage() {
           </div>
         </div>
 
-        {/* Bloco 3: Call to Action */}
+        {/* Bloco 3: NOSSA EQUIPE (Novo!) */}
+        <div>
+          <h2 className="text-3xl text-white font-barlow font-black uppercase mb-8 border-l-4 border-(--leao-amarelo) pl-4">
+            Quem Faz Acontecer
+          </h2>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {/* Renato César */}
+            <div className="bg-[#111] p-5 rounded-xl border border-zinc-800 flex items-center gap-4 hover:border-(--leao-vermelho) transition-colors group hover:-translate-y-1 duration-300">
+              <div className="w-12 h-12 bg-zinc-900 rounded-full flex items-center justify-center text-xl border border-zinc-700 group-hover:border-(--leao-vermelho) group-hover:text-(--leao-vermelho) transition-colors">
+                👔
+              </div>
+              <div>
+                <strong className="text-white text-lg block uppercase font-barlow leading-none mb-1">
+                  Renato César
+                </strong>
+                <span className="text-(--leao-amarelo) text-[10px] font-bold uppercase tracking-widest border border-(--leao-amarelo) px-2 py-0.5 rounded-full">
+                  Diretor
+                </span>
+              </div>
+            </div>
+
+            {/* Papa */}
+            <div className="bg-[#111] p-5 rounded-xl border border-zinc-800 flex items-center gap-4 hover:border-(--leao-vermelho) transition-colors group hover:-translate-y-1 duration-300">
+              <div className="w-12 h-12 bg-zinc-900 rounded-full flex items-center justify-center text-xl border border-zinc-700 group-hover:border-(--leao-vermelho) group-hover:text-(--leao-vermelho) transition-colors">
+                📋
+              </div>
+              <div>
+                <strong className="text-white text-lg block uppercase font-barlow leading-none mb-1">
+                  Papa
+                </strong>
+                <span className="text-zinc-500 text-xs font-bold uppercase tracking-wider">
+                  Coordenador
+                </span>
+              </div>
+            </div>
+
+            {/* André Luiz */}
+            <div className="bg-[#111] p-5 rounded-xl border border-zinc-800 flex items-center gap-4 hover:border-(--leao-vermelho) transition-colors group hover:-translate-y-1 duration-300">
+              <div className="w-12 h-12 bg-zinc-900 rounded-full flex items-center justify-center text-xl border border-zinc-700 group-hover:border-(--leao-vermelho) group-hover:text-(--leao-vermelho) transition-colors">
+                🧠
+              </div>
+              <div>
+                <strong className="text-white text-lg block uppercase font-barlow leading-none mb-1">
+                  André Luiz
+                </strong>
+                <span className="text-zinc-500 text-xs font-bold uppercase tracking-wider">
+                  Técnico
+                </span>
+              </div>
+            </div>
+
+            {/* Matheus Carvalho */}
+            <div className="bg-[#111] p-5 rounded-xl border border-zinc-800 flex items-center gap-4 hover:border-(--leao-vermelho) transition-colors group hover:-translate-y-1 duration-300">
+              <div className="w-12 h-12 bg-zinc-900 rounded-full flex items-center justify-center text-xl border border-zinc-700 group-hover:border-(--leao-vermelho) group-hover:text-(--leao-vermelho) transition-colors">
+                ©️
+              </div>
+              <div>
+                <strong className="text-white text-lg block uppercase font-barlow leading-none mb-1">
+                  Matheus Carvalho
+                </strong>
+                <span className="text-zinc-500 text-xs font-bold uppercase tracking-wider">
+                  Capitão
+                </span>
+              </div>
+            </div>
+
+            {/* Flavio Afa */}
+            <div className="bg-[#111] p-5 rounded-xl border border-zinc-800 flex items-center gap-4 hover:border-(--leao-vermelho) transition-colors group hover:-translate-y-1 duration-300">
+              <div className="w-12 h-12 bg-zinc-900 rounded-full flex items-center justify-center text-xl border border-zinc-700 group-hover:border-(--leao-vermelho) group-hover:text-(--leao-vermelho) transition-colors">
+                📱
+              </div>
+              <div>
+                <strong className="text-white text-lg block uppercase font-barlow leading-none mb-1">
+                  Flavio Afa
+                </strong>
+                <span className="text-zinc-500 text-xs font-bold uppercase tracking-wider">
+                  Social Media
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Bloco 4: Call to Action */}
         <div className="bg-zinc-900/30 border border-zinc-800 p-10 rounded-2xl text-center">
           <h2 className="text-3xl text-white font-barlow font-black uppercase mb-4">
             Faça parte dessa história
