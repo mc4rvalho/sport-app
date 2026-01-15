@@ -1,47 +1,62 @@
 @import "tailwindcss";
 
 :root {
-  /* Cores Oficiais do Sport */
+  /* Cores Oficiais do Sport Club do Recife */
   --leao-vermelho: #c60000;
   --leao-preto: #000000;
   --leao-amarelo: #ffcc00;
   --leao-verde: #009b3a;
 
+  /* --font-barlow: "Barlow Condensed", sans-serif;
+  --font-roboto: "Roboto", sans-serif; */
+}
+
+@theme {
   --font-barlow: "Barlow Condensed", sans-serif;
   --font-roboto: "Roboto", sans-serif;
 }
 
-body {
-  background-color: #0a0a0a;
-  /* Textura de fibra de carbono similar ao vídeo */
-  background-image: linear-gradient(
-      45deg,
-      #111 25%,
-      transparent 25%,
-      transparent 75%,
-      #111 75%,
-      #111
-    ),
-    linear-gradient(
-      45deg,
-      #111 25%,
-      transparent 25%,
-      transparent 75%,
-      #111 75%,
-      #111
-    );
-  background-size: 20px 20px;
-  background-position: 0 0, 10px 10px;
-  color: white;
-  font-family: var(--font-roboto);
+@layer base {
+  body {
+    @apply bg-[#0a0a0a] text-zinc-300 font-roboto antialiased;
+
+    background-image: linear-gradient(
+        45deg,
+        #111 25%,
+        transparent 25%,
+        transparent 75%,
+        #111 75%,
+        #111
+      ),
+      linear-gradient(
+        45deg,
+        #111 25%,
+        transparent 25%,
+        transparent 75%,
+        #111 75%,
+        #111
+      );
+    background-size: 20px 20px;
+    background-position: 0 0, 10px 10px;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-barlow text-zinc-200;
+  }
 }
 
-/* Utilitários */
-.font-barlow {
-  font-family: var(--font-barlow);
+@layer components {
+  .btn-sport {
+    @apply bg-black text-zinc-400 border border-(--leao-vermelho) rounded-md px-6 py-3 font-barlow font-bold uppercase tracking-wider transition-all duration-300 hover:bg-(--leao-amarelo) hover:text-black hover:border-(--leao-amarelo) cursor-pointer inline-block text-center shadow-lg hover:shadow-[0_0_15px_rgba(255,204,0,0.3)];
+  }
 }
 
-/* Scrollbar personalizada */
+/* Scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
 }
@@ -54,21 +69,4 @@ body {
 }
 ::-webkit-scrollbar-thumb:hover {
   background: var(--leao-vermelho);
-}
-
-@import "tailwindcss";
-
-@theme {
-  --font-barlow: var(--font-barlow);
-  --font-roboto: var(--font-roboto); /* Adicionada */
-
-  --color-leao-amarelo: #ffcc00; /* Amarelo Sport */
-  --color-leao-vermelho: #c60000; /* Vermelho Sport */
-  --color-leao-preto: #000000;
-}
-
-@layer components {
-  .btn-sport {
-    @apply bg-(--leao-vermelho) text-(--leao-preto) rounded-md px-6 py-3 font-barlow font-bold uppercase tracking-wider transition-all duration-300 hover:bg-(--leao-amarelo) hover:text-black hover:border-(--leao-amarelo) cursor-pointer;
-  }
 }

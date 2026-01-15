@@ -2,7 +2,6 @@ import { prisma } from "@/lib/prisma";
 import { salvarBotonista, excluirBotonista } from "./actions";
 import Link from "next/link";
 
-// Formata URL de foto
 function formatarFoto(url: string | null) {
   if (!url) return "";
   if (url.includes("drive.google.com") && url.includes("/file/d/")) {
@@ -24,7 +23,6 @@ export default async function AdminJogadores({
   const params = await searchParams;
   const editId = params.editId;
 
-  // Busca jogadores
   const jogadores = await prisma.botonista.findMany({
     orderBy: { nome: "asc" },
     include: { usuario: true },
@@ -49,7 +47,6 @@ export default async function AdminJogadores({
           </h1>
         </div>
 
-        {/* FORMULÁRIO PADRONIZADO (Dark Card) */}
         <div
           className={`p-8 rounded-xl border border-zinc-800 mb-12 shadow-xl ${
             jogadorEditando
@@ -118,7 +115,6 @@ export default async function AdminJogadores({
               />
             </div>
 
-            {/* CARD DE VÍNCULO */}
             <div className="md:col-span-2 bg-zinc-900/50 p-5 rounded-lg border border-zinc-800 border-dashed mt-2">
               <label className="text-xs text-(--leao-amarelo) uppercase font-bold block mb-2 tracking-wider">
                 🔐 Vincular Login (Área do Atleta)
@@ -135,7 +131,6 @@ export default async function AdminJogadores({
               />
             </div>
 
-            {/* BOTÃO PADRONIZADO (Preto/Amarelo -> Vermelho) */}
             <div className="md:col-span-2 flex justify-end mt-4">
               <button
                 type="submit"
@@ -147,7 +142,6 @@ export default async function AdminJogadores({
           </form>
         </div>
 
-        {/* LISTA DE JOGADORES */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {jogadores.map((j) => {
             const avatarUrl = formatarFoto(j.fotoUrl);

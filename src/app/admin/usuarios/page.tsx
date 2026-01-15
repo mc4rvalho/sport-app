@@ -2,7 +2,6 @@ import { prisma } from "@/lib/prisma";
 import { salvarUsuario, excluirUsuario } from "./actions";
 import Link from "next/link";
 
-// Formata URL da foto
 function formatarFoto(url: string | null) {
   if (!url) return "";
   if (url.includes("drive.google.com") && url.includes("/file/d/")) {
@@ -24,7 +23,6 @@ export default async function AdminUsuarios({
   const params = await searchParams;
   const editId = params.editId;
 
-  // Busca usuários e inclui o botonista vinculado
   const usuarios = await prisma.usuario.findMany({
     orderBy: { nome: "asc" },
     include: { botonista: true },
@@ -47,7 +45,6 @@ export default async function AdminUsuarios({
           </h1>
         </div>
 
-        {/* FORMULÁRIO PADRONIZADO (Dark Card) */}
         <div
           className={`p-8 rounded-xl border border-zinc-800 mb-12 shadow-xl ${
             userEdit ? "bg-yellow-900/10 border-yellow-700" : "bg-[#141414]"
@@ -140,11 +137,8 @@ export default async function AdminUsuarios({
           </form>
         </div>
 
-        {/* LISTA DE USUÁRIOS */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {usuarios.map((user) => {
-            // CORREÇÃO DO ANY: Verificamos se botonista existe de forma segura
-            // Se for array (1-n) pega o primeiro, se for objeto (1-1) pega direto
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             const dadosBotonista = user.botonista as any;
             const fotoVinculada = Array.isArray(dadosBotonista)
@@ -162,7 +156,6 @@ export default async function AdminUsuarios({
                     : "border-zinc-800 hover:border-zinc-600"
                 }`}
               >
-                {/* AVATAR */}
                 <div
                   className={`w-14 h-14 rounded-full flex items-center justify-center shrink-0 overflow-hidden border-2 ${
                     user.role === "ADMIN"

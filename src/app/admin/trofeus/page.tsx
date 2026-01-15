@@ -2,7 +2,6 @@ import { prisma } from "@/lib/prisma";
 import { salvarConquista, excluirConquista } from "./actions";
 import Link from "next/link";
 
-// Formata URL da imagem
 function formatarImagem(url: string | null) {
   if (!url) return "";
   if (url.includes("drive.google.com") && url.includes("/file/d/")) {
@@ -44,7 +43,6 @@ export default async function AdminTrofeus({
           </h1>
         </div>
 
-        {/* FORMULÁRIO PADRONIZADO (Dark Card) */}
         <div
           className={`p-8 rounded-xl border border-zinc-800 mb-12 shadow-xl ${
             itemEdit ? "bg-yellow-900/10 border-yellow-700" : "bg-[#141414]"
@@ -132,7 +130,6 @@ export default async function AdminTrofeus({
           </form>
         </div>
 
-        {/* LISTA DE TROFÉUS (Com Edição e Exclusão) */}
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {conquistas.map((item) => {
             const imgUrl = formatarImagem(item.imagemUrl);
@@ -146,7 +143,6 @@ export default async function AdminTrofeus({
                     : "border-zinc-800 hover:border-zinc-600"
                 }`}
               >
-                {/* Imagem da Taça */}
                 <div className="h-32 w-full flex items-center justify-center mb-4 bg-zinc-900/50 rounded-lg overflow-hidden">
                   {imgUrl ? (
                     // eslint-disable-next-line @next/next/no-img-element
@@ -172,7 +168,6 @@ export default async function AdminTrofeus({
                   {item.tipo}
                 </span>
 
-                {/* BOTÕES DE AÇÃO (Aparecem no Hover) */}
                 <div className="absolute top-2 right-2 flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity bg-black/80 rounded-lg p-1 backdrop-blur-sm border border-zinc-800">
                   <Link
                     href={`/admin/trofeus?editId=${item.id}`}

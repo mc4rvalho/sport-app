@@ -31,7 +31,6 @@ export default async function AdminCampeonatos({
           </h1>
         </div>
 
-        {/* FORMULÁRIO PADRONIZADO */}
         <div
           className={`p-8 rounded-xl border border-zinc-800 mb-12 shadow-xl ${
             campEditando ? "bg-yellow-900/10 border-yellow-700" : "bg-[#141414]"
@@ -59,7 +58,6 @@ export default async function AdminCampeonatos({
           >
             <input type="hidden" name="id" value={campEditando?.id || ""} />
 
-            {/* INPUT NOME */}
             <div className="lg:col-span-1">
               <label className="text-xs text-zinc-500 uppercase font-bold block mb-2 tracking-wider">
                 Nome do Torneio
@@ -73,7 +71,6 @@ export default async function AdminCampeonatos({
               />
             </div>
 
-            {/* INPUT DATA (CORRIGIDO) */}
             <div>
               <label className="text-xs text-zinc-500 uppercase font-bold block mb-2 tracking-wider">
                 Data de Início
@@ -81,7 +78,6 @@ export default async function AdminCampeonatos({
               <input
                 name="data"
                 type="date"
-                // toISOString() retorna UTC, então o .split pega a data correta
                 defaultValue={
                   campEditando
                     ? new Date(campEditando.data).toISOString().split("T")[0]
@@ -92,7 +88,6 @@ export default async function AdminCampeonatos({
               />
             </div>
 
-            {/* INPUT TIPO (Atualizado com Novas Opções) */}
             <div>
               <label className="text-xs text-zinc-500 uppercase font-bold block mb-2 tracking-wider">
                 Tipo de Competição
@@ -106,7 +101,6 @@ export default async function AdminCampeonatos({
                 <option value="COPA PE">Copa Pernambuco</option>
                 <option value="ETAPA PE">Etapa Pernambucana</option>
                 <option value="TGR">TGR (Taça Grande Recife)</option>
-                {/* Adicionado para funcionar com as cores do Calendário */}
                 <option value="NACIONAL">
                   Nacional (Brasileiro/Copa do BR)
                 </option>
@@ -116,7 +110,6 @@ export default async function AdminCampeonatos({
               </select>
             </div>
 
-            {/* BOTÃO */}
             <div className="md:col-span-2 lg:col-span-3 flex justify-end mt-2">
               <button
                 type="submit"
@@ -128,7 +121,6 @@ export default async function AdminCampeonatos({
           </form>
         </div>
 
-        {/* LISTA DE CAMPEONATOS */}
         <div className="flex flex-col gap-3">
           {campeonatos.map((camp) => (
             <div
@@ -153,8 +145,6 @@ export default async function AdminCampeonatos({
                     <span className="text-[10px] bg-zinc-900 text-zinc-500 px-2 py-0.5 rounded uppercase font-bold tracking-wider border border-zinc-800">
                       {camp.tipo}
                     </span>
-
-                    {/* CORREÇÃO AQUI: timeZone: "UTC" para exibir a data correta */}
                     <span className="text-[10px] text-zinc-500 py-0.5 font-bold uppercase tracking-wider">
                       📅{" "}
                       {new Date(camp.data).toLocaleDateString("pt-BR", {

@@ -2,13 +2,14 @@
 
 import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
+import { verificarAdmin } from "@/lib/auth";
 
 export async function salvarResultado(formData: FormData) {
+  await verificarAdmin();
+
   const id = formData.get("id") as string;
   const botonistaId = formData.get("botonistaId") as string;
   const campeonatoId = formData.get("campeonatoId") as string;
-
-  // Converter strings para números
   const colocacao = parseInt(formData.get("colocacao") as string);
   const jogos = parseInt(formData.get("jogos") as string);
   const vitorias = parseInt(formData.get("vitorias") as string);
@@ -27,8 +28,6 @@ export async function salvarResultado(formData: FormData) {
     derrotas,
     golsPro,
     golsContra,
-    // CORREÇÃO: O banco espera um número (Int).
-    // Vamos usar 1 para representar "1ª Divisão/Ouro".
     divisao: 1,
     data: new Date(),
   };
@@ -40,18 +39,19 @@ export async function salvarResultado(formData: FormData) {
       await prisma.resultado.create({ data });
     }
     revalidatePath("/admin/resultados");
-    revalidatePath("/ranking"); // Atualiza o ranking
+    revalidatePath("/ranking");
   } catch (error) {
-    console.error("Erro ao salvar resultado:", error);
+    console.error("Erro ao salvar:", error);
   }
 }
 
 export async function excluirResultado(id: string) {
+  await verificarAdmin();
   try {
     await prisma.resultado.delete({ where: { id } });
     revalidatePath("/admin/resultados");
     revalidatePath("/ranking");
   } catch (error) {
-    console.error("Erro ao excluir resultado:", error);
+    console.error("Erro ao excluir:", error);
   }
 }

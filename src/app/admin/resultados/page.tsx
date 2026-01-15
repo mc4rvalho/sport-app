@@ -10,12 +10,11 @@ export default async function AdminResultados({
   const params = await searchParams;
   const editId = params.editId;
 
-  // Carrega dados
   const [resultados, botonistas, campeonatos] = await Promise.all([
     prisma.resultado.findMany({
       orderBy: { data: "desc" },
       include: { botonista: true, campeonato: true },
-      take: 50, // Mostra apenas os últimos 50
+      take: 50,
     }),
     prisma.botonista.findMany({ orderBy: { nome: "asc" } }),
     prisma.campeonato.findMany({ orderBy: { data: "desc" } }),
@@ -38,7 +37,6 @@ export default async function AdminResultados({
           </h1>
         </div>
 
-        {/* FORMULÁRIO PADRONIZADO */}
         <div
           className={`p-8 rounded-xl border border-zinc-800 mb-12 shadow-xl ${
             itemEdit ? "bg-yellow-900/10 border-yellow-700" : "bg-[#141414]"
@@ -64,7 +62,6 @@ export default async function AdminResultados({
           >
             <input type="hidden" name="id" value={itemEdit?.id || ""} />
 
-            {/* SELEÇÃO DO ATLETA E CAMPEONATO */}
             <div className="col-span-2 md:col-span-3">
               <label className="text-xs text-zinc-500 uppercase font-bold block mb-2 tracking-wider">
                 Atleta
@@ -105,7 +102,6 @@ export default async function AdminResultados({
 
             <div className="col-span-2 md:col-span-6 border-t border-zinc-800 my-2"></div>
 
-            {/* DADOS NUMÉRICOS */}
             <div>
               <label className="text-xs text-(--leao-amarelo) uppercase font-bold block mb-2 tracking-wider">
                 Colocação
@@ -198,7 +194,6 @@ export default async function AdminResultados({
             </div>
 
             <div className="col-span-2 md:col-span-5 flex justify-end">
-              {/* BOTÃO ESTILIZADO CONFORME PEDIDO */}
               <button
                 type="submit"
                 className="w-full md:w-auto bg-black text-(--leao-amarelo) border-2 border-(--leao-amarelo) font-black uppercase px-8 py-3 rounded-lg hover:bg-(--leao-vermelho) hover:text-white hover:border-(--leao-vermelho) transition-all cursor-pointer shadow-lg tracking-widest"
@@ -209,18 +204,15 @@ export default async function AdminResultados({
           </form>
         </div>
 
-        {/* LISTA DE ÚLTIMOS LANÇAMENTOS */}
         <h3 className="text-white font-barlow text-2xl uppercase font-bold mb-4 border-l-4 border-(--leao-vermelho) pl-3">
           Últimos Lançamentos
         </h3>
         <div className="flex flex-col gap-2">
           {resultados.map((r) => (
-            // USANDO GRID PARA CENTRALIZAR O MEIO PERFEITAMENTE
             <div
               key={r.id}
               className="bg-[#111] border border-zinc-800 p-4 rounded-lg grid grid-cols-1 md:grid-cols-12 gap-4 items-center hover:border-zinc-600 transition-colors"
             >
-              {/* ESQUERDA: NOME E POSIÇÃO (5 colunas) */}
               <div className="md:col-span-5 flex items-center gap-4">
                 <div className="bg-zinc-900 w-10 h-10 flex items-center justify-center rounded font-bold text-white border border-zinc-800 shrink-0">
                   {r.colocacao}º
@@ -235,14 +227,12 @@ export default async function AdminResultados({
                 </div>
               </div>
 
-              {/* CENTRO: ESTATÍSTICAS (4 colunas - Centralizado) */}
               <div className="md:col-span-4 flex items-center justify-center gap-6 font-mono text-sm">
                 <span className="text-green-500 font-bold">{r.vitorias}V</span>
                 <span className="text-zinc-500 font-bold">{r.empates}E</span>
                 <span className="text-red-500 font-bold">{r.derrotas}D</span>
               </div>
 
-              {/* DIREITA: BOTÕES (3 colunas - Alinhado à direita) */}
               <div className="md:col-span-3 flex gap-2 justify-end">
                 <Link
                   href={`/admin/resultados?editId=${r.id}`}

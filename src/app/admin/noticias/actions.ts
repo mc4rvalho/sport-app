@@ -2,20 +2,19 @@
 
 import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
+import { verificarAdmin } from "@/lib/auth";
 
 export async function salvarNoticia(formData: FormData) {
+  await verificarAdmin();
+
   const id = formData.get("id") as string;
   const titulo = formData.get("titulo") as string;
   const subtitulo = formData.get("subtitulo") as string;
   const link = formData.get("link") as string;
   const imagemUrl = formData.get("imagemUrl") as string;
-
-  // Checkbox vem como "on" se marcado, ou null se não
   const publicada = formData.get("publicada") === "on";
 
   try {
-    // CORREÇÃO: Adicionamos o campo 'conteudo' que é obrigatório no banco.
-    // Usamos o subtítulo como conteúdo ou uma string vazia para não dar erro.
     const data = {
       titulo,
       subtitulo,
@@ -33,19 +32,20 @@ export async function salvarNoticia(formData: FormData) {
 
     revalidatePath("/admin/noticias");
     revalidatePath("/noticias");
-    revalidatePath("/"); // Atualiza a Home também
+    revalidatePath("/");
   } catch (error) {
-    console.error("Erro ao salvar notícia:", error);
+    console.error("Erro ao salvar:", error);
   }
 }
 
 export async function excluirNoticia(id: string) {
+  await verificarAdmin();
   try {
     await prisma.noticia.delete({ where: { id } });
     revalidatePath("/admin/noticias");
     revalidatePath("/noticias");
     revalidatePath("/");
   } catch (error) {
-    console.error("Erro ao excluir notícia:", error);
+    console.error("Erro ao excluir:", error);
   }
 }

@@ -2,8 +2,11 @@
 
 import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
+import { verificarAdmin } from "@/lib/auth";
 
 export async function salvarConquista(formData: FormData) {
+  await verificarAdmin();
+
   const id = formData.get("id") as string;
   const nome = formData.get("nome") as string;
   const ano = formData.get("ano") as string;
@@ -20,13 +23,14 @@ export async function salvarConquista(formData: FormData) {
     }
 
     revalidatePath("/admin/trofeus");
-    revalidatePath("/titulos"); // Atualiza a página pública de Títulos
+    revalidatePath("/titulos");
   } catch (error) {
-    console.error("Erro ao salvar conquista:", error);
+    console.error("Erro ao salvar:", error);
   }
 }
 
 export async function excluirConquista(id: string) {
+  await verificarAdmin();
   try {
     await prisma.conquista.delete({ where: { id } });
     revalidatePath("/admin/trofeus");

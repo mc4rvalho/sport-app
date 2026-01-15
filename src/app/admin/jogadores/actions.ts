@@ -2,8 +2,11 @@
 
 import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
+import { verificarAdmin } from "@/lib/auth";
 
 export async function salvarBotonista(formData: FormData) {
+  await verificarAdmin();
+
   const id = formData.get("id") as string;
   const nome = formData.get("nome") as string;
   const categoria = formData.get("categoria") as string;
@@ -13,26 +16,19 @@ export async function salvarBotonista(formData: FormData) {
   try {
     let usuarioId = null;
 
-    // Se digitou um email, busca o ID do usuário
     if (emailVinculo) {
       const usuario = await prisma.usuario.findUnique({
-        where: { email: emailVinculo }
+        where: { email: emailVinculo },
       });
-      
-      if (usuario) {
-        usuarioId = usuario.id;
-      } else {
-        // Opcional: Poderia retornar erro avisando que o email não existe
-        console.warn("Usuário não encontrado para vínculo:", emailVinculo);
-      }
+      if (usuario) usuarioId = usuario.id;
     }
 
     const data = {
       nome,
       categoria,
       fotoUrl,
-      time: "Sport", // Padrão
-      usuarioId: usuarioId // Vincula (ou desvincula se for null)
+      time: "Sport",
+      usuarioId: usuarioId,
     };
 
     if (id) {
@@ -44,15 +40,16 @@ export async function salvarBotonista(formData: FormData) {
     revalidatePath("/admin/jogadores");
     revalidatePath("/ranking");
   } catch (error) {
-    console.error("Erro ao salvar jogador:", error);
+    console.error("Erro ao salvar:", error);
   }
 }
 
 export async function excluirBotonista(id: string) {
+  await verificarAdmin();
   try {
     await prisma.botonista.delete({ where: { id } });
     revalidatePath("/admin/jogadores");
   } catch (error) {
-    console.error("Erro ao excluir jogador:", error);
+    console.error("Erro ao excluir:", error);
   }
 }

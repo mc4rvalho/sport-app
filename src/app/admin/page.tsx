@@ -1,54 +1,45 @@
 import Link from "next/link";
-import { pegarSessao } from "@/lib/auth";
-import { redirect } from "next/navigation";
 
 export default async function AdminDashboard() {
-  const sessao = await pegarSessao();
-
-  // Proteção: Apenas ADMIN
-  if (!sessao || sessao.role !== "ADMIN") {
-    redirect("/");
-  }
-
   const menuItems = [
     {
       label: "Lançar Súmula",
-      icon: "📝",
+      icon: <span className="text-4xl">📝 </span>,
       desc: "Resultados & Estatísticas",
       href: "/admin/resultados",
       color: "border-red-900 bg-red-900/10",
     },
     {
       label: "Campeonatos",
-      icon: "⚽",
+      icon: <span className="text-4xl">⚽</span>,
       desc: "Criar competições",
       href: "/admin/campeonatos",
       color: "border-zinc-800 bg-zinc-900",
     },
     {
       label: "Botonistas",
-      icon: "👤",
+      icon: <span className="text-4xl">👤</span>,
       desc: "Gerenciar elenco",
       href: "/admin/jogadores",
       color: "border-zinc-800 bg-zinc-900",
     },
     {
       label: "Notícias",
-      icon: "📰",
+      icon: <span className="text-4xl">📰</span>,
       desc: "Publicar no Boletim",
       href: "/admin/noticias",
       color: "border-zinc-800 bg-zinc-900",
     },
     {
       label: "Sala de Troféus",
-      icon: "🏆",
+      icon: <span className="text-4xl">🏆</span>,
       desc: "Gerenciar Conquistas",
       href: "/admin/trofeus",
       color: "border-zinc-800 bg-zinc-900",
     },
     {
       label: "Usuários",
-      icon: "🔐",
+      icon: <span className="text-4xl">🔐</span>,
       desc: "Criar Contas de Acesso",
       href: "/admin/usuarios",
       color: "border-zinc-800 bg-zinc-900",
@@ -56,7 +47,7 @@ export default async function AdminDashboard() {
   ];
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a] p-8 pt-24">
+    <div className="min-h-screen bg-[#0a0a0a] p-8 pt-10">
       <div className="max-w-6xl mx-auto">
         <h1 className="font-barlow text-4xl text-white uppercase font-bold mb-2 flex items-center gap-3">
           <span className="text-zinc-500">⚙️</span> Painel de Controle
@@ -70,9 +61,10 @@ export default async function AdminDashboard() {
             <Link
               key={item.href}
               href={item.href}
-              className={`group border ${item.color} p-8 rounded-xl hover:scale-105 transition-all duration-300 hover:border-(--leao-amarelo)`}
+              // Corrigido: hover:border-[var(...)]
+              className={`group border ${item.color} p-8 rounded-xl hover:scale-105 transition-all duration-300 hover:border-(--leao-amarelo) flex flex-col items-start`}
             >
-              <div className="text-4xl mb-4 group-hover:scale-110 transition-transform w-fit">
+              <div className="mb-4 group-hover:scale-110 transition-transform w-fit">
                 {item.icon}
               </div>
               <h2 className="text-white font-barlow text-2xl font-bold uppercase mb-1">

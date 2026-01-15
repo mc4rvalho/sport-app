@@ -2,7 +2,6 @@ import { prisma } from "@/lib/prisma";
 import { salvarNoticia, excluirNoticia } from "./actions";
 import Link from "next/link";
 
-// Formata URL da imagem (Google Drive ou Link Direto)
 function formatarImagem(url: string | null) {
   if (!url) return "";
   if (url.includes("drive.google.com") && url.includes("/file/d/")) {
@@ -42,7 +41,6 @@ export default async function AdminNoticias({
           </h1>
         </div>
 
-        {/* FORMULÁRIO PADRONIZADO */}
         <div
           className={`p-8 rounded-xl border border-zinc-800 mb-12 shadow-xl ${
             itemEdit ? "bg-yellow-900/10 border-yellow-700" : "bg-[#141414]"
@@ -143,7 +141,6 @@ export default async function AdminNoticias({
           </form>
         </div>
 
-        {/* LISTA DE NOTÍCIAS COM FOTO */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {noticias.map((item) => {
             const imgUrl = formatarImagem(item.imagemUrl);
@@ -157,7 +154,6 @@ export default async function AdminNoticias({
                     : "border-zinc-800 hover:border-zinc-600"
                 }`}
               >
-                {/* ÁREA DA IMAGEM */}
                 <div className="h-40 bg-zinc-900 relative overflow-hidden">
                   {imgUrl ? (
                     // eslint-disable-next-line @next/next/no-img-element
@@ -171,7 +167,6 @@ export default async function AdminNoticias({
                       <span className="text-4xl">📷</span>
                     </div>
                   )}
-                  {/* Status de Publicação */}
                   {!item.publicada && (
                     <span className="absolute top-2 right-2 bg-red-600 text-white text-[10px] font-bold px-2 py-1 rounded shadow">
                       RASCUNHO

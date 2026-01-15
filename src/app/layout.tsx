@@ -27,7 +27,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-BR" className={`${barlow.variable} ${roboto.variable}`}>
+    <html lang="pt-BR" className={`${barlow} ${roboto}`}>
       <body className="bg-[#0a0a0a] text-zinc-300 font-roboto antialiased flex flex-col min-h-screen">
         <Navbar />
         {children}
