@@ -9,13 +9,10 @@ export default async function MeuPerfil() {
     redirect("/login");
   }
 
-  // Tenta achar o atleta vinculado a esse usuario
   const atleta = await prisma.botonista.findFirst({
-    // CORREÇÃO: Mudamos de 'sessao.sub' para 'sessao.id'
     where: { usuarioId: sessao.id },
   });
 
-  // Se o usuário não tem um perfil de atleta vinculado, mostra aviso
   if (!atleta) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-[#0a0a0a] text-white">
@@ -35,6 +32,5 @@ export default async function MeuPerfil() {
     );
   }
 
-  // Se achou, redireciona para a página bonita de atleta
   redirect(`/atleta/${atleta.id}`);
 }

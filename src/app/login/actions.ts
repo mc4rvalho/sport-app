@@ -9,7 +9,6 @@ interface LoginState {
   erro: string;
 }
 
-// Correção: prevState pode ser 'unknown' ou 'LoginState'
 export async function loginAction(
   prevState: unknown,
   formData: FormData
@@ -39,7 +38,5 @@ export async function loginAction(
   });
 
   redirect("/admin");
-
-  // O redirect interrompe a execução, mas o TS pede retorno
   return { erro: "" };
 }

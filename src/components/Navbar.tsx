@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 
 import { useState, useEffect } from "react";
@@ -17,13 +18,12 @@ export function Navbar() {
   useEffect(() => {
     async function carregarSessao() {
       const dados = await getSessionData();
-      if (dados) {
+      if (dados)
         setUsuario({
           nome: dados.nome,
           foto: dados.foto ?? null,
           role: dados.role,
         });
-      }
     }
     carregarSessao();
   }, []);
@@ -49,7 +49,6 @@ export function Navbar() {
   }
 
   const avatarUrl = formatarFoto(usuario?.foto || null);
-
   const navLinkClass =
     "text-gray-400 font-bold font-barlow text-lg no-underline transition-colors uppercase hover:text-(--leao-amarelo) tracking-wide";
   const menuItemClass =
@@ -57,9 +56,7 @@ export function Navbar() {
 
   return (
     <nav className="bg-(--leao-preto) border-b-4 border-(--leao-vermelho) px-6 lg:px-12 py-4 flex justify-between items-center flex-wrap gap-5 shadow-2xl sticky top-0 z-50 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]">
-      {/* LADO ESQUERDO: LOGO */}
       <div className="flex items-center gap-4 group">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src="https://upload.wikimedia.org/wikipedia/pt/1/17/Sport_Club_do_Recife.png"
           alt="Escudo Sport"
@@ -75,7 +72,6 @@ export function Navbar() {
         </div>
       </div>
 
-      {/* LADO DIREITO: LINKS E AVATAR */}
       <ul className="flex gap-8 items-center list-none m-0 p-0">
         <li className="hidden md:block">
           <Link href="/" className={navLinkClass}>
@@ -108,7 +104,6 @@ export function Navbar() {
           </Link>
         </li>
 
-        {/* ÁREA DE LOGIN / PERFIL */}
         {usuario ? (
           <>
             <li className="border-l-2 border-zinc-800 h-8 mx-2 hidden md:block"></li>
@@ -118,7 +113,6 @@ export function Navbar() {
                 className="w-12 h-12 rounded-full bg-zinc-900 border-2 border-(--leao-amarelo) flex items-center justify-center cursor-pointer overflow-hidden transition-all hover:ring-4 ring-(--leao-amarelo)/30 ring-offset-2 ring-offset-black"
               >
                 {avatarUrl ? (
-                  // eslint-disable-next-line @next/next/no-img-element
                   <img
                     src={avatarUrl}
                     alt="Perfil"
@@ -130,7 +124,6 @@ export function Navbar() {
                   </span>
                 )}
               </button>
-
               {menuAberto && (
                 <>
                   <div
@@ -141,7 +134,6 @@ export function Navbar() {
                     <div className="px-4 py-3 border-b border-zinc-800 mb-2 flex items-center gap-3 bg-zinc-900/50 rounded-t-lg">
                       <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-zinc-700">
                         {avatarUrl ? (
-                          // eslint-disable-next-line @next/next/no-img-element
                           <img
                             src={avatarUrl}
                             alt=""
@@ -164,7 +156,6 @@ export function Navbar() {
                         </span>
                       </div>
                     </div>
-
                     <Link
                       href="/perfil"
                       onClick={() => setMenuAberto(false)}
@@ -172,7 +163,6 @@ export function Navbar() {
                     >
                       👤 Meu Perfil
                     </Link>
-
                     {usuario.role === "ADMIN" && (
                       <Link
                         href="/admin"
@@ -182,9 +172,7 @@ export function Navbar() {
                         ⚙️ Painel do Diretor
                       </Link>
                     )}
-
                     <div className="border-t border-zinc-800 my-1"></div>
-
                     <button
                       onClick={handleLogout}
                       className={`${menuItemClass} text-red-500 hover:bg-red-950/30 hover:text-red-400 w-full text-left cursor-pointer`}

@@ -3,8 +3,7 @@ import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Notícias | Sport Club do Recife - Futebol de Mesa",
-  description:
-    "Fique por dentro das últimas novidades, resultados e eventos do futebol de mesa do Leão.",
+  description: "Fique por dentro das últimas novidades.",
 };
 
 function formatarData(data: Date) {
@@ -15,14 +14,11 @@ function formatarData(data: Date) {
   }).format(data);
 }
 
-// CORREÇÃO DEFINITIVA DE IMAGEM
 function formatarImagem(url: string | null) {
   if (!url) return "";
   if (url.includes("drive.google.com") && url.includes("/file/d/")) {
     try {
       const id = url.split("/file/d/")[1].split("/")[0];
-      // MUDANÇA: Usamos 'thumbnail' com sz=w1000 (largura 1000px).
-      // Isso garante alta qualidade sem os bloqueios de download do Google.
       return `https://drive.google.com/thumbnail?id=${id}&sz=w1000`;
     } catch {
       return url;
@@ -40,11 +36,9 @@ export default async function NoticiasPage() {
   return (
     <main className="min-h-screen bg-[#0a0a0a] py-20 px-6">
       <div className="max-w-6xl mx-auto">
-        {/* CABEÇALHO */}
         <div className="text-center mb-16">
           <h1 className="font-barlow text-5xl md:text-6xl text-white uppercase font-black mb-4 tracking-tight">
             <span className="text-(--leao-amarelo)">Últimas</span>{" "}
-            {/* CORREÇÃO: Faltava fechar o parêntese aqui */}
             <span className="text-(--leao-vermelho)">Notícias</span>
           </h1>
           <div className="w-24 h-1 bg-(--leao-vermelho) mx-auto mb-6"></div>
@@ -54,7 +48,6 @@ export default async function NoticiasPage() {
           </p>
         </div>
 
-        {/* GRID DE NOTÍCIAS */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {noticias.map((noticia, index) => {
             const imgUrl = formatarImagem(noticia.imagemUrl);
@@ -67,7 +60,6 @@ export default async function NoticiasPage() {
                 key={noticia.id}
                 className={`bg-[#111] border border-zinc-800 rounded-2xl overflow-hidden flex flex-col group hover:border-(--leao-amarelo) transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_10px_30px_-10px_rgba(0,0,0,0.5)] ${destaqueClass}`}
               >
-                {/* ÁREA DA IMAGEM */}
                 <div
                   className={`${alturaImagem} bg-black relative overflow-hidden flex items-center justify-center`}
                 >
@@ -84,14 +76,10 @@ export default async function NoticiasPage() {
                       <span className="text-5xl grayscale opacity-20">🦁</span>
                     </div>
                   )}
-
-                  {/* Data */}
                   <div className="absolute top-4 left-4 bg-(--leao-vermelho) text-white text-xs font-bold uppercase px-3 py-1.5 rounded-full shadow-lg z-10">
                     {formatarData(noticia.data)}
                   </div>
                 </div>
-
-                {/* CONTEÚDO */}
                 <div className="p-6 flex-1 flex flex-col">
                   <h2 className="text-white font-barlow text-2xl uppercase font-bold leading-tight mb-3 group-hover:text-(--leao-amarelo) transition-colors">
                     {noticia.titulo}
@@ -99,7 +87,6 @@ export default async function NoticiasPage() {
                   <p className="text-zinc-400 text-sm line-clamp-3 mb-6 flex-1">
                     {noticia.subtitulo}
                   </p>
-
                   {noticia.link && (
                     <a
                       href={noticia.link}
@@ -114,7 +101,6 @@ export default async function NoticiasPage() {
               </article>
             );
           })}
-
           {noticias.length === 0 && (
             <div className="col-span-full text-center py-20 p-8 border border-dashed border-zinc-800 rounded-xl">
               <p className="text-zinc-500 text-xl font-barlow uppercase font-bold">

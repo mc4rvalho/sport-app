@@ -10,7 +10,6 @@ export default function ContatoPage() {
     <main className="min-h-screen py-20 px-6">
       <div className="max-w-5xl mx-auto">
         <div className="text-center mb-16">
-          {/* Trocado text-white por text-zinc-200 */}
           <h1 className="text-5xl text-(--leao-amarelo) uppercase font-black mb-2">
             Fale <span className="text-(--leao-vermelho)">Conosco</span>
           </h1>
@@ -20,10 +19,8 @@ export default function ContatoPage() {
         </div>
 
         <div className="grid md:grid-cols-2 gap-12 bg-[#111] p-8 md:p-12 rounded-2xl border border-zinc-800 shadow-2xl">
-          {/* Lado Esquerdo: Infos */}
           <div className="flex flex-col justify-center space-y-10">
             <div>
-              {/* Títulos em cinza claro */}
               <h3 className="text-(--leao-amarelo) font-barlow text-2xl font-bold uppercase mb-3">
                 Sala Otávio Coutinho
               </h3>
@@ -35,7 +32,6 @@ export default function ContatoPage() {
                 CEP: 50750-560
               </p>
             </div>
-
             <div>
               <h3 className="text-(--leao-vermelho) font-barlow text-2xl font-bold uppercase mb-3">
                 Seja Patrocinador
@@ -45,7 +41,6 @@ export default function ContatoPage() {
                 formulário e selecione o assunto &quot;Patrocínio&quot;.
               </p>
             </div>
-
             <div className="pt-4 border-t border-zinc-800">
               <span className="text-zinc-500 text-xs font-bold uppercase block mb-1">
                 E-mail Direto
@@ -59,7 +54,6 @@ export default function ContatoPage() {
             </div>
           </div>
 
-          {/* Lado Direito: Formulário */}
           <form className="flex flex-col gap-5">
             <div>
               <label className="block text-[10px] font-bold uppercase text-zinc-500 mb-1 tracking-wider">
@@ -71,7 +65,6 @@ export default function ContatoPage() {
                 placeholder="Digite seu nome"
               />
             </div>
-
             <div>
               <label className="block text-[10px] font-bold uppercase text-zinc-500 mb-1 tracking-wider">
                 E-mail
@@ -82,7 +75,6 @@ export default function ContatoPage() {
                 placeholder="seu@email.com"
               />
             </div>
-
             <div>
               <label className="block text-[10px] font-bold uppercase text-zinc-500 mb-1 tracking-wider">
                 Assunto
@@ -93,7 +85,6 @@ export default function ContatoPage() {
                 <option>Dúvidas Gerais</option>
               </select>
             </div>
-
             <div>
               <label className="block text-[10px] font-bold uppercase text-zinc-500 mb-1 tracking-wider">
                 Mensagem
@@ -104,7 +95,6 @@ export default function ContatoPage() {
                 placeholder="Escreva sua mensagem..."
               ></textarea>
             </div>
-
             <button type="button" className="btn-sport w-full mt-2">
               Enviar Mensagem
             </button>

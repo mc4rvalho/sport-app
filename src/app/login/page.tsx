@@ -17,7 +17,6 @@ export default function LoginPage() {
   return (
     <div className="flex items-center justify-center min-h-[80vh] px-4">
       <div className="w-full max-w-md bg-[#111] p-8 rounded-lg border border-[#333] shadow-2xl relative overflow-hidden">
-        {/* Detalhe visual do Sport */}
         <div className="absolute top-0 left-0 w-full h-1 bg-(--leao-vermelho)"></div>
 
         <div className="text-center mb-8">
@@ -56,7 +55,6 @@ export default function LoginPage() {
             />
           </div>
 
-          {/* Mensagem de Erro (se houver) */}
           {state?.erro && (
             <div className="bg-red-900/30 text-red-400 p-3 rounded text-sm text-center border border-red-900">
               ⚠️ {state.erro}

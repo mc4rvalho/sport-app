@@ -21,7 +21,6 @@ interface PageProps {
 export default async function PerfilAtleta({ params }: PageProps) {
   const { id } = await params;
 
-  // Busca dados do atleta e seus resultados
   const atleta = await prisma.botonista.findUnique({
     where: { id },
     include: {
@@ -34,7 +33,6 @@ export default async function PerfilAtleta({ params }: PageProps) {
 
   if (!atleta) return notFound();
 
-  // Cálculos Gerais
   const totalJogos = atleta.resultados.reduce((acc, r) => acc + r.jogos, 0);
   const totalTitulos = atleta.resultados.filter(
     (r) => r.colocacao === 1
@@ -43,11 +41,10 @@ export default async function PerfilAtleta({ params }: PageProps) {
   return (
     <main className="min-h-screen bg-[#0a0a0a] pb-20 pt-24">
       <div className="max-w-5xl mx-auto px-6">
-        {/* CARTÃO DO CABEÇALHO */}
+        {/* CABEÇALHO */}
         <div className="bg-[#111] border border-zinc-800 rounded-2xl p-8 mb-12 flex flex-col md:flex-row items-center gap-10 shadow-2xl relative overflow-hidden">
           <div className="absolute top-0 right-0 w-64 h-64 bg-(--leao-vermelho) opacity-5 blur-[100px] rounded-full pointer-events-none"></div>
 
-          {/* FOTO */}
           <div className="relative shrink-0">
             <div className="w-48 h-48 rounded-full border-[6px] border-(--leao-vermelho) overflow-hidden bg-zinc-900 shadow-[0_0_30px_rgba(211,9,21,0.4)]">
               {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -59,7 +56,6 @@ export default async function PerfilAtleta({ params }: PageProps) {
             </div>
           </div>
 
-          {/* DADOS PRINCIPAIS */}
           <div className="text-center md:text-left flex-1">
             <span className="text-zinc-500 font-bold uppercase tracking-[4px] text-xs mb-2 block">
               Ficha Técnica
@@ -80,7 +76,6 @@ export default async function PerfilAtleta({ params }: PageProps) {
             </div>
           </div>
 
-          {/* STATS DESTAQUE */}
           <div className="flex gap-8 md:gap-12 border-t md:border-t-0 md:border-l border-zinc-800 pt-6 md:pt-0 md:pl-12">
             <div className="text-center">
               <span className="block text-5xl font-black text-(--leao-amarelo) font-barlow leading-none">
@@ -110,13 +105,13 @@ export default async function PerfilAtleta({ params }: PageProps) {
         </div>
 
         {/* LISTA DE ATUAÇÕES */}
+
         <h2 className="text-(--leao-amarelo) font-barlow text-3xl uppercase font-bold mb-6 flex items-center gap-3">
           Últimas <span className="text-(--leao-vermelho)">Atuações</span>
         </h2>
 
         <div className="flex flex-col gap-4">
           {atleta.resultados.map((resultado) => {
-            // Cálculos por linha
             const saldo = resultado.golsPro - resultado.golsContra;
             const aproveitamento =
               resultado.jogos > 0
@@ -148,7 +143,8 @@ export default async function PerfilAtleta({ params }: PageProps) {
                     <span className="text-xs text-zinc-500 font-bold uppercase flex items-center gap-2">
                       📅{" "}
                       {new Date(resultado.campeonato.data).toLocaleDateString(
-                        "pt-BR"
+                        "pt-BR",
+                        { timeZone: "UTC" }
                       )}
                       {resultado.colocacao === 1 && (
                         <span className="text-(--leao-amarelo) flex items-center gap-1 ml-2">
@@ -173,7 +169,6 @@ export default async function PerfilAtleta({ params }: PageProps) {
                   </div>
                 </div>
 
-                {/* GRID DE STATS */}
                 <div className="grid grid-cols-4 md:grid-cols-10 gap-y-4 gap-x-2 text-center border-t border-zinc-900 pt-4">
                   <div>
                     <span className="text-white font-bold font-mono text-lg block">
@@ -207,9 +202,7 @@ export default async function PerfilAtleta({ params }: PageProps) {
                       D
                     </span>
                   </div>
-
                   <div className="hidden md:block w-px bg-zinc-800 mx-auto h-full"></div>
-
                   <div>
                     <span className="text-zinc-300 font-mono text-lg block">
                       {resultado.golsPro}
@@ -234,9 +227,7 @@ export default async function PerfilAtleta({ params }: PageProps) {
                       SG
                     </span>
                   </div>
-
                   <div className="hidden md:block w-px bg-zinc-800 mx-auto h-full"></div>
-
                   <div className="col-span-4 md:col-span-2 flex justify-between md:justify-around px-4 md:px-0">
                     <div className="text-center">
                       <span className="text-white font-bold font-mono text-lg block">
@@ -267,7 +258,6 @@ export default async function PerfilAtleta({ params }: PageProps) {
               </div>
             );
           })}
-
           {atleta.resultados.length === 0 && (
             <div className="p-8 border border-dashed border-zinc-800 rounded-xl text-center text-zinc-500 font-bold uppercase">
               Este atleta ainda não disputou partidas nesta temporada.

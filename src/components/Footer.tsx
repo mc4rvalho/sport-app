@@ -3,14 +3,11 @@ import Link from "next/link";
 export function Footer() {
   return (
     <footer className="bg-[#111] border-t-4 border-(--leao-vermelho) mt-auto">
-      {/* ÁREA DE PATROCINADORES */}
       <div className="bg-black py-12 border-b border-zinc-900">
         <div className="max-w-6xl mx-auto px-6 text-center">
           <h3 className="text-(--leao-vermelho) font-barlow font-bold uppercase tracking-[4px] text-xs mb-8">
             Patrocinadores Oficiais
           </h3>
-
-          {/* Lista de Marcas (Texto simulando logos) */}
           <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-50 grayscale hover:grayscale-0 transition-all duration-500 hover:opacity-100">
             <span className="text-3xl font-black text-(--leao-vermelho) font-barlow tracking-tighter">
               RECIFE TELHAS
@@ -22,7 +19,6 @@ export function Footer() {
               WE.TEST
             </span>
           </div>
-
           <div className="mt-10">
             <Link
               href="/contato"
@@ -34,7 +30,6 @@ export function Footer() {
         </div>
       </div>
 
-      {/* LINKS E INFOS */}
       <div className="max-w-6xl mx-auto px-6 py-10 grid md:grid-cols-4 gap-8 text-sm">
         <div className="col-span-1 md:col-span-2">
           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -48,7 +43,6 @@ export function Footer() {
             raça e glórias desde a fundação. Pelo Sport Tudo!
           </p>
         </div>
-
         <div>
           <h4 className="text-(--leao-amarelo) font-barlow font-bold uppercase mb-4 tracking-wider text-sm">
             Navegação
@@ -88,7 +82,6 @@ export function Footer() {
             </li>
           </ul>
         </div>
-
         <div>
           <h4 className="text-(--leao-vermelho) font-barlow font-bold uppercase mb-4 tracking-wider text-sm">
             Contato

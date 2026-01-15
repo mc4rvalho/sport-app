@@ -1,7 +1,6 @@
 import { gerarRanking } from "@/lib/ranking-logic";
 import Link from "next/link";
 
-// Componente para formatar foto... (mantenha a função formatarFoto aqui)
 function formatarFoto(url: string | null) {
   if (!url) return "";
   if (url.includes("drive.google.com") && url.includes("/file/d/")) {
@@ -15,7 +14,6 @@ function formatarFoto(url: string | null) {
   return url;
 }
 
-// O componente agora recebe searchParams para saber qual aba está ativa
 export default async function RankingPage({
   searchParams,
 }: {
@@ -24,7 +22,6 @@ export default async function RankingPage({
   const params = await searchParams;
   const filtroAtual =
     (params.filtro as "GERAL" | "INTERNO" | "ADULTO" | "MASTER") || "GERAL";
-
   const ranking = await gerarRanking(filtroAtual);
 
   const abas = [
@@ -37,15 +34,12 @@ export default async function RankingPage({
   return (
     <main className="min-h-screen bg-[#0a0a0a] pb-20 pt-10">
       <div className="max-w-7xl mx-auto px-4">
-        {" "}
-        {/* Aumentei para 7xl para caber as colunas */}
         <div className="text-center mb-10">
           <h1 className="font-barlow text-5xl uppercase font-black">
-            <span className="text-(--leao-amarelo)">Classificação</span>
+            <span className="text-(--leao-amarelo)">Classificação</span>{" "}
             <span className="text-(--leao-vermelho)">Oficial</span>
           </h1>
         </div>
-        {/* ABAS DE NAVEGAÇÃO */}
         <div className="flex justify-center gap-2 mb-8 flex-wrap">
           {abas.map((aba) => (
             <Link
