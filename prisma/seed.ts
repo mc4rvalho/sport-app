@@ -6,7 +6,7 @@ const prisma = new PrismaClient();
 async function main() {
   console.log("🌱 Iniciando a semeadura completa...");
 
-  // 1. LIMPEZA (Apenas tabelas que existem no seu schema atual)
+  // 1. LIMPEZA (Apenas tabelas que existem no schema atual)
   // A ordem importa para evitar erro de chave estrangeira
   await prisma.resultado.deleteMany();
   await prisma.campeonato.deleteMany();
