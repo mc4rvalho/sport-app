@@ -11,8 +11,8 @@ export default function ContatoPage() {
       <div className="max-w-5xl mx-auto">
         <div className="text-center mb-16">
           {/* Trocado text-white por text-zinc-200 */}
-          <h1 className="text-5xl text-zinc-200 uppercase font-black mb-2">
-            Fale <span className="text-(--leao-amarelo)">Conosco</span>
+          <h1 className="text-5xl text-(--leao-amarelo) uppercase font-black mb-2">
+            Fale <span className="text-(--leao-vermelho)">Conosco</span>
           </h1>
           <p className="text-zinc-500 max-w-xl mx-auto">
             Canal oficial para dúvidas, imprensa e parcerias comerciais.
@@ -24,8 +24,8 @@ export default function ContatoPage() {
           <div className="flex flex-col justify-center space-y-10">
             <div>
               {/* Títulos em cinza claro */}
-              <h3 className="text-zinc-200 font-barlow text-2xl font-bold uppercase mb-3">
-                Sede da Ilha
+              <h3 className="text-(--leao-amarelo) font-barlow text-2xl font-bold uppercase mb-3">
+                Sala Otávio Coutinho
               </h3>
               <p className="text-zinc-400 leading-relaxed text-sm">
                 Av. Sport Club do Recife
@@ -37,7 +37,7 @@ export default function ContatoPage() {
             </div>
 
             <div>
-              <h3 className="text-zinc-200 font-barlow text-2xl font-bold uppercase mb-3">
+              <h3 className="text-(--leao-vermelho) font-barlow text-2xl font-bold uppercase mb-3">
                 Seja Patrocinador
               </h3>
               <p className="text-zinc-400 leading-relaxed text-sm">
@@ -88,7 +88,7 @@ export default function ContatoPage() {
                 Assunto
               </label>
               <select className="w-full bg-black border border-zinc-800 rounded p-3 text-zinc-300 focus:border-(--leao-amarelo) outline-none transition-colors cursor-pointer">
-                <option>Quero ser Patrocinador</option>
+                <option>Quero ser patrocinador</option>
                 <option>Imprensa / Mídia</option>
                 <option>Dúvidas Gerais</option>
               </select>

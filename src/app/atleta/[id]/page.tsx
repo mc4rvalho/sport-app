@@ -69,7 +69,7 @@ export default async function PerfilAtleta({ params }: PageProps) {
             </h1>
 
             <div className="flex items-center justify-center md:justify-start gap-3 mb-8">
-              <span className="bg-(--leao-vermelho) text-white font-bold px-4 py-1 rounded text-sm uppercase shadow-lg border border-red-900">
+              <span className="bg-(--leao-vermelho) text-(--leao-preto) font-bold px-4 py-1 rounded text-sm uppercase shadow-lg border border-red-900">
                 {atleta.categoria}
               </span>
               {atleta.time && (
@@ -91,7 +91,7 @@ export default async function PerfilAtleta({ params }: PageProps) {
               </span>
             </div>
             <div className="text-center">
-              <span className="block text-5xl font-black text-white font-barlow leading-none">
+              <span className="block text-5xl font-black text-(--leao-vermelho) font-barlow leading-none">
                 {totalJogos}
               </span>
               <span className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest mt-1 block">
@@ -110,8 +110,8 @@ export default async function PerfilAtleta({ params }: PageProps) {
         </div>
 
         {/* LISTA DE ATUAÇÕES */}
-        <h2 className="text-white font-barlow text-3xl uppercase font-bold mb-6 flex items-center gap-3">
-          Últimas Atuações
+        <h2 className="text-(--leao-amarelo) font-barlow text-3xl uppercase font-bold mb-6 flex items-center gap-3">
+          Últimas <span className="text-(--leao-vermelho)">Atuações</span>
         </h2>
 
         <div className="flex flex-col gap-4">
@@ -142,7 +142,7 @@ export default async function PerfilAtleta({ params }: PageProps) {
               >
                 <div className="flex justify-between items-start mb-6">
                   <div>
-                    <strong className="text-white text-xl uppercase font-barlow block mb-1">
+                    <strong className="text-(--leao-vermelho) text-xl uppercase font-barlow block mb-1">
                       {resultado.campeonato.nome}
                     </strong>
                     <span className="text-xs text-zinc-500 font-bold uppercase flex items-center gap-2">

@@ -13,6 +13,7 @@ export default async function AdminCampeonatos({
   const campeonatos = await prisma.campeonato.findMany({
     orderBy: { data: "desc" },
   });
+
   const campEditando = editId ? campeonatos.find((c) => c.id === editId) : null;
 
   return (
@@ -72,7 +73,7 @@ export default async function AdminCampeonatos({
               />
             </div>
 
-            {/* INPUT DATA */}
+            {/* INPUT DATA (CORRIGIDO) */}
             <div>
               <label className="text-xs text-zinc-500 uppercase font-bold block mb-2 tracking-wider">
                 Data de Início
@@ -80,6 +81,7 @@ export default async function AdminCampeonatos({
               <input
                 name="data"
                 type="date"
+                // toISOString() retorna UTC, então o .split pega a data correta
                 defaultValue={
                   campEditando
                     ? new Date(campEditando.data).toISOString().split("T")[0]
@@ -90,7 +92,7 @@ export default async function AdminCampeonatos({
               />
             </div>
 
-            {/* INPUT TIPO (Atualizado) */}
+            {/* INPUT TIPO (Atualizado com Novas Opções) */}
             <div>
               <label className="text-xs text-zinc-500 uppercase font-bold block mb-2 tracking-wider">
                 Tipo de Competição
@@ -104,10 +106,17 @@ export default async function AdminCampeonatos({
                 <option value="COPA PE">Copa Pernambuco</option>
                 <option value="ETAPA PE">Etapa Pernambucana</option>
                 <option value="TGR">TGR (Taça Grande Recife)</option>
+                {/* Adicionado para funcionar com as cores do Calendário */}
+                <option value="NACIONAL">
+                  Nacional (Brasileiro/Copa do BR)
+                </option>
+                <option value="INTERNACIONAL">
+                  Internacional (Mundial/Sul-Americano)
+                </option>
               </select>
             </div>
 
-            {/* BOTÃO PADRONIZADO (Igual Resultados) */}
+            {/* BOTÃO */}
             <div className="md:col-span-2 lg:col-span-3 flex justify-end mt-2">
               <button
                 type="submit"
@@ -144,8 +153,13 @@ export default async function AdminCampeonatos({
                     <span className="text-[10px] bg-zinc-900 text-zinc-500 px-2 py-0.5 rounded uppercase font-bold tracking-wider border border-zinc-800">
                       {camp.tipo}
                     </span>
+
+                    {/* CORREÇÃO AQUI: timeZone: "UTC" para exibir a data correta */}
                     <span className="text-[10px] text-zinc-500 py-0.5 font-bold uppercase tracking-wider">
-                      📅 {new Date(camp.data).toLocaleDateString("pt-BR")}
+                      📅{" "}
+                      {new Date(camp.data).toLocaleDateString("pt-BR", {
+                        timeZone: "UTC",
+                      })}
                     </span>
                   </div>
                 </div>

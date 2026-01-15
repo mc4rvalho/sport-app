@@ -40,8 +40,9 @@ export default async function RankingPage({
         {" "}
         {/* Aumentei para 7xl para caber as colunas */}
         <div className="text-center mb-10">
-          <h1 className="font-barlow text-5xl text-white uppercase font-black">
-            Classificação Oficial
+          <h1 className="font-barlow text-5xl uppercase font-black">
+            <span className="text-(--leao-amarelo)">Classificação</span>
+            <span className="text-(--leao-vermelho)">Oficial</span>
           </h1>
         </div>
         {/* ABAS DE NAVEGAÇÃO */}

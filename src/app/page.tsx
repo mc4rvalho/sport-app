@@ -68,22 +68,42 @@ export default async function Home() {
 
   return (
     <main className="min-h-screen pb-12 bg-[#0a0a0a]">
-      {/* HERO SECTION COMPACTA */}
-      <section className="bg-black border-b-4 border-(--leao-vermelho) py-10 text-center relative overflow-hidden shadow-xl z-10">
-        <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-40 mix-blend-overlay"></div>
+      {/* HERO SECTION DINÂMICA COM LINK PARA CALENDÁRIO */}
+      <Link href="/calendario" className="block cursor-pointer group">
+        <section className="bg-black border-b-4 border-(--leao-vermelho) py-10 text-center relative overflow-hidden shadow-xl z-10 hover:bg-[#0f0f0f] transition-colors">
+          <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-40 mix-blend-overlay"></div>
 
-        <div className="relative z-10 flex flex-col items-center">
-          <span className="inline-block bg-zinc-900/80 border border-zinc-700 px-3 py-1 rounded-full text-gray-400 text-[10px] font-bold tracking-[3px] uppercase mb-2">
-            Próxima Partida
-          </span>
-          <h1 className="text-(--leao-amarelo) font-barlow text-7xl md:text-8xl font-black leading-none mb-1 drop-shadow-[0_2px_10px_rgba(255,215,0,0.3)]">
-            {dataDisplay}
-          </h1>
-          <h2 className="text-white font-barlow text-2xl md:text-4xl uppercase font-bold tracking-wider max-w-2xl leading-tight px-4">
-            {nomeDisplay}
-          </h2>
-        </div>
-      </section>
+          {/* Efeito Hover: Borda Amarela sutil ao passar o mouse */}
+          <div className="absolute top-0 left-0 w-full h-1 bg-transparent group-hover:bg-(--leao-amarelo) transition-colors duration-500"></div>
+
+          <div className="relative z-10 flex flex-col items-center">
+            <div className="inline-flex items-center gap-2 bg-zinc-900/80 border border-zinc-700 px-4 py-1 rounded-full text-zinc-400 text-[10px] font-bold tracking-[3px] uppercase mb-2 group-hover:border-(--leao-amarelo) group-hover:text-(--leao-amarelo) transition-colors">
+              <span>Próxima Partida</span>
+              <span className="text-xs">↗</span>
+            </div>
+
+            {proximoCampeonato ? (
+              <>
+                <h1 className="text-(--leao-amarelo) font-barlow text-7xl md:text-8xl font-black leading-none mb-1 drop-shadow-[0_2px_10px_rgba(255,215,0,0.3)] group-hover:scale-105 group-hover:text-(--leao-vermelho) transition-transform duration-300">
+                  {dataDisplay}
+                </h1>
+                <h2 className="text-(--leao-vermelho) font-barlow text-2xl md:text-4xl uppercase font-bold tracking-wider max-w-2xl leading-tight px-4 group-hover:text-(--leao-amarelo) transition-colors">
+                  {nomeDisplay}
+                </h2>
+              </>
+            ) : (
+              <>
+                <h1 className="text-zinc-600 font-barlow text-5xl md:text-7xl font-black leading-none mb-2 group-hover:text-zinc-500 transition-colors">
+                  EM BREVE
+                </h1>
+                <h2 className="text-zinc-400 font-barlow text-xl uppercase font-bold tracking-wider">
+                  Ver Calendário Completo
+                </h2>
+              </>
+            )}
+          </div>
+        </section>
+      </Link>
 
       {/* CONTAINER PRINCIPAL */}
       <div className="max-w-6xl mx-auto px-4 mt-12 relative z-20">
@@ -92,8 +112,9 @@ export default async function Home() {
           <div className="mb-16 border-b border-zinc-900/50 pb-8">
             <div className="text-center mb-16">
               <h3 className="font-barlow text-3xl uppercase font-bold text-white inline-flex items-center gap-3 before:h-px before:w-12 before:bg-zinc-700 after:h-px after:w-12 after:bg-zinc-700 tracking-wider">
-                <span className="text-(--leao-amarelo) text-xl">♛</span> Líderes
-                da Temporada
+                <span className="text-(--leao-amarelo) text-xl">♛</span>
+                <span className="text-(--leao-amarelo)">Líderes da </span>
+                <span className="text-(--leao-vermelho)">Temporada</span>
               </h3>
             </div>
 
@@ -110,7 +131,6 @@ export default async function Home() {
                     </div>
                     <div className="w-24 h-24 md:w-28 md:h-28 rounded-full border-4 border-zinc-400 overflow-hidden bg-zinc-900 shadow-xl flex items-center justify-center">
                       {imgTop2 ? (
-                        // ADICIONADO: referrerPolicy="no-referrer"
                         // eslint-disable-next-line @next/next/no-img-element
                         <img
                           src={imgTop2}
@@ -150,7 +170,6 @@ export default async function Home() {
                     </div>
                     <div className="w-32 h-32 md:w-36 md:h-36 rounded-full border-4 border-(--leao-amarelo) overflow-hidden bg-zinc-900 shadow-[0_0_30px_rgba(255,215,0,0.2)] ring-4 ring-(--leao-amarelo)/10 ring-offset-4 ring-offset-black group-hover:ring-(--leao-amarelo)/40 transition-all flex items-center justify-center">
                       {imgTop1 ? (
-                        // ADICIONADO: referrerPolicy="no-referrer"
                         // eslint-disable-next-line @next/next/no-img-element
                         <img
                           src={imgTop1}
@@ -187,7 +206,6 @@ export default async function Home() {
                     </div>
                     <div className="w-24 h-24 md:w-28 md:h-28 rounded-full border-4 border-[#cd7f32] overflow-hidden bg-zinc-900 shadow-xl flex items-center justify-center">
                       {imgTop3 ? (
-                        // ADICIONADO: referrerPolicy="no-referrer"
                         // eslint-disable-next-line @next/next/no-img-element
                         <img
                           src={imgTop3}
@@ -215,11 +233,12 @@ export default async function Home() {
           </div>
         )}
 
+        {/* RESTO DO CONTEÚDO */}
         <div className="grid lg:grid-cols-2 gap-10 mt-8">
           {/* ÚLTIMOS JOGOS */}
           <div>
             <div className="flex items-center justify-between mb-6 border-l-4 border-(--leao-vermelho) pl-4 bg-linear-to-r from-zinc-900 to-transparent py-2 rounded-r-lg">
-              <h3 className="font-barlow text-2xl uppercase font-bold tracking-wide text-white">
+              <h3 className="font-barlow text-2xl uppercase font-bold tracking-wide text-(--leao-amarelo)">
                 Últimos Resultados
               </h3>
               <Link
@@ -240,12 +259,12 @@ export default async function Home() {
                 >
                   <div className="flex items-center gap-4">
                     <div className="w-10 h-10 bg-zinc-900 rounded flex items-center justify-center text-lg group-hover:scale-105 transition-transform shadow-inner border border-zinc-800">
-                      {jogo.campeonato.tipo === "COPA" ? "🏆" : "⚽"}
+                      {jogo.campeonato.tipo.includes("PE") ? "🏆" : "⚽"}
                     </div>
                     <div>
                       <Link
                         href={`/atleta/${jogo.botonista.id}`}
-                        className="text-white block uppercase font-barlow text-xl leading-none mb-1 group-hover:text-(--leao-amarelo) transition-colors tracking-tight hover:underline"
+                        className="text-(--leao-vermelho) block uppercase font-barlow text-xl leading-none mb-1 group-hover:text-(--leao-amarelo) transition-colors tracking-tight hover:underline"
                       >
                         {jogo.botonista.nome}
                       </Link>
@@ -255,7 +274,7 @@ export default async function Home() {
                     </div>
                   </div>
                   <div className="flex flex-col items-end">
-                    <span className="text-3xl font-black font-barlow text-white leading-none italic group-hover:text-(--leao-amarelo) transition-colors">
+                    <span className="text-3xl font-black font-barlow text-(--leao-vermelho) leading-none italic group-hover:text-(--leao-amarelo) transition-colors">
                       {jogo.colocacao}º
                     </span>
                     <span className="text-[8px] text-zinc-600 uppercase font-bold mt-0.5 tracking-widest">
@@ -275,7 +294,7 @@ export default async function Home() {
           {/* DESTAQUE */}
           <div>
             <div className="flex items-center justify-between mb-6 border-l-4 border-(--leao-vermelho) pl-4 bg-linear-to-r from-zinc-900 to-transparent py-2 rounded-r-lg">
-              <h3 className="font-barlow text-2xl uppercase font-bold tracking-wide text-white">
+              <h3 className="font-barlow text-2xl uppercase font-bold tracking-wide text-(--leao-amarelo)">
                 Destaque do Leão
               </h3>
               <Link
@@ -292,7 +311,7 @@ export default async function Home() {
                 target={ultimaNoticia.link ? "_blank" : "_self"}
                 className="block bg-[#111] border border-zinc-800 rounded-2xl overflow-hidden group hover:border-(--leao-amarelo)/40 transition-all shadow-lg hover:shadow-(--leao-amarelo)/10 relative top-0 hover:-top-1"
               >
-                <div className="h-64 overflow-hidden relative flex items-center justify-center bg-black">
+                <div className="h-72 overflow-hidden relative flex items-center justify-center bg-black">
                   {imgNoticia ? (
                     // eslint-disable-next-line @next/next/no-img-element
                     <img

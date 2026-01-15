@@ -37,8 +37,8 @@ export default async function TitulosPage() {
       <div className="max-w-6xl mx-auto">
         {/* CABEÇALHO */}
         <div className="text-center mb-16">
-          <h1 className="font-barlow text-5xl md:text-6xl text-white uppercase font-black mb-4 tracking-tight">
-            Sala de <span className="text-(--leao-amarelo)">Troféus</span>
+          <h1 className="font-barlow text-5xl md:text-6xl text-(--leao-amarelo) uppercase font-black mb-4 tracking-tight">
+            Sala de <span className="text-(--leao-vermelho)">Troféus</span>
           </h1>
           <p className="text-zinc-400 text-lg max-w-2xl mx-auto">
             A história do Sport Club do Recife no futebol de mesa é feita de
@@ -50,7 +50,7 @@ export default async function TitulosPage() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-20 border-y border-zinc-800 py-8 bg-[#111] rounded-xl">
           {/* TOTAL */}
           <div className="text-center border-r border-zinc-800 last:border-0">
-            <span className="block text-4xl md:text-5xl font-black text-white font-barlow mb-1">
+            <span className="block text-4xl md:text-5xl font-black text-(--leao-amarelo) font-barlow mb-1">
               {total}
             </span>
             <span className="text-[10px] md:text-xs text-zinc-500 uppercase font-bold tracking-widest">
@@ -60,7 +60,7 @@ export default async function TitulosPage() {
 
           {/* ESTADUAIS */}
           <div className="text-center border-r border-zinc-800 last:border-0">
-            <span className="block text-4xl md:text-5xl font-black text-(--leao-amarelo) font-barlow mb-1">
+            <span className="block text-4xl md:text-5xl font-black text-(--leao-vermelho) font-barlow mb-1">
               {estaduais}
             </span>
             <span className="text-[10px] md:text-xs text-zinc-500 uppercase font-bold tracking-widest">
@@ -70,7 +70,7 @@ export default async function TitulosPage() {
 
           {/* REGIONAIS */}
           <div className="text-center border-r border-zinc-800 last:border-0">
-            <span className="block text-4xl md:text-5xl font-black text-(--leao-vermelho) font-barlow mb-1">
+            <span className="block text-4xl md:text-5xl font-black text-(--leao-amarelo) font-barlow mb-1">
               {regionais}
             </span>
             <span className="text-[10px] md:text-xs text-zinc-500 uppercase font-bold tracking-widest">
@@ -80,7 +80,7 @@ export default async function TitulosPage() {
 
           {/* NACIONAIS (Substituindo a "Paixão") */}
           <div className="text-center">
-            <span className="block text-4xl md:text-5xl font-black text-blue-400 font-barlow mb-1">
+            <span className="block text-4xl md:text-5xl font-black text-(--leao-vermelho) font-barlow mb-1">
               {nacionais}
             </span>
             <span className="text-[10px] md:text-xs text-zinc-500 uppercase font-bold tracking-widest">
@@ -124,7 +124,7 @@ export default async function TitulosPage() {
 
                 {/* Textos */}
                 <div className="relative z-10">
-                  <h3 className="text-white font-barlow font-bold uppercase text-lg leading-tight mb-2">
+                  <h3 className="text-(--leao-vermelho) font-barlow font-bold uppercase text-lg leading-tight mb-2">
                     {item.nome}
                   </h3>
                   <div className="flex justify-center gap-2">

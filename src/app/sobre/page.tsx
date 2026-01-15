@@ -24,9 +24,9 @@ export default function SobrePage() {
           <span className="text-(--leao-amarelo) font-barlow font-bold uppercase tracking-[4px] text-sm mb-3 block">
             Desde 1905
           </span>
-          <h1 className="font-barlow text-6xl md:text-8xl text-white uppercase font-black leading-none max-w-4xl tracking-tighter">
+          <h1 className="font-barlow text-6xl md:text-8xl text-(--leao-amarelo) uppercase font-black leading-none max-w-4xl tracking-tighter">
             Pelo Sport <br />
-            <span className="text-zinc-700">Tudo!</span>
+            <span className="text-(--leao-vermelho)">Tudo!</span>
           </h1>
         </div>
       </section>
@@ -36,17 +36,17 @@ export default function SobrePage() {
         {/* Bloco 1: História */}
         <div className="flex flex-col md:flex-row gap-12 items-start">
           <div className="w-full md:w-1/3">
-            <h2 className="text-4xl text-white font-black uppercase mb-6 leading-none">
-              A Tradição nos{" "}
-              <span className="text-(--leao-vermelho)">Tabuleiros</span>
+            <h2 className="text-4xl text-(--leao-amarelo) font-black uppercase mb-6 leading-none">
+              A Tradição nas{" "}
+              <span className="text-(--leao-vermelho)">Mesas</span>
             </h2>
             <div className="w-12 h-1 bg-(--leao-amarelo)"></div>
           </div>
 
           <div className="w-full md:w-2/3 space-y-6 text-zinc-400 text-lg leading-relaxed font-roboto">
             <p>
-              O <strong className="text-white">Sport Club do Recife</strong> não
-              é gigante apenas nos gramados. Nos tabuleiros, o Leão ruge alto
+              O <strong className="text-(--leao-vermelho)">Sport Club do Recife</strong> não
+              é gigante apenas nos gramados. Nas mesas, o Leão ruge alto
               com uma das equipes mais tradicionais e vitoriosas do futebol de
               mesa brasileiro.
             </p>
@@ -66,7 +66,7 @@ export default function SobrePage() {
             <span className="text-4xl mb-6 block group-hover:scale-110 transition-transform w-fit">
               🦁
             </span>
-            <h3 className="text-white font-barlow font-bold uppercase text-xl mb-3 group-hover:text-(--leao-vermelho) transition-colors">
+            <h3 className="text-(--leao-amarelo) font-barlow font-bold uppercase text-xl mb-3 group-hover:text-(--leao-vermelho) transition-colors">
               Raça
             </h3>
             <p className="text-zinc-500 text-sm leading-relaxed">
@@ -78,7 +78,7 @@ export default function SobrePage() {
             <span className="text-4xl mb-6 block group-hover:scale-110 transition-transform w-fit">
               🏆
             </span>
-            <h3 className="text-white font-barlow font-bold uppercase text-xl mb-3 group-hover:text-(--leao-amarelo) transition-colors">
+            <h3 className="text-(--leao-vermelho) font-barlow font-bold uppercase text-xl mb-3 group-hover:text-(--leao-amarelo) transition-colors">
               Excelência
             </h3>
             <p className="text-zinc-500 text-sm leading-relaxed">
@@ -90,7 +90,7 @@ export default function SobrePage() {
             <span className="text-4xl mb-6 block group-hover:scale-110 transition-transform w-fit">
               🤝
             </span>
-            <h3 className="text-white font-barlow font-bold uppercase text-xl mb-3 group-hover:text-blue-500 transition-colors">
+            <h3 className="text-(--leao-verde) font-barlow font-bold uppercase text-xl mb-3 group-hover:text-blue-500 transition-colors">
               União
             </h3>
             <p className="text-zinc-500 text-sm leading-relaxed">
@@ -113,7 +113,7 @@ export default function SobrePage() {
                 👔
               </div>
               <div>
-                <strong className="text-white text-lg block uppercase font-barlow leading-none mb-1">
+                <strong className="text-(--leao-vermelho) text-lg block uppercase font-barlow leading-none mb-1">
                   Renato César
                 </strong>
                 <span className="text-(--leao-amarelo) text-[10px] font-bold uppercase tracking-widest border border-(--leao-amarelo) px-2 py-0.5 rounded-full">
@@ -128,10 +128,10 @@ export default function SobrePage() {
                 📋
               </div>
               <div>
-                <strong className="text-white text-lg block uppercase font-barlow leading-none mb-1">
+                <strong className="text-(--leao-vermelho) text-lg block uppercase font-barlow leading-none mb-1">
                   Papa
                 </strong>
-                <span className="text-zinc-500 text-xs font-bold uppercase tracking-wider">
+                <span className="text-(--leao-amarelo) text-xs font-bold uppercase tracking-wider">
                   Coordenador
                 </span>
               </div>
@@ -143,10 +143,10 @@ export default function SobrePage() {
                 🧠
               </div>
               <div>
-                <strong className="text-white text-lg block uppercase font-barlow leading-none mb-1">
+                <strong className="text-(--leao-vermelho) text-lg block uppercase font-barlow leading-none mb-1">
                   André Luiz
                 </strong>
-                <span className="text-zinc-500 text-xs font-bold uppercase tracking-wider">
+                <span className="text-(--leao-amarelo) text-xs font-bold uppercase tracking-wider">
                   Técnico
                 </span>
               </div>
@@ -158,10 +158,10 @@ export default function SobrePage() {
                 ©️
               </div>
               <div>
-                <strong className="text-white text-lg block uppercase font-barlow leading-none mb-1">
+                <strong className="text-(--leao-vermelho) text-lg block uppercase font-barlow leading-none mb-1">
                   Matheus Carvalho
                 </strong>
-                <span className="text-zinc-500 text-xs font-bold uppercase tracking-wider">
+                <span className="text-(--leao-amarelo) text-xs font-bold uppercase tracking-wider">
                   Capitão
                 </span>
               </div>
@@ -173,10 +173,10 @@ export default function SobrePage() {
                 📱
               </div>
               <div>
-                <strong className="text-white text-lg block uppercase font-barlow leading-none mb-1">
+                <strong className="text-(--leao-vermelho) text-lg block uppercase font-barlow leading-none mb-1">
                   Flavio Afa
                 </strong>
-                <span className="text-zinc-500 text-xs font-bold uppercase tracking-wider">
+                <span className="text-(--leao-amarelo) text-xs font-bold uppercase tracking-wider">
                   Social Media
                 </span>
               </div>

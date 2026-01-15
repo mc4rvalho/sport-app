@@ -13,19 +13,13 @@ export function Footer() {
           {/* Lista de Marcas (Texto simulando logos) */}
           <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-50 grayscale hover:grayscale-0 transition-all duration-500 hover:opacity-100">
             <span className="text-3xl font-black text-(--leao-vermelho) font-barlow tracking-tighter">
-              RTELHAS
+              RECIFE TELHAS
             </span>
             <span className="text-3xl font-black text-(--leao-vermelho) font-barlow tracking-tighter">
               FACSU
             </span>
             <span className="text-3xl font-black text-(--leao-vermelho) font-barlow tracking-tighter">
               WE.TEST
-            </span>
-            <span className="text-3xl font-black text-(--leao-vermelho) font-barlow tracking-tighter">
-              TOTAL
-            </span>
-            <span className="text-3xl font-black text-(--leao-vermelho) font-barlow tracking-tighter">
-              SILVA
             </span>
           </div>
 
@@ -56,7 +50,7 @@ export function Footer() {
         </div>
 
         <div>
-          <h4 className="text-white font-barlow font-bold uppercase mb-4 tracking-wider text-sm">
+          <h4 className="text-(--leao-amarelo) font-barlow font-bold uppercase mb-4 tracking-wider text-sm">
             Navegação
           </h4>
           <ul className="flex flex-col gap-2 text-zinc-500 text-xs font-bold uppercase tracking-wide">
@@ -96,7 +90,7 @@ export function Footer() {
         </div>
 
         <div>
-          <h4 className="text-white font-barlow font-bold uppercase mb-4 tracking-wider text-sm">
+          <h4 className="text-(--leao-vermelho) font-barlow font-bold uppercase mb-4 tracking-wider text-sm">
             Contato
           </h4>
           <ul className="flex flex-col gap-2 text-zinc-500 text-xs">

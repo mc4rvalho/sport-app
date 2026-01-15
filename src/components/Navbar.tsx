@@ -51,7 +51,7 @@ export function Navbar() {
   const avatarUrl = formatarFoto(usuario?.foto || null);
 
   const navLinkClass =
-    "text-white font-bold font-barlow text-lg no-underline transition-colors uppercase hover:text-(--leao-amarelo) tracking-wide";
+    "text-gray-400 font-bold font-barlow text-lg no-underline transition-colors uppercase hover:text-(--leao-amarelo) tracking-wide";
   const menuItemClass =
     "flex items-center gap-3 text-gray-300 px-4 py-3 rounded-lg hover:bg-zinc-800 block text-sm transition-colors font-bold uppercase";
 
@@ -95,6 +95,11 @@ export function Navbar() {
         <li className="hidden md:block">
           <Link href="/titulos" className={navLinkClass}>
             TÍTULOS
+          </Link>
+        </li>
+        <li className="hidden md:block">
+          <Link href="/calendario" className={navLinkClass}>
+            CALENDÁRIO
           </Link>
         </li>
         <li className="hidden md:block">

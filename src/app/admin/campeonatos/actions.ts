@@ -12,15 +12,18 @@ export async function salvarCampeonato(formData: FormData) {
   // Lógica de Peso automática baseada no Tipo
   let peso = 1;
   if (tipo === "ETAPA PE" || tipo === "COPA PE") {
-    peso = 2; // Exemplo: Estaduais valem mais
+    peso = 2; // Estaduais valem mais
+  } else if (tipo === "NACIONAL" || tipo === "INTERNACIONAL") {
+    peso = 3; // Nacionais/Mundiais valem ainda mais
   }
 
   const data = {
     nome,
-    data: new Date(dataRaw), // Converte string para Data
+    // new Date("YYYY-MM-DD") cria a data em UTC 00:00 automaticamente, o que é correto
+    data: new Date(dataRaw),
     tipo,
     peso,
-    fotoUrl: "", // Campo opcional
+    fotoUrl: "",
   };
 
   try {
@@ -31,6 +34,7 @@ export async function salvarCampeonato(formData: FormData) {
     }
     revalidatePath("/admin/campeonatos");
     revalidatePath("/ranking");
+    revalidatePath("/calendario"); // Atualiza o calendário também
   } catch (error) {
     console.error("Erro ao salvar campeonato:", error);
   }
@@ -41,6 +45,7 @@ export async function excluirCampeonato(id: string) {
     await prisma.campeonato.delete({ where: { id } });
     revalidatePath("/admin/campeonatos");
     revalidatePath("/ranking");
+    revalidatePath("/calendario");
   } catch (error) {
     console.error("Erro ao excluir campeonato:", error);
   }
