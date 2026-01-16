@@ -1,18 +1,19 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-@theme {
-  --font-barlow: "Barlow Condensed", sans-serif;
-  --font-roboto: "Roboto", sans-serif;
-
-  --color-leao-vermelho: #c60000;
-  --color-leao-preto: #000000;
-  --color-leao-amarelo: #ffcc00;
-  --color-leao-verde: #009b3a;
+:root {
+  /* Mantemos as variáveis CSS puras como fallback */
+  --leao-vermelho: #c60000;
+  --leao-preto: #000000;
+  --leao-amarelo: #ffcc00;
+  --leao-verde: #009b3a;
 }
 
 @layer base {
   body {
-    @apply bg-[#0a0a0a] text-zinc-300 font-roboto antialiased;
+    @apply bg-[#0a0a0a] text-zinc-300 antialiased;
+    font-family: "Roboto", sans-serif;
 
     background-image: linear-gradient(
         45deg,
@@ -40,17 +41,20 @@
   h4,
   h5,
   h6 {
-    @apply font-barlow text-zinc-200;
+    font-family: "Barlow Condensed", sans-serif;
+    @apply text-zinc-200;
   }
 }
 
 @layer components {
+  /* Botão Padrão Sport */
   .btn-sport {
-    @apply bg-black text-zinc-400 border border-leao-vermelho rounded-md px-6 py-3 font-barlow font-bold uppercase tracking-wider transition-all duration-300 hover:bg-leao-vermelho hover:text-leao-preto hover:border-leao-vermelho cursor-pointer inline-block text-center shadow-lg hover:shadow-[0_0_15px_rgba(255,204,0,0.3)];
+    @apply bg-black text-zinc-400 border border-leao-vermelho rounded-md px-6 py-3 font-bold uppercase tracking-wider transition-all duration-300 hover:bg-leao-amarelo hover:text-black hover:border-leao-amarelo cursor-pointer inline-block text-center shadow-lg hover:shadow-[0_0_15px_rgba(255,204,0,0.3)];
+    font-family: "Barlow Condensed", sans-serif;
   }
 }
 
-/* Scrollbar */
+/* Scrollbar personalizada */
 ::-webkit-scrollbar {
   width: 8px;
 }
