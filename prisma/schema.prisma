@@ -87,6 +87,7 @@ model Campeonato {
   nome      String
   fotoUrl   String?
   descricao String?
+  local     String   @default("Ilha do Retiro")
   
   // Data do campeonato.
   data      DateTime @default(now())

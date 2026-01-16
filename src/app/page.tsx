@@ -237,7 +237,7 @@ export default async function Home() {
         <div className="grid lg:grid-cols-2 gap-10 mt-8">
           {/* ÚLTIMOS JOGOS */}
           <div>
-            <div className="flex items-center justify-between mb-6 border-l-4 border-leao-vermelho pl-4 bg-linear-to-r from-zinc-900 to-transparent py-2 rounded-r-lg">
+            <div className="flex items-center justify-between mb-6 border-l-4 border-leao-vermelho pl-4 bg-gradient-to-r from-zinc-900 to-transparent py-2 rounded-r-lg">
               <h3 className="font-barlow text-2xl uppercase font-bold tracking-wide text-leao-amarelo">
                 Últimos Resultados
               </h3>
@@ -293,7 +293,7 @@ export default async function Home() {
 
           {/* DESTAQUE */}
           <div>
-            <div className="flex items-center justify-between mb-6 border-l-4 border-leao-vermelho pl-4 bg-linear-to-r from-zinc-900 to-transparent py-2 rounded-r-lg">
+            <div className="flex items-center justify-between mb-6 border-l-4 border-leao-vermelho pl-4 bg-gradient-to-r from-zinc-900 to-transparent py-2 rounded-r-lg">
               <h3 className="font-barlow text-2xl uppercase font-bold tracking-wide text-leao-amarelo">
                 Destaque do Leão
               </h3>
@@ -324,7 +324,7 @@ export default async function Home() {
                     <span className="text-5xl grayscale opacity-20">📰</span>
                   )}
 
-                  <div className="absolute inset-0 bg-linear-to-t from-black via-black/70 to-transparent opacity-90"></div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-transparent opacity-90"></div>
 
                   <div className="absolute bottom-0 left-0 w-full p-6">
                     <span className="inline-block bg-leao-vermelho text-white text-[9px] font-black uppercase px-3 py-1 rounded mb-3 tracking-widest shadow-sm">

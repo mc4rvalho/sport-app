@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { prisma } from "@/lib/prisma";
 import { salvarCampeonato, excluirCampeonato } from "./actions";
 import Link from "next/link";
@@ -54,7 +55,7 @@ export default async function AdminCampeonatos({
 
           <form
             action={salvarCampeonato}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-end"
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 items-end"
           >
             <input type="hidden" name="id" value={campEditando?.id || ""} />
 
@@ -68,6 +69,20 @@ export default async function AdminCampeonatos({
                 required
                 className="w-full bg-black border border-zinc-800 text-white p-3 rounded-lg focus:border-leao-amarelo outline-none transition-all"
                 placeholder="Ex: IV Copa Leão"
+              />
+            </div>
+
+            <div className="lg:col-span-1">
+              <label className="text-xs text-zinc-500 uppercase font-bold block mb-2 tracking-wider">
+                Local
+              </label>
+              <input
+                name="local"
+                // @ts-ignore (Ignora erro se o type ainda não atualizou no TS)
+                defaultValue={campEditando?.local || "Ilha do Retiro"}
+                required
+                className="w-full bg-black border border-zinc-800 text-white p-3 rounded-lg focus:border-leao-amarelo outline-none transition-all placeholder:text-zinc-700"
+                placeholder="Ex: Arena Pernambuco"
               />
             </div>
 
@@ -90,7 +105,7 @@ export default async function AdminCampeonatos({
 
             <div>
               <label className="text-xs text-zinc-500 uppercase font-bold block mb-2 tracking-wider">
-                Tipo de Competição
+                Tipo
               </label>
               <select
                 name="tipo"
@@ -101,16 +116,12 @@ export default async function AdminCampeonatos({
                 <option value="COPA PE">Copa Pernambuco</option>
                 <option value="ETAPA PE">Etapa Pernambucana</option>
                 <option value="TGR">TGR (Taça Grande Recife)</option>
-                <option value="NACIONAL">
-                  Nacional (Brasileiro/Copa do BR)
-                </option>
-                <option value="INTERNACIONAL">
-                  Internacional (Mundial/Sul-Americano)
-                </option>
+                <option value="NACIONAL">Nacional</option>
+                <option value="INTERNACIONAL">Internacional</option>
               </select>
             </div>
 
-            <div className="md:col-span-2 lg:col-span-3 flex justify-end mt-2">
+            <div className="md:col-span-2 lg:col-span-4 flex justify-end mt-2">
               <button
                 type="submit"
                 className="w-full md:w-auto bg-black text-leao-amarelo border-2 border-leao-amarelo font-black uppercase px-8 py-3 rounded-lg hover:bg-leao-vermelho hover:text-white hover:border-leao-vermelho transition-all cursor-pointer shadow-lg tracking-widest"
@@ -141,7 +152,7 @@ export default async function AdminCampeonatos({
                   <strong className="text-white block text-lg uppercase font-barlow leading-none mb-1">
                     {camp.nome}
                   </strong>
-                  <div className="flex gap-2">
+                  <div className="flex gap-2 items-center">
                     <span className="text-[10px] bg-zinc-900 text-zinc-500 px-2 py-0.5 rounded uppercase font-bold tracking-wider border border-zinc-800">
                       {camp.tipo}
                     </span>
@@ -150,6 +161,10 @@ export default async function AdminCampeonatos({
                       {new Date(camp.data).toLocaleDateString("pt-BR", {
                         timeZone: "UTC",
                       })}
+                    </span>
+                    <span className="text-[10px] text-zinc-600 py-0.5 font-bold uppercase tracking-wider ml-1">
+                      📍 {/* @ts-ignore */}
+                      {camp.local || "Ilha do Retiro"}
                     </span>
                   </div>
                 </div>

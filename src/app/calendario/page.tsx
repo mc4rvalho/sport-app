@@ -21,8 +21,8 @@ function getEstiloEvento(nome: string, tipo: string) {
   // 1. TGR
   if (nomeUpper.includes("TGR") || tipoUpper === "TGR") {
     return {
-      border: "border-l-emerald-600",
-      badge: "bg-emerald-600 text-white",
+      border: "border-l-blue-400",
+      badge: "bg-blue-400 text-white",
       icon: "⚽",
       label: "TGR",
     };
@@ -41,8 +41,8 @@ function getEstiloEvento(nome: string, tipo: string) {
   // 3. Copa PE
   if (nomeUpper.includes("COPA") && nomeUpper.includes("PE")) {
     return {
-      border: "border-l-zinc-400",
-      badge: "bg-zinc-400 text-black",
+      border: "border-l-blue-500",
+      badge: "bg-blue-500 text-white",
       icon: "🥈",
       label: "Copa PE",
     };
@@ -55,8 +55,8 @@ function getEstiloEvento(nome: string, tipo: string) {
     tipoUpper === "ETAPA PE"
   ) {
     return {
-      border: "border-l-leao-amarelo",
-      badge: "bg-leao-amarelo text-black",
+      border: "border-l-blue-700",
+      badge: "bg-blue-700 text-white",
       icon: "🏆",
       label: "Estadual",
     };
@@ -65,8 +65,8 @@ function getEstiloEvento(nome: string, tipo: string) {
   // 5. Nacionais
   if (tipoUpper === "NACIONAL") {
     return {
-      border: "border-l-blue-600",
-      badge: "bg-blue-600 text-white",
+      border: "border-l-emerald-600",
+      badge: "bg-emerald-600 text-white",
       icon: "🇧🇷",
       label: "Nacional",
     };
@@ -100,7 +100,8 @@ export default async function CalendarioPage() {
     nome: c.nome,
     data: c.data,
     tipo: c.tipo,
-    local: "Ilha do Retiro",
+    // @ts-expect-error (Caso o prisma ainda não tenha tipado)
+    local: c.local || "Ilha do Retiro",
   }));
 
   todosEventos.sort(
@@ -128,8 +129,8 @@ export default async function CalendarioPage() {
     <main className="min-h-screen bg-[#0a0a0a] py-20 px-6">
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-16">
-          <h1 className="font-barlow text-5xl md:text-6xl text-white uppercase font-black mb-4 tracking-tight">
-            Calendário <span className="text-leao-amarelo">Oficial</span>
+          <h1 className="font-barlow text-5xl md:text-6xl text-leao-amarelo uppercase font-black mb-4 tracking-tight">
+            Calendário <span className="text-leao-vermelho">Oficial</span>
           </h1>
           <p className="text-zinc-400 text-lg max-w-2xl mx-auto">
             Programe-se para os compromissos do Leão na temporada.

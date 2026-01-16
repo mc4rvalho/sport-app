@@ -11,6 +11,7 @@ export async function salvarCampeonato(formData: FormData) {
   const nome = formData.get("nome") as string;
   const dataRaw = formData.get("data") as string;
   const tipo = formData.get("tipo") as string;
+  const local = (formData.get("local") as string) || "Ilha do Retiro";
 
   let peso = 1;
   if (tipo === "ETAPA PE" || tipo === "COPA PE") peso = 2;
@@ -22,6 +23,7 @@ export async function salvarCampeonato(formData: FormData) {
     tipo,
     peso,
     fotoUrl: "",
+    local,
   };
 
   try {
