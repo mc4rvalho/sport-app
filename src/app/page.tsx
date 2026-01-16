@@ -4,11 +4,11 @@ import { gerarRanking } from "@/lib/ranking-logic";
 
 // Função para formatar a foto
 function formatarFoto(url: string | null | undefined) {
-  if (!url) return null;
+  if (!url) return "";
   if (url.includes("drive.google.com") && url.includes("/file/d/")) {
     try {
       const id = url.split("/file/d/")[1].split("/")[0];
-      return `https://drive.google.com/thumbnail?id=${id}&sz=w1000`;
+      return `https://drive.google.com/thumbnail?id=${id}&sz=w200`;
     } catch {
       return url;
     }

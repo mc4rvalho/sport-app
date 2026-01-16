@@ -1,12 +1,12 @@
 import { prisma } from "@/lib/prisma";
 import { notFound } from "next/navigation";
 
-function formatarFoto(url: string | null) {
+function formatarFoto(url: string | null | undefined) {
   if (!url) return "";
   if (url.includes("drive.google.com") && url.includes("/file/d/")) {
     try {
       const id = url.split("/file/d/")[1].split("/")[0];
-      return `https://drive.google.com/thumbnail?id=${id}&sz=w400`;
+      return `https://drive.google.com/thumbnail?id=${id}&sz=w200`;
     } catch {
       return url;
     }

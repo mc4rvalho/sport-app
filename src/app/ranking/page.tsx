@@ -1,7 +1,7 @@
 import { gerarRanking } from "@/lib/ranking-logic";
 import Link from "next/link";
 
-function formatarFoto(url: string | null) {
+function formatarFoto(url: string | null | undefined) {
   if (!url) return "";
   if (url.includes("drive.google.com") && url.includes("/file/d/")) {
     try {
