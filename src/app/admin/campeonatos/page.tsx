@@ -26,7 +26,7 @@ export default async function AdminCampeonatos({
           >
             ⬅️
           </Link>
-          <h1 className="font-barlow text-4xl text-(--leao-amarelo) uppercase font-bold">
+          <h1 className="font-barlow text-4xl text-leao-amarelo uppercase font-bold">
             Campeonatos
           </h1>
         </div>
@@ -66,7 +66,7 @@ export default async function AdminCampeonatos({
                 name="nome"
                 defaultValue={campEditando?.nome}
                 required
-                className="w-full bg-black border border-zinc-800 text-white p-3 rounded-lg focus:border-(--leao-amarelo) outline-none transition-all"
+                className="w-full bg-black border border-zinc-800 text-white p-3 rounded-lg focus:border-leao-amarelo outline-none transition-all"
                 placeholder="Ex: IV Copa Leão"
               />
             </div>
@@ -84,7 +84,7 @@ export default async function AdminCampeonatos({
                     : ""
                 }
                 required
-                className="w-full bg-black border border-zinc-800 text-white p-3 rounded-lg focus:border-(--leao-amarelo) outline-none transition-all scheme-dark"
+                className="w-full bg-black border border-zinc-800 text-white p-3 rounded-lg focus:border-leao-amarelo outline-none transition-all scheme-dark"
               />
             </div>
 
@@ -95,7 +95,7 @@ export default async function AdminCampeonatos({
               <select
                 name="tipo"
                 defaultValue={campEditando?.tipo || "INTERNO"}
-                className="w-full bg-black border border-zinc-800 text-white p-3 rounded-lg focus:border-(--leao-amarelo) outline-none transition-all cursor-pointer"
+                className="w-full bg-black border border-zinc-800 text-white p-3 rounded-lg focus:border-leao-amarelo outline-none transition-all cursor-pointer"
               >
                 <option value="INTERNO">Interno</option>
                 <option value="COPA PE">Copa Pernambuco</option>
@@ -113,7 +113,7 @@ export default async function AdminCampeonatos({
             <div className="md:col-span-2 lg:col-span-3 flex justify-end mt-2">
               <button
                 type="submit"
-                className="w-full md:w-auto bg-black text-(--leao-amarelo) border-2 border-(--leao-amarelo) font-black uppercase px-8 py-3 rounded-lg hover:bg-(--leao-vermelho) hover:text-white hover:border-(--leao-vermelho) transition-all cursor-pointer shadow-lg tracking-widest"
+                className="w-full md:w-auto bg-black text-leao-amarelo border-2 border-leao-amarelo font-black uppercase px-8 py-3 rounded-lg hover:bg-leao-vermelho hover:text-white hover:border-leao-vermelho transition-all cursor-pointer shadow-lg tracking-widest"
               >
                 {campEditando ? "Salvar Alterações" : "Criar Campeonato"}
               </button>

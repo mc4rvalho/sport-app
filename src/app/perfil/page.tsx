@@ -22,7 +22,7 @@ export default async function MeuPerfil() {
             Seu usuário ({sessao.nome}) não está ligado a um jogador.
           </p>
           {sessao.role === "ADMIN" && (
-            <p className="mt-4 text-(--leao-amarelo)">
+            <p className="mt-4 text-leao-amarelo">
               Como você é Admin, vá em Botonistas e vincule seu e-mail ao seu
               jogador.
             </p>

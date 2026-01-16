@@ -42,7 +42,7 @@ export default async function AdminJogadores({
           >
             ⬅️
           </Link>
-          <h1 className="font-barlow text-4xl text-(--leao-amarelo) uppercase font-bold">
+          <h1 className="font-barlow text-4xl text-leao-amarelo uppercase font-bold">
             Gerenciar Elenco
           </h1>
         </div>
@@ -84,7 +84,7 @@ export default async function AdminJogadores({
                 name="nome"
                 defaultValue={jogadorEditando?.nome}
                 required
-                className="w-full bg-black border border-zinc-800 text-white p-3 rounded-lg focus:border-(--leao-amarelo) outline-none transition-all placeholder:text-zinc-700"
+                className="w-full bg-black border border-zinc-800 text-white p-3 rounded-lg focus:border-leao-amarelo outline-none transition-all placeholder:text-zinc-700"
                 placeholder="Nome Completo"
               />
             </div>
@@ -96,7 +96,7 @@ export default async function AdminJogadores({
               <select
                 name="categoria"
                 defaultValue={jogadorEditando?.categoria || "ADULTO"}
-                className="w-full bg-black border border-zinc-800 text-white p-3 rounded-lg focus:border-(--leao-amarelo) outline-none transition-all cursor-pointer"
+                className="w-full bg-black border border-zinc-800 text-white p-3 rounded-lg focus:border-leao-amarelo outline-none transition-all cursor-pointer"
               >
                 <option value="ADULTO">Adulto</option>
                 <option value="MASTER">Master</option>
@@ -110,13 +110,13 @@ export default async function AdminJogadores({
               <input
                 name="fotoUrl"
                 defaultValue={jogadorEditando?.fotoUrl || ""}
-                className="w-full bg-black border border-zinc-800 text-white p-3 rounded-lg focus:border-(--leao-amarelo) outline-none transition-all placeholder:text-zinc-700"
+                className="w-full bg-black border border-zinc-800 text-white p-3 rounded-lg focus:border-leao-amarelo outline-none transition-all placeholder:text-zinc-700"
                 placeholder="https://drive.google.com/..."
               />
             </div>
 
             <div className="md:col-span-2 bg-zinc-900/50 p-5 rounded-lg border border-zinc-800 border-dashed mt-2">
-              <label className="text-xs text-(--leao-amarelo) uppercase font-bold block mb-2 tracking-wider">
+              <label className="text-xs text-leao-amarelo uppercase font-bold block mb-2 tracking-wider">
                 🔐 Vincular Login (Área do Atleta)
               </label>
               <p className="text-[10px] text-zinc-500 mb-3">
@@ -126,7 +126,7 @@ export default async function AdminJogadores({
               <input
                 name="emailVinculo"
                 defaultValue={jogadorEditando?.usuario?.email || ""}
-                className="w-full bg-black border border-zinc-800 text-white p-3 rounded-lg focus:border-(--leao-amarelo) outline-none transition-all placeholder:text-zinc-700"
+                className="w-full bg-black border border-zinc-800 text-white p-3 rounded-lg focus:border-leao-amarelo outline-none transition-all placeholder:text-zinc-700"
                 placeholder="Ex: email@jogador.com"
               />
             </div>
@@ -134,7 +134,7 @@ export default async function AdminJogadores({
             <div className="md:col-span-2 flex justify-end mt-4">
               <button
                 type="submit"
-                className="w-full md:w-auto bg-black text-(--leao-amarelo) border-2 border-(--leao-amarelo) font-black uppercase px-8 py-3 rounded-lg hover:bg-(--leao-vermelho) hover:text-white hover:border-(--leao-vermelho) transition-all cursor-pointer shadow-lg tracking-widest"
+                className="w-full md:w-auto bg-black text-leao-amarelo border-2 border-leao-amarelo font-black uppercase px-8 py-3 rounded-lg hover:bg-leao-vermelho hover:text-white hover:border-leao-vermelho transition-all cursor-pointer shadow-lg tracking-widest"
               >
                 {jogadorEditando ? "Salvar Alterações" : "Contratar Atleta"}
               </button>
@@ -151,7 +151,7 @@ export default async function AdminJogadores({
                 key={j.id}
                 className={`bg-[#111] border p-4 rounded-xl flex items-center gap-4 group transition-colors ${
                   jogadorEditando?.id === j.id
-                    ? "border-(--leao-amarelo) bg-yellow-900/10"
+                    ? "border-leao-amarelo bg-yellow-900/10"
                     : "border-zinc-800 hover:border-zinc-600"
                 }`}
               >

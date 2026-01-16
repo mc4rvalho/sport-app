@@ -36,7 +36,7 @@ export default async function AdminNoticias({
           >
             ⬅️
           </Link>
-          <h1 className="font-barlow text-4xl text-(--leao-amarelo) uppercase font-bold">
+          <h1 className="font-barlow text-4xl text-leao-amarelo uppercase font-bold">
             Mural de Notícias
           </h1>
         </div>
@@ -72,7 +72,7 @@ export default async function AdminNoticias({
                   name="titulo"
                   defaultValue={itemEdit?.titulo}
                   required
-                  className="w-full bg-black border border-zinc-800 text-white p-3 rounded-lg focus:border-(--leao-amarelo) outline-none transition-all placeholder:text-zinc-700"
+                  className="w-full bg-black border border-zinc-800 text-white p-3 rounded-lg focus:border-leao-amarelo outline-none transition-all placeholder:text-zinc-700"
                   placeholder="Ex: Vitória no Clássico!"
                 />
               </div>
@@ -83,7 +83,7 @@ export default async function AdminNoticias({
                 <input
                   name="subtitulo"
                   defaultValue={itemEdit?.subtitulo || ""}
-                  className="w-full bg-black border border-zinc-800 text-white p-3 rounded-lg focus:border-(--leao-amarelo) outline-none transition-all placeholder:text-zinc-700"
+                  className="w-full bg-black border border-zinc-800 text-white p-3 rounded-lg focus:border-leao-amarelo outline-none transition-all placeholder:text-zinc-700"
                   placeholder="Resumo curto da notícia..."
                 />
               </div>
@@ -97,7 +97,7 @@ export default async function AdminNoticias({
                 <input
                   name="imagemUrl"
                   defaultValue={itemEdit?.imagemUrl || ""}
-                  className="w-full bg-black border border-zinc-800 text-white p-3 rounded-lg focus:border-(--leao-amarelo) outline-none transition-all placeholder:text-zinc-700"
+                  className="w-full bg-black border border-zinc-800 text-white p-3 rounded-lg focus:border-leao-amarelo outline-none transition-all placeholder:text-zinc-700"
                   placeholder="https://..."
                 />
               </div>
@@ -108,7 +108,7 @@ export default async function AdminNoticias({
                 <input
                   name="link"
                   defaultValue={itemEdit?.link || ""}
-                  className="w-full bg-black border border-zinc-800 text-white p-3 rounded-lg focus:border-(--leao-amarelo) outline-none transition-all placeholder:text-zinc-700"
+                  className="w-full bg-black border border-zinc-800 text-white p-3 rounded-lg focus:border-leao-amarelo outline-none transition-all placeholder:text-zinc-700"
                   placeholder="Link para matéria completa..."
                 />
               </div>
@@ -119,7 +119,7 @@ export default async function AdminNoticias({
                 type="checkbox"
                 name="publicada"
                 defaultChecked={itemEdit ? itemEdit.publicada : true}
-                className="w-5 h-5 accent-(--leao-amarelo) cursor-pointer"
+                className="w-5 h-5 accent-leao-amarelo cursor-pointer"
                 id="pub"
               />
               <label
@@ -133,7 +133,7 @@ export default async function AdminNoticias({
             <div className="flex justify-end pt-2">
               <button
                 type="submit"
-                className="w-full md:w-auto bg-black text-(--leao-amarelo) border-2 border-(--leao-amarelo) font-black uppercase px-8 py-3 rounded-lg hover:bg-(--leao-vermelho) hover:text-white hover:border-(--leao-vermelho) transition-all cursor-pointer shadow-lg tracking-widest"
+                className="w-full md:w-auto bg-black text-leao-amarelo border-2 border-leao-amarelo font-black uppercase px-8 py-3 rounded-lg hover:bg-leao-vermelho hover:text-white hover:border-leao-vermelho transition-all cursor-pointer shadow-lg tracking-widest"
               >
                 {itemEdit ? "Atualizar Post" : "Postar Notícia"}
               </button>
@@ -150,7 +150,7 @@ export default async function AdminNoticias({
                 key={item.id}
                 className={`bg-[#111] border rounded-xl overflow-hidden flex flex-col group transition-all ${
                   itemEdit?.id === item.id
-                    ? "border-(--leao-amarelo)"
+                    ? "border-leao-amarelo"
                     : "border-zinc-800 hover:border-zinc-600"
                 }`}
               >

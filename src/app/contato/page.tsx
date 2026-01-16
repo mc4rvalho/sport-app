@@ -10,8 +10,8 @@ export default function ContatoPage() {
     <main className="min-h-screen py-20 px-6">
       <div className="max-w-5xl mx-auto">
         <div className="text-center mb-16">
-          <h1 className="text-5xl text-(--leao-amarelo) uppercase font-black mb-2">
-            Fale <span className="text-(--leao-vermelho)">Conosco</span>
+          <h1 className="text-5xl text-leao-amarelo uppercase font-black mb-2">
+            Fale <span className="text-leao-vermelho">Conosco</span>
           </h1>
           <p className="text-zinc-500 max-w-xl mx-auto">
             Canal oficial para dúvidas, imprensa e parcerias comerciais.
@@ -21,7 +21,7 @@ export default function ContatoPage() {
         <div className="grid md:grid-cols-2 gap-12 bg-[#111] p-8 md:p-12 rounded-2xl border border-zinc-800 shadow-2xl">
           <div className="flex flex-col justify-center space-y-10">
             <div>
-              <h3 className="text-(--leao-amarelo) font-barlow text-2xl font-bold uppercase mb-3">
+              <h3 className="text-leao-amarelo font-barlow text-2xl font-bold uppercase mb-3">
                 Sala Otávio Coutinho
               </h3>
               <p className="text-zinc-400 leading-relaxed text-sm">
@@ -33,7 +33,7 @@ export default function ContatoPage() {
               </p>
             </div>
             <div>
-              <h3 className="text-(--leao-vermelho) font-barlow text-2xl font-bold uppercase mb-3">
+              <h3 className="text-leao-vermelho font-barlow text-2xl font-bold uppercase mb-3">
                 Seja Patrocinador
               </h3>
               <p className="text-zinc-400 leading-relaxed text-sm">
@@ -47,7 +47,7 @@ export default function ContatoPage() {
               </span>
               <a
                 href="mailto:futmesa@sportrecife.com.br"
-                className="text-zinc-200 font-bold text-lg hover:text-(--leao-amarelo) transition-colors"
+                className="text-zinc-200 font-bold text-lg hover:text-leao-amarelo transition-colors"
               >
                 futmesa@sportrecife.com.br
               </a>
@@ -61,7 +61,7 @@ export default function ContatoPage() {
               </label>
               <input
                 type="text"
-                className="w-full bg-black border border-zinc-800 rounded p-3 text-zinc-300 focus:border-(--leao-amarelo) outline-none transition-colors placeholder:text-zinc-800"
+                className="w-full bg-black border border-zinc-800 rounded p-3 text-zinc-300 focus:border-leao-amarelo outline-none transition-colors placeholder:text-zinc-800"
                 placeholder="Digite seu nome"
               />
             </div>
@@ -71,7 +71,7 @@ export default function ContatoPage() {
               </label>
               <input
                 type="email"
-                className="w-full bg-black border border-zinc-800 rounded p-3 text-zinc-300 focus:border-(--leao-amarelo) outline-none transition-colors placeholder:text-zinc-800"
+                className="w-full bg-black border border-zinc-800 rounded p-3 text-zinc-300 focus:border-leao-amarelo outline-none transition-colors placeholder:text-zinc-800"
                 placeholder="seu@email.com"
               />
             </div>
@@ -79,7 +79,7 @@ export default function ContatoPage() {
               <label className="block text-[10px] font-bold uppercase text-zinc-500 mb-1 tracking-wider">
                 Assunto
               </label>
-              <select className="w-full bg-black border border-zinc-800 rounded p-3 text-zinc-300 focus:border-(--leao-amarelo) outline-none transition-colors cursor-pointer">
+              <select className="w-full bg-black border border-zinc-800 rounded p-3 text-zinc-300 focus:border-leao-amarelo outline-none transition-colors cursor-pointer">
                 <option>Quero ser patrocinador</option>
                 <option>Imprensa / Mídia</option>
                 <option>Dúvidas Gerais</option>
@@ -91,7 +91,7 @@ export default function ContatoPage() {
               </label>
               <textarea
                 rows={4}
-                className="w-full bg-black border border-zinc-800 rounded p-3 text-zinc-300 focus:border-(--leao-amarelo) outline-none transition-colors placeholder:text-zinc-800"
+                className="w-full bg-black border border-zinc-800 rounded p-3 text-zinc-300 focus:border-leao-amarelo outline-none transition-colors placeholder:text-zinc-800"
                 placeholder="Escreva sua mensagem..."
               ></textarea>
             </div>

@@ -38,7 +38,7 @@ export default async function AdminTrofeus({
           >
             ⬅️
           </Link>
-          <h1 className="font-barlow text-4xl text-(--leao-amarelo) uppercase font-bold">
+          <h1 className="font-barlow text-4xl text-leao-amarelo uppercase font-bold">
             Sala de Troféus
           </h1>
         </div>
@@ -76,7 +76,7 @@ export default async function AdminTrofeus({
                 name="nome"
                 defaultValue={itemEdit?.nome}
                 required
-                className="w-full bg-black border border-zinc-800 text-white p-3 rounded-lg focus:border-(--leao-amarelo) outline-none transition-all placeholder:text-zinc-700"
+                className="w-full bg-black border border-zinc-800 text-white p-3 rounded-lg focus:border-leao-amarelo outline-none transition-all placeholder:text-zinc-700"
                 placeholder="Ex: Campeão Pernambucano"
               />
             </div>
@@ -89,7 +89,7 @@ export default async function AdminTrofeus({
                 name="ano"
                 defaultValue={itemEdit?.ano}
                 required
-                className="w-full bg-black border border-zinc-800 text-white p-3 rounded-lg focus:border-(--leao-amarelo) outline-none transition-all placeholder:text-zinc-700"
+                className="w-full bg-black border border-zinc-800 text-white p-3 rounded-lg focus:border-leao-amarelo outline-none transition-all placeholder:text-zinc-700"
                 placeholder="2026"
               />
             </div>
@@ -101,7 +101,7 @@ export default async function AdminTrofeus({
               <select
                 name="tipo"
                 defaultValue={itemEdit?.tipo}
-                className="w-full bg-black border border-zinc-800 text-white p-3 rounded-lg focus:border-(--leao-amarelo) outline-none transition-all cursor-pointer"
+                className="w-full bg-black border border-zinc-800 text-white p-3 rounded-lg focus:border-leao-amarelo outline-none transition-all cursor-pointer"
               >
                 <option value="ESTADUAL">Estadual</option>
                 <option value="REGIONAL">Regional</option>
@@ -116,14 +116,14 @@ export default async function AdminTrofeus({
               <input
                 name="imagemUrl"
                 defaultValue={itemEdit?.imagemUrl || ""}
-                className="w-full bg-black border border-zinc-800 text-white p-3 rounded-lg focus:border-(--leao-amarelo) outline-none transition-all placeholder:text-zinc-700"
+                className="w-full bg-black border border-zinc-800 text-white p-3 rounded-lg focus:border-leao-amarelo outline-none transition-all placeholder:text-zinc-700"
                 placeholder="https://..."
               />
             </div>
 
             <button
               type="submit"
-              className="w-full md:w-auto bg-black text-(--leao-amarelo) border-2 border-(--leao-amarelo) font-black uppercase px-8 py-3 rounded-lg hover:bg-(--leao-vermelho) hover:text-white hover:border-(--leao-vermelho) transition-all cursor-pointer shadow-lg tracking-widest"
+              className="w-full md:w-auto bg-black text-leao-amarelo border-2 border-leao-amarelo font-black uppercase px-8 py-3 rounded-lg hover:bg-leao-vermelho hover:text-white hover:border-leao-vermelho transition-all cursor-pointer shadow-lg tracking-widest"
             >
               {itemEdit ? "Salvar" : "+ Adicionar"}
             </button>
@@ -139,7 +139,7 @@ export default async function AdminTrofeus({
                 key={item.id}
                 className={`bg-[#111] border rounded-xl p-4 flex flex-col items-center text-center group hover:-translate-y-1 transition-all duration-300 relative ${
                   itemEdit?.id === item.id
-                    ? "border-(--leao-amarelo)"
+                    ? "border-leao-amarelo"
                     : "border-zinc-800 hover:border-zinc-600"
                 }`}
               >
@@ -160,7 +160,7 @@ export default async function AdminTrofeus({
                   {item.nome}
                 </strong>
 
-                <span className="text-(--leao-amarelo) font-black text-2xl">
+                <span className="text-leao-amarelo font-black text-2xl">
                   {item.ano}
                 </span>
 

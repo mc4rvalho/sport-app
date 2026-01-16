@@ -19,12 +19,12 @@ export default function SobrePage() {
           />
         </div>
         <div className="max-w-6xl mx-auto relative z-10">
-          <span className="text-(--leao-amarelo) font-barlow font-bold uppercase tracking-[4px] text-sm mb-3 block">
+          <span className="text-leao-amarelo font-barlow font-bold uppercase tracking-[4px] text-sm mb-3 block">
             Desde 1905
           </span>
-          <h1 className="font-barlow text-6xl md:text-8xl text-(--leao-amarelo) uppercase font-black leading-none max-w-4xl tracking-tighter">
+          <h1 className="font-barlow text-6xl md:text-8xl text-leao-amarelo uppercase font-black leading-none max-w-4xl tracking-tighter">
             Pelo Sport <br />
-            <span className="text-(--leao-vermelho)">Tudo!</span>
+            <span className="text-leao-vermelho">Tudo!</span>
           </h1>
         </div>
       </section>
@@ -32,16 +32,16 @@ export default function SobrePage() {
       <section className="max-w-5xl mx-auto px-6 mt-20 space-y-20">
         <div className="flex flex-col md:flex-row gap-12 items-start">
           <div className="w-full md:w-1/3">
-            <h2 className="text-4xl text-(--leao-amarelo) font-black uppercase mb-6 leading-none">
+            <h2 className="text-4xl text-leao-amarelo font-black uppercase mb-6 leading-none">
               A Tradição nas{" "}
-              <span className="text-(--leao-vermelho)">Mesas</span>
+              <span className="text-leao-vermelho">Mesas</span>
             </h2>
-            <div className="w-12 h-1 bg-(--leao-amarelo)"></div>
+            <div className="w-12 h-1 bg-leao-amarelo"></div>
           </div>
           <div className="w-full md:w-2/3 space-y-6 text-zinc-400 text-lg leading-relaxed font-roboto">
             <p>
               O{" "}
-              <strong className="text-(--leao-vermelho)">
+              <strong className="text-leao-vermelho">
                 Sport Club do Recife
               </strong>{" "}
               não é gigante apenas nos gramados. Nas mesas, o Leão ruge alto com
@@ -57,11 +57,11 @@ export default function SobrePage() {
         </div>
 
         <div className="grid md:grid-cols-3 gap-6">
-          <div className="bg-[#111] p-8 rounded-xl border border-zinc-800 hover:border-(--leao-vermelho) transition-colors group">
+          <div className="bg-[#111] p-8 rounded-xl border border-zinc-800 hover:border-leao-vermelho transition-colors group">
             <span className="text-4xl mb-6 block group-hover:scale-110 transition-transform w-fit">
               🦁
             </span>
-            <h3 className="text-(--leao-amarelo) font-barlow font-bold uppercase text-xl mb-3 group-hover:text-(--leao-vermelho) transition-colors">
+            <h3 className="text-leao-amarelo font-barlow font-bold uppercase text-xl mb-3 group-hover:text-leao-vermelho transition-colors">
               Raça
             </h3>
             <p className="text-zinc-500 text-sm leading-relaxed">
@@ -69,11 +69,11 @@ export default function SobrePage() {
               último segundo.
             </p>
           </div>
-          <div className="bg-[#111] p-8 rounded-xl border border-zinc-800 hover:border-(--leao-amarelo) transition-colors group">
+          <div className="bg-[#111] p-8 rounded-xl border border-zinc-800 hover:border-leao-amarelo transition-colors group">
             <span className="text-4xl mb-6 block group-hover:scale-110 transition-transform w-fit">
               🏆
             </span>
-            <h3 className="text-(--leao-vermelho) font-barlow font-bold uppercase text-xl mb-3 group-hover:text-(--leao-amarelo) transition-colors">
+            <h3 className="text-leao-vermelho font-barlow font-bold uppercase text-xl mb-3 group-hover:text-leao-amarelo transition-colors">
               Excelência
             </h3>
             <p className="text-zinc-500 text-sm leading-relaxed">
@@ -85,7 +85,7 @@ export default function SobrePage() {
             <span className="text-4xl mb-6 block group-hover:scale-110 transition-transform w-fit">
               🤝
             </span>
-            <h3 className="text-(--leao-verde) font-barlow font-bold uppercase text-xl mb-3 group-hover:text-blue-500 transition-colors">
+            <h3 className="text-leao-verde font-barlow font-bold uppercase text-xl mb-3 group-hover:text-blue-500 transition-colors">
               União
             </h3>
             <p className="text-zinc-500 text-sm leading-relaxed">
@@ -96,71 +96,71 @@ export default function SobrePage() {
         </div>
 
         <div>
-          <h2 className="text-3xl text-white font-barlow font-black uppercase mb-8 border-l-4 border-(--leao-amarelo) pl-4">
+          <h2 className="text-3xl text-white font-barlow font-black uppercase mb-8 border-l-4 border-leao-amarelo pl-4">
             Quem Faz Acontecer
           </h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <div className="bg-[#111] p-5 rounded-xl border border-zinc-800 flex items-center gap-4 hover:border-(--leao-vermelho) transition-colors group hover:-translate-y-1 duration-300">
-              <div className="w-12 h-12 bg-zinc-900 rounded-full flex items-center justify-center text-xl border border-zinc-700 group-hover:border-(--leao-vermelho) group-hover:text-(--leao-vermelho) transition-colors">
+            <div className="bg-[#111] p-5 rounded-xl border border-zinc-800 flex items-center gap-4 hover:border-leao-vermelho transition-colors group hover:-translate-y-1 duration-300">
+              <div className="w-12 h-12 bg-zinc-900 rounded-full flex items-center justify-center text-xl border border-zinc-700 group-hover:border-leao-vermelho group-hover:text-leao-vermelho transition-colors">
                 👔
               </div>
               <div>
-                <strong className="text-(--leao-vermelho) text-lg block uppercase font-barlow leading-none mb-1">
+                <strong className="text-leao-vermelho text-lg block uppercase font-barlow leading-none mb-1">
                   Renato César
                 </strong>
-                <span className="text-(--leao-amarelo) text-[10px] font-bold uppercase tracking-widest border border-(--leao-amarelo) px-2 py-0.5 rounded-full">
+                <span className="text-leao-amarelo text-[10px] font-bold uppercase tracking-widest border border-leao-amarelo px-2 py-0.5 rounded-full">
                   Diretor
                 </span>
               </div>
             </div>
-            <div className="bg-[#111] p-5 rounded-xl border border-zinc-800 flex items-center gap-4 hover:border-(--leao-vermelho) transition-colors group hover:-translate-y-1 duration-300">
-              <div className="w-12 h-12 bg-zinc-900 rounded-full flex items-center justify-center text-xl border border-zinc-700 group-hover:border-(--leao-vermelho) group-hover:text-(--leao-vermelho) transition-colors">
+            <div className="bg-[#111] p-5 rounded-xl border border-zinc-800 flex items-center gap-4 hover:border-leao-vermelho transition-colors group hover:-translate-y-1 duration-300">
+              <div className="w-12 h-12 bg-zinc-900 rounded-full flex items-center justify-center text-xl border border-zinc-700 group-hover:border-leao-vermelho group-hover:text-leao-vermelho transition-colors">
                 📋
               </div>
               <div>
-                <strong className="text-(--leao-vermelho) text-lg block uppercase font-barlow leading-none mb-1">
+                <strong className="text-leao-vermelho text-lg block uppercase font-barlow leading-none mb-1">
                   Papa
                 </strong>
-                <span className="text-(--leao-amarelo) text-xs font-bold uppercase tracking-wider">
+                <span className="text-leao-amarelo text-xs font-bold uppercase tracking-wider">
                   Coordenador
                 </span>
               </div>
             </div>
-            <div className="bg-[#111] p-5 rounded-xl border border-zinc-800 flex items-center gap-4 hover:border-(--leao-vermelho) transition-colors group hover:-translate-y-1 duration-300">
-              <div className="w-12 h-12 bg-zinc-900 rounded-full flex items-center justify-center text-xl border border-zinc-700 group-hover:border-(--leao-vermelho) group-hover:text-(--leao-vermelho) transition-colors">
+            <div className="bg-[#111] p-5 rounded-xl border border-zinc-800 flex items-center gap-4 hover:border-leao-vermelho transition-colors group hover:-translate-y-1 duration-300">
+              <div className="w-12 h-12 bg-zinc-900 rounded-full flex items-center justify-center text-xl border border-zinc-700 group-hover:border-leao-vermelho group-hover:text-leao-vermelho transition-colors">
                 🧠
               </div>
               <div>
-                <strong className="text-(--leao-vermelho) text-lg block uppercase font-barlow leading-none mb-1">
+                <strong className="text-leao-vermelho text-lg block uppercase font-barlow leading-none mb-1">
                   André Luiz
                 </strong>
-                <span className="text-(--leao-amarelo) text-xs font-bold uppercase tracking-wider">
+                <span className="text-leao-amarelo text-xs font-bold uppercase tracking-wider">
                   Técnico
                 </span>
               </div>
             </div>
-            <div className="bg-[#111] p-5 rounded-xl border border-zinc-800 flex items-center gap-4 hover:border-(--leao-vermelho) transition-colors group hover:-translate-y-1 duration-300">
-              <div className="w-12 h-12 bg-zinc-900 rounded-full flex items-center justify-center text-xl border border-zinc-700 group-hover:border-(--leao-vermelho) group-hover:text-(--leao-vermelho) transition-colors">
+            <div className="bg-[#111] p-5 rounded-xl border border-zinc-800 flex items-center gap-4 hover:border-leao-vermelho transition-colors group hover:-translate-y-1 duration-300">
+              <div className="w-12 h-12 bg-zinc-900 rounded-full flex items-center justify-center text-xl border border-zinc-700 group-hover:border-leao-vermelho group-hover:text-leao-vermelho transition-colors">
                 ©️
               </div>
               <div>
-                <strong className="text-(--leao-vermelho) text-lg block uppercase font-barlow leading-none mb-1">
+                <strong className="text-leao-vermelho text-lg block uppercase font-barlow leading-none mb-1">
                   Matheus Carvalho
                 </strong>
-                <span className="text-(--leao-amarelo) text-xs font-bold uppercase tracking-wider">
+                <span className="text-leao-amarelo text-xs font-bold uppercase tracking-wider">
                   Capitão
                 </span>
               </div>
             </div>
-            <div className="bg-[#111] p-5 rounded-xl border border-zinc-800 flex items-center gap-4 hover:border-(--leao-vermelho) transition-colors group hover:-translate-y-1 duration-300">
-              <div className="w-12 h-12 bg-zinc-900 rounded-full flex items-center justify-center text-xl border border-zinc-700 group-hover:border-(--leao-vermelho) group-hover:text-(--leao-vermelho) transition-colors">
+            <div className="bg-[#111] p-5 rounded-xl border border-zinc-800 flex items-center gap-4 hover:border-leao-vermelho transition-colors group hover:-translate-y-1 duration-300">
+              <div className="w-12 h-12 bg-zinc-900 rounded-full flex items-center justify-center text-xl border border-zinc-700 group-hover:border-leao-vermelho group-hover:text-leao-vermelho transition-colors">
                 📱
               </div>
               <div>
-                <strong className="text-(--leao-vermelho) text-lg block uppercase font-barlow leading-none mb-1">
+                <strong className="text-leao-vermelho text-lg block uppercase font-barlow leading-none mb-1">
                   Flavio Afa
                 </strong>
-                <span className="text-(--leao-amarelo) text-xs font-bold uppercase tracking-wider">
+                <span className="text-leao-amarelo text-xs font-bold uppercase tracking-wider">
                   Social Media
                 </span>
               </div>

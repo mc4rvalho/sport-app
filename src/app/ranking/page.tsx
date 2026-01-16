@@ -36,8 +36,8 @@ export default async function RankingPage({
       <div className="max-w-7xl mx-auto px-4">
         <div className="text-center mb-10">
           <h1 className="font-barlow text-5xl uppercase font-black">
-            <span className="text-(--leao-amarelo)">Classificação</span>{" "}
-            <span className="text-(--leao-vermelho)">Oficial</span>
+            <span className="text-leao-amarelo">Classificação</span>{" "}
+            <span className="text-leao-vermelho">Oficial</span>
           </h1>
         </div>
         <div className="flex justify-center gap-2 mb-8 flex-wrap">
@@ -47,7 +47,7 @@ export default async function RankingPage({
               href={`/ranking?filtro=${aba.id}`}
               className={`px-6 py-2 rounded-full font-bold uppercase text-xs tracking-widest border transition-all ${
                 filtroAtual === aba.id
-                  ? "bg-(--leao-vermelho) text-white border-red-900"
+                  ? "bg-leao-vermelho text-white border-red-900"
                   : "bg-zinc-900 text-zinc-500 border-zinc-800 hover:text-white"
               }`}
             >
@@ -83,7 +83,7 @@ export default async function RankingPage({
                 >
                   MG-
                 </th>
-                <th className="p-4 text-center text-(--leao-amarelo)">%</th>
+                <th className="p-4 text-center text-leao-amarelo">%</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-zinc-800 text-sm">
@@ -108,7 +108,7 @@ export default async function RankingPage({
                           className="w-full h-full object-cover"
                         />
                       </div>
-                      <span className="font-bold text-white uppercase group-hover:text-(--leao-amarelo) transition-colors">
+                      <span className="font-bold text-white uppercase group-hover:text-leao-amarelo transition-colors">
                         {atleta.nome}
                       </span>
                     </Link>
@@ -143,7 +143,7 @@ export default async function RankingPage({
                   <td className="p-4 text-center font-mono text-red-400 text-xs">
                     {atleta.mediaContra}
                   </td>
-                  <td className="p-4 text-center font-mono text-(--leao-amarelo) font-bold">
+                  <td className="p-4 text-center font-mono text-leao-amarelo font-bold">
                     {atleta.aproveitamento}%
                   </td>
                 </tr>

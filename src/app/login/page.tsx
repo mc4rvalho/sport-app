@@ -17,7 +17,7 @@ export default function LoginPage() {
   return (
     <div className="flex items-center justify-center min-h-[80vh] px-4">
       <div className="w-full max-w-md bg-[#111] p-8 rounded-lg border border-[#333] shadow-2xl relative overflow-hidden">
-        <div className="absolute top-0 left-0 w-full h-1 bg-(--leao-vermelho)"></div>
+        <div className="absolute top-0 left-0 w-full h-1 bg-leao-vermelho"></div>
 
         <div className="text-center mb-8">
           <h1 className="text-3xl font-barlow text-white uppercase font-bold mb-2">
@@ -38,7 +38,7 @@ export default function LoginPage() {
               type="email"
               required
               placeholder="admin@sport.com"
-              className="w-full bg-[#050505] border border-[#333] text-white p-3 rounded focus:border-(--leao-amarelo) focus:outline-none transition-colors"
+              className="w-full bg-[#050505] border border-[#333] text-white p-3 rounded focus:border-leao-amarelo focus:outline-none transition-colors"
             />
           </div>
 
@@ -51,7 +51,7 @@ export default function LoginPage() {
               type="password"
               required
               placeholder="••••••••"
-              className="w-full bg-[#050505] border border-[#333] text-white p-3 rounded focus:border-(--leao-amarelo) focus:outline-none transition-colors"
+              className="w-full bg-[#050505] border border-[#333] text-white p-3 rounded focus:border-leao-amarelo focus:outline-none transition-colors"
             />
           </div>
 
@@ -64,7 +64,7 @@ export default function LoginPage() {
           <button
             type="submit"
             disabled={isPending}
-            className="mt-2 bg-(--leao-vermelho) text-white font-bold font-barlow uppercase py-3 rounded hover:bg-red-700 transition-colors disabled:opacity-50 cursor-pointer"
+            className="mt-2 bg-leao-vermelho text-white font-bold font-barlow uppercase py-3 rounded hover:bg-red-700 transition-colors disabled:opacity-50 cursor-pointer"
           >
             {isPending ? "Validando..." : "ENTRAR NO SISTEMA"}
           </button>
@@ -73,7 +73,7 @@ export default function LoginPage() {
         <div className="mt-6 text-center">
           <Link
             href="/"
-            className="text-xs text-gray-600 hover:text-(--leao-amarelo) transition-colors"
+            className="text-xs text-gray-600 hover:text-leao-amarelo transition-colors"
           >
             ← Voltar para o site
           </Link>

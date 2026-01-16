@@ -31,8 +31,8 @@ function getEstiloEvento(nome: string, tipo: string) {
   // 2. Interno
   if (nomeUpper.includes("INTERNO")) {
     return {
-      border: "border-l-(--leao-vermelho)",
-      badge: "bg-(--leao-vermelho) text-black",
+      border: "border-l-leao-vermelho",
+      badge: "bg-leao-vermelho text-black",
       icon: "🦁",
       label: "Interno",
     };
@@ -55,8 +55,8 @@ function getEstiloEvento(nome: string, tipo: string) {
     tipoUpper === "ETAPA PE"
   ) {
     return {
-      border: "border-l-(--leao-amarelo)",
-      badge: "bg-(--leao-amarelo) text-black",
+      border: "border-l-leao-amarelo",
+      badge: "bg-leao-amarelo text-black",
       icon: "🏆",
       label: "Estadual",
     };
@@ -129,7 +129,7 @@ export default async function CalendarioPage() {
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-16">
           <h1 className="font-barlow text-5xl md:text-6xl text-white uppercase font-black mb-4 tracking-tight">
-            Calendário <span className="text-(--leao-amarelo)">Oficial</span>
+            Calendário <span className="text-leao-amarelo">Oficial</span>
           </h1>
           <p className="text-zinc-400 text-lg max-w-2xl mx-auto">
             Programe-se para os compromissos do Leão na temporada.
@@ -144,7 +144,7 @@ export default async function CalendarioPage() {
             >
               <div className="sticky top-24 z-10 bg-[#0a0a0a]/95 backdrop-blur-sm py-4 border-b border-zinc-800 mb-6">
                 <h2 className="text-3xl font-barlow font-black text-white uppercase tracking-wide flex items-center gap-3">
-                  <span className="text-(--leao-vermelho)">📅</span> {mes}
+                  <span className="text-leao-vermelho">📅</span> {mes}
                 </h2>
               </div>
 
@@ -182,7 +182,7 @@ export default async function CalendarioPage() {
                             📍 {evento.local}
                           </span>
                         </div>
-                        <h3 className="text-xl md:text-2xl font-barlow font-bold text-white uppercase group-hover:text-(--leao-amarelo) transition-colors">
+                        <h3 className="text-xl md:text-2xl font-barlow font-bold text-white uppercase group-hover:text-leao-amarelo transition-colors">
                           {evento.nome}
                         </h3>
                       </div>

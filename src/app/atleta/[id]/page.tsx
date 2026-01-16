@@ -43,10 +43,10 @@ export default async function PerfilAtleta({ params }: PageProps) {
       <div className="max-w-5xl mx-auto px-6">
         {/* CABEÇALHO */}
         <div className="bg-[#111] border border-zinc-800 rounded-2xl p-8 mb-12 flex flex-col md:flex-row items-center gap-10 shadow-2xl relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-64 h-64 bg-(--leao-vermelho) opacity-5 blur-[100px] rounded-full pointer-events-none"></div>
+          <div className="absolute top-0 right-0 w-64 h-64 bg-leao-vermelho opacity-5 blur-[100px] rounded-full pointer-events-none"></div>
 
           <div className="relative shrink-0">
-            <div className="w-48 h-48 rounded-full border-[6px] border-(--leao-vermelho) overflow-hidden bg-zinc-900 shadow-[0_0_30px_rgba(211,9,21,0.4)]">
+            <div className="w-48 h-48 rounded-full border-[6px] border-leao-vermelho overflow-hidden bg-zinc-900 shadow-[0_0_30px_rgba(211,9,21,0.4)]">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={formatarFoto(atleta.fotoUrl)}
@@ -65,7 +65,7 @@ export default async function PerfilAtleta({ params }: PageProps) {
             </h1>
 
             <div className="flex items-center justify-center md:justify-start gap-3 mb-8">
-              <span className="bg-(--leao-vermelho) text-(--leao-preto) font-bold px-4 py-1 rounded text-sm uppercase shadow-lg border border-red-900">
+              <span className="bg-leao-vermelho text-leao-preto font-bold px-4 py-1 rounded text-sm uppercase shadow-lg border border-red-900">
                 {atleta.categoria}
               </span>
               {atleta.time && (
@@ -78,7 +78,7 @@ export default async function PerfilAtleta({ params }: PageProps) {
 
           <div className="flex gap-8 md:gap-12 border-t md:border-t-0 md:border-l border-zinc-800 pt-6 md:pt-0 md:pl-12">
             <div className="text-center">
-              <span className="block text-5xl font-black text-(--leao-amarelo) font-barlow leading-none">
+              <span className="block text-5xl font-black text-leao-amarelo font-barlow leading-none">
                 {totalTitulos}
               </span>
               <span className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest mt-1 block">
@@ -86,7 +86,7 @@ export default async function PerfilAtleta({ params }: PageProps) {
               </span>
             </div>
             <div className="text-center">
-              <span className="block text-5xl font-black text-(--leao-vermelho) font-barlow leading-none">
+              <span className="block text-5xl font-black text-leao-vermelho font-barlow leading-none">
                 {totalJogos}
               </span>
               <span className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest mt-1 block">
@@ -94,7 +94,7 @@ export default async function PerfilAtleta({ params }: PageProps) {
               </span>
             </div>
             <div className="text-center">
-              <span className="block text-5xl font-black text-(--leao-amarelo) font-barlow leading-none">
+              <span className="block text-5xl font-black text-leao-amarelo font-barlow leading-none">
                 {atleta.resultados.length}
               </span>
               <span className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest mt-1 block">
@@ -106,8 +106,8 @@ export default async function PerfilAtleta({ params }: PageProps) {
 
         {/* LISTA DE ATUAÇÕES */}
 
-        <h2 className="text-(--leao-amarelo) font-barlow text-3xl uppercase font-bold mb-6 flex items-center gap-3">
-          Últimas <span className="text-(--leao-vermelho)">Atuações</span>
+        <h2 className="text-leao-amarelo font-barlow text-3xl uppercase font-bold mb-6 flex items-center gap-3">
+          Últimas <span className="text-leao-vermelho">Atuações</span>
         </h2>
 
         <div className="flex flex-col gap-4">
@@ -137,7 +137,7 @@ export default async function PerfilAtleta({ params }: PageProps) {
               >
                 <div className="flex justify-between items-start mb-6">
                   <div>
-                    <strong className="text-(--leao-vermelho) text-xl uppercase font-barlow block mb-1">
+                    <strong className="text-leao-vermelho text-xl uppercase font-barlow block mb-1">
                       {resultado.campeonato.nome}
                     </strong>
                     <span className="text-xs text-zinc-500 font-bold uppercase flex items-center gap-2">
@@ -147,7 +147,7 @@ export default async function PerfilAtleta({ params }: PageProps) {
                         { timeZone: "UTC" }
                       )}
                       {resultado.colocacao === 1 && (
-                        <span className="text-(--leao-amarelo) flex items-center gap-1 ml-2">
+                        <span className="text-leao-amarelo flex items-center gap-1 ml-2">
                           🏆 CAMPEÃO
                         </span>
                       )}
@@ -157,7 +157,7 @@ export default async function PerfilAtleta({ params }: PageProps) {
                     <span
                       className={`text-4xl font-black font-barlow leading-none ${
                         resultado.colocacao === 1
-                          ? "text-(--leao-amarelo)"
+                          ? "text-leao-amarelo"
                           : "text-white"
                       }`}
                     >

@@ -38,10 +38,10 @@ export default async function NoticiasPage() {
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16">
           <h1 className="font-barlow text-5xl md:text-6xl text-white uppercase font-black mb-4 tracking-tight">
-            <span className="text-(--leao-amarelo)">Últimas</span>{" "}
-            <span className="text-(--leao-vermelho)">Notícias</span>
+            <span className="text-leao-amarelo">Últimas</span>{" "}
+            <span className="text-leao-vermelho">Notícias</span>
           </h1>
-          <div className="w-24 h-1 bg-(--leao-vermelho) mx-auto mb-6"></div>
+          <div className="w-24 h-1 bg-leao-vermelho mx-auto mb-6"></div>
           <p className="text-zinc-400 text-lg max-w-2xl mx-auto">
             Acompanhe o dia a dia, resultados dos torneios e novidades do nosso
             departamento.
@@ -58,7 +58,7 @@ export default async function NoticiasPage() {
             return (
               <article
                 key={noticia.id}
-                className={`bg-[#111] border border-zinc-800 rounded-2xl overflow-hidden flex flex-col group hover:border-(--leao-amarelo) transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_10px_30px_-10px_rgba(0,0,0,0.5)] ${destaqueClass}`}
+                className={`bg-[#111] border border-zinc-800 rounded-2xl overflow-hidden flex flex-col group hover:border-leao-amarelo transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_10px_30px_-10px_rgba(0,0,0,0.5)] ${destaqueClass}`}
               >
                 <div
                   className={`${alturaImagem} bg-black relative overflow-hidden flex items-center justify-center`}
@@ -76,12 +76,12 @@ export default async function NoticiasPage() {
                       <span className="text-5xl grayscale opacity-20">🦁</span>
                     </div>
                   )}
-                  <div className="absolute top-4 left-4 bg-(--leao-vermelho) text-white text-xs font-bold uppercase px-3 py-1.5 rounded-full shadow-lg z-10">
+                  <div className="absolute top-4 left-4 bg-leao-vermelho text-white text-xs font-bold uppercase px-3 py-1.5 rounded-full shadow-lg z-10">
                     {formatarData(noticia.data)}
                   </div>
                 </div>
                 <div className="p-6 flex-1 flex flex-col">
-                  <h2 className="text-white font-barlow text-2xl uppercase font-bold leading-tight mb-3 group-hover:text-(--leao-amarelo) transition-colors">
+                  <h2 className="text-white font-barlow text-2xl uppercase font-bold leading-tight mb-3 group-hover:text-leao-amarelo transition-colors">
                     {noticia.titulo}
                   </h2>
                   <p className="text-zinc-400 text-sm line-clamp-3 mb-6 flex-1">
@@ -92,7 +92,7 @@ export default async function NoticiasPage() {
                       href={noticia.link}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 text-(--leao-amarelo) font-bold uppercase text-sm tracking-wider hover:underline w-fit"
+                      className="inline-flex items-center gap-2 text-leao-amarelo font-bold uppercase text-sm tracking-wider hover:underline w-fit"
                     >
                       Leia mais <span className="text-lg">↗</span>
                     </a>

@@ -32,7 +32,7 @@ export default async function AdminResultados({
           >
             ⬅️
           </Link>
-          <h1 className="font-barlow text-4xl text-(--leao-amarelo) uppercase font-bold">
+          <h1 className="font-barlow text-4xl text-leao-amarelo uppercase font-bold">
             Lançar Súmula
           </h1>
         </div>
@@ -69,7 +69,7 @@ export default async function AdminResultados({
               <select
                 name="botonistaId"
                 defaultValue={itemEdit?.botonistaId}
-                className="w-full bg-black border border-zinc-800 text-white p-3 rounded-lg focus:border-(--leao-amarelo) outline-none"
+                className="w-full bg-black border border-zinc-800 text-white p-3 rounded-lg focus:border-leao-amarelo outline-none"
                 required
               >
                 <option value="">Selecione...</option>
@@ -88,7 +88,7 @@ export default async function AdminResultados({
               <select
                 name="campeonatoId"
                 defaultValue={itemEdit?.campeonatoId}
-                className="w-full bg-black border border-zinc-800 text-white p-3 rounded-lg focus:border-(--leao-amarelo) outline-none"
+                className="w-full bg-black border border-zinc-800 text-white p-3 rounded-lg focus:border-leao-amarelo outline-none"
                 required
               >
                 <option value="">Selecione...</option>
@@ -103,14 +103,14 @@ export default async function AdminResultados({
             <div className="col-span-2 md:col-span-6 border-t border-zinc-800 my-2"></div>
 
             <div>
-              <label className="text-xs text-(--leao-amarelo) uppercase font-bold block mb-2 tracking-wider">
+              <label className="text-xs text-leao-amarelo uppercase font-bold block mb-2 tracking-wider">
                 Colocação
               </label>
               <input
                 type="number"
                 name="colocacao"
                 defaultValue={itemEdit?.colocacao || 0}
-                className="w-full bg-black border border-zinc-800 text-(--leao-amarelo) font-bold p-3 rounded-lg focus:border-(--leao-amarelo) outline-none"
+                className="w-full bg-black border border-zinc-800 text-leao-amarelo font-bold p-3 rounded-lg focus:border-leao-amarelo outline-none"
                 required
               />
             </div>
@@ -123,7 +123,7 @@ export default async function AdminResultados({
                 type="number"
                 name="jogos"
                 defaultValue={itemEdit?.jogos || 0}
-                className="w-full bg-black border border-zinc-800 text-white p-3 rounded-lg focus:border-(--leao-amarelo) outline-none"
+                className="w-full bg-black border border-zinc-800 text-white p-3 rounded-lg focus:border-leao-amarelo outline-none"
                 required
               />
             </div>
@@ -196,7 +196,7 @@ export default async function AdminResultados({
             <div className="col-span-2 md:col-span-5 flex justify-end">
               <button
                 type="submit"
-                className="w-full md:w-auto bg-black text-(--leao-amarelo) border-2 border-(--leao-amarelo) font-black uppercase px-8 py-3 rounded-lg hover:bg-(--leao-vermelho) hover:text-white hover:border-(--leao-vermelho) transition-all cursor-pointer shadow-lg tracking-widest"
+                className="w-full md:w-auto bg-black text-leao-amarelo border-2 border-leao-amarelo font-black uppercase px-8 py-3 rounded-lg hover:bg-leao-vermelho hover:text-white hover:border-leao-vermelho transition-all cursor-pointer shadow-lg tracking-widest"
               >
                 {itemEdit ? "Atualizar Súmula" : "Lançar Resultado"}
               </button>
@@ -204,7 +204,7 @@ export default async function AdminResultados({
           </form>
         </div>
 
-        <h3 className="text-white font-barlow text-2xl uppercase font-bold mb-4 border-l-4 border-(--leao-vermelho) pl-3">
+        <h3 className="text-white font-barlow text-2xl uppercase font-bold mb-4 border-l-4 border-leao-vermelho pl-3">
           Últimos Lançamentos
         </h3>
         <div className="flex flex-col gap-2">

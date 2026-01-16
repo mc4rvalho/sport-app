@@ -33,8 +33,8 @@ export default async function TitulosPage() {
     <main className="min-h-screen bg-[#0a0a0a] py-20 px-6">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16">
-          <h1 className="font-barlow text-5xl md:text-6xl text-(--leao-amarelo) uppercase font-black mb-4 tracking-tight">
-            Sala de <span className="text-(--leao-vermelho)">Troféus</span>
+          <h1 className="font-barlow text-5xl md:text-6xl text-leao-amarelo uppercase font-black mb-4 tracking-tight">
+            Sala de <span className="text-leao-vermelho">Troféus</span>
           </h1>
           <p className="text-zinc-400 text-lg max-w-2xl mx-auto">
             A história do Sport Club do Recife no futebol de mesa é feita de
@@ -44,7 +44,7 @@ export default async function TitulosPage() {
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-20 border-y border-zinc-800 py-8 bg-[#111] rounded-xl">
           <div className="text-center border-r border-zinc-800 last:border-0">
-            <span className="block text-4xl md:text-5xl font-black text-(--leao-amarelo) font-barlow mb-1">
+            <span className="block text-4xl md:text-5xl font-black text-leao-amarelo font-barlow mb-1">
               {total}
             </span>
             <span className="text-[10px] md:text-xs text-zinc-500 uppercase font-bold tracking-widest">
@@ -52,7 +52,7 @@ export default async function TitulosPage() {
             </span>
           </div>
           <div className="text-center border-r border-zinc-800 last:border-0">
-            <span className="block text-4xl md:text-5xl font-black text-(--leao-vermelho) font-barlow mb-1">
+            <span className="block text-4xl md:text-5xl font-black text-leao-vermelho font-barlow mb-1">
               {estaduais}
             </span>
             <span className="text-[10px] md:text-xs text-zinc-500 uppercase font-bold tracking-widest">
@@ -60,7 +60,7 @@ export default async function TitulosPage() {
             </span>
           </div>
           <div className="text-center border-r border-zinc-800 last:border-0">
-            <span className="block text-4xl md:text-5xl font-black text-(--leao-amarelo) font-barlow mb-1">
+            <span className="block text-4xl md:text-5xl font-black text-leao-amarelo font-barlow mb-1">
               {regionais}
             </span>
             <span className="text-[10px] md:text-xs text-zinc-500 uppercase font-bold tracking-widest">
@@ -68,7 +68,7 @@ export default async function TitulosPage() {
             </span>
           </div>
           <div className="text-center">
-            <span className="block text-4xl md:text-5xl font-black text-(--leao-vermelho) font-barlow mb-1">
+            <span className="block text-4xl md:text-5xl font-black text-leao-vermelho font-barlow mb-1">
               {nacionais}
             </span>
             <span className="text-[10px] md:text-xs text-zinc-500 uppercase font-bold tracking-widest">
@@ -83,10 +83,10 @@ export default async function TitulosPage() {
             return (
               <div
                 key={item.id}
-                className="bg-[#111] border border-zinc-800 p-6 rounded-2xl flex flex-col items-center text-center group hover:border-(--leao-amarelo) hover:-translate-y-2 transition-all duration-300 relative overflow-hidden"
+                className="bg-[#111] border border-zinc-800 p-6 rounded-2xl flex flex-col items-center text-center group hover:border-leao-amarelo hover:-translate-y-2 transition-all duration-300 relative overflow-hidden"
               >
-                <div className="absolute inset-0 bg-linear-to-b from-(--leao-amarelo)/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                <span className="text-4xl font-black text-zinc-800 absolute top-2 right-4 group-hover:text-(--leao-amarelo)/20 transition-colors select-none">
+                <div className="absolute inset-0 bg-linear-to-b from-leao-amarelo/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                <span className="text-4xl font-black text-zinc-800 absolute top-2 right-4 group-hover:text-leao-amarelo/20 transition-colors select-none">
                   {item.ano}
                 </span>
                 <div className="h-40 w-full flex items-center justify-center mb-6 relative z-10">
@@ -102,14 +102,14 @@ export default async function TitulosPage() {
                   )}
                 </div>
                 <div className="relative z-10">
-                  <h3 className="text-(--leao-vermelho) font-barlow font-bold uppercase text-lg leading-tight mb-2">
+                  <h3 className="text-leao-vermelho font-barlow font-bold uppercase text-lg leading-tight mb-2">
                     {item.nome}
                   </h3>
                   <div className="flex justify-center gap-2">
                     <span className="text-[10px] bg-zinc-900 text-zinc-400 px-2 py-1 rounded border border-zinc-800 uppercase font-bold tracking-wider">
                       {item.tipo}
                     </span>
-                    <span className="text-[10px] bg-(--leao-amarelo) text-black px-2 py-1 rounded font-black">
+                    <span className="text-[10px] bg-leao-amarelo text-black px-2 py-1 rounded font-black">
                       {item.ano}
                     </span>
                   </div>

@@ -62,7 +62,7 @@ export default async function AdminDashboard() {
               key={item.href}
               href={item.href}
               // Corrigido: hover:border-[var(...)]
-              className={`group border ${item.color} p-8 rounded-xl hover:scale-105 transition-all duration-300 hover:border-(--leao-amarelo) flex flex-col items-start`}
+              className={`group border ${item.color} p-8 rounded-xl hover:scale-105 transition-all duration-300 hover:border-leao-amarelo flex flex-col items-start`}
             >
               <div className="mb-4 group-hover:scale-110 transition-transform w-fit">
                 {item.icon}

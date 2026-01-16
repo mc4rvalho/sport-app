@@ -2,27 +2,27 @@ import Link from "next/link";
 
 export function Footer() {
   return (
-    <footer className="bg-[#111] border-t-4 border-(--leao-vermelho) mt-auto">
+    <footer className="bg-[#111] border-t-4 border-leao-vermelho mt-auto">
       <div className="bg-black py-12 border-b border-zinc-900">
         <div className="max-w-6xl mx-auto px-6 text-center">
-          <h3 className="text-(--leao-vermelho) font-barlow font-bold uppercase tracking-[4px] text-xs mb-8">
+          <h3 className="text-leao-vermelho font-barlow font-bold uppercase tracking-[4px] text-xs mb-8">
             Patrocinadores Oficiais
           </h3>
           <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-50 grayscale hover:grayscale-0 transition-all duration-500 hover:opacity-100">
-            <span className="text-3xl font-black text-(--leao-vermelho) font-barlow tracking-tighter">
+            <span className="text-3xl font-black text-leao-vermelho font-barlow tracking-tighter">
               RECIFE TELHAS
             </span>
-            <span className="text-3xl font-black text-(--leao-vermelho) font-barlow tracking-tighter">
+            <span className="text-3xl font-black text-leao-vermelho font-barlow tracking-tighter">
               FACSU
             </span>
-            <span className="text-3xl font-black text-(--leao-vermelho) font-barlow tracking-tighter">
+            <span className="text-3xl font-black text-leao-vermelho font-barlow tracking-tighter">
               WE.TEST
             </span>
           </div>
           <div className="mt-10">
             <Link
               href="/contato"
-              className="bg-(--leao-vermelho) text-(--leao-preto) rounded-md px-6 py-3 font-barlow font-bold uppercase tracking-wider transition-all duration-300 hover:bg-(--leao-amarelo) hover:text-black hover:border-(--leao-amarelo) cursor-pointer"
+              className="bg-leao-vermelho text-leao-preto rounded-md px-6 py-3 font-barlow font-bold uppercase tracking-wider transition-all duration-300 hover:bg-leao-amarelo hover:text-black hover:border-leao-amarelo cursor-pointer"
             >
               Seja um Patrocinador do Clube
             </Link>
@@ -44,14 +44,14 @@ export function Footer() {
           </p>
         </div>
         <div>
-          <h4 className="text-(--leao-amarelo) font-barlow font-bold uppercase mb-4 tracking-wider text-sm">
+          <h4 className="text-leao-amarelo font-barlow font-bold uppercase mb-4 tracking-wider text-sm">
             Navegação
           </h4>
           <ul className="flex flex-col gap-2 text-zinc-500 text-xs font-bold uppercase tracking-wide">
             <li>
               <Link
                 href="/noticias"
-                className="hover:text-(--leao-amarelo) transition-colors"
+                className="hover:text-leao-amarelo transition-colors"
               >
                 Notícias
               </Link>
@@ -59,7 +59,7 @@ export function Footer() {
             <li>
               <Link
                 href="/titulos"
-                className="hover:text-(--leao-amarelo) transition-colors"
+                className="hover:text-leao-amarelo transition-colors"
               >
                 Sala de Troféus
               </Link>
@@ -67,7 +67,7 @@ export function Footer() {
             <li>
               <Link
                 href="/ranking"
-                className="hover:text-(--leao-amarelo) transition-colors"
+                className="hover:text-leao-amarelo transition-colors"
               >
                 Ranking Oficial
               </Link>
@@ -75,7 +75,7 @@ export function Footer() {
             <li>
               <Link
                 href="/sobre"
-                className="hover:text-(--leao-amarelo) transition-colors"
+                className="hover:text-leao-amarelo transition-colors"
               >
                 Sobre o Clube
               </Link>
@@ -83,7 +83,7 @@ export function Footer() {
           </ul>
         </div>
         <div>
-          <h4 className="text-(--leao-vermelho) font-barlow font-bold uppercase mb-4 tracking-wider text-sm">
+          <h4 className="text-leao-vermelho font-barlow font-bold uppercase mb-4 tracking-wider text-sm">
             Contato
           </h4>
           <ul className="flex flex-col gap-2 text-zinc-500 text-xs">
