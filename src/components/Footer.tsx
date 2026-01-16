@@ -10,13 +10,13 @@ export function Footer() {
           </h3>
           <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-50 grayscale hover:grayscale-0 transition-all duration-500 hover:opacity-100">
             <span className="text-3xl font-black text-leao-vermelho font-barlow tracking-tighter">
-              RECIFE TELHAS
-            </span>
-            <span className="text-3xl font-black text-leao-vermelho font-barlow tracking-tighter">
               FACSU
             </span>
             <span className="text-3xl font-black text-leao-vermelho font-barlow tracking-tighter">
               WE.TEST
+            </span>
+            <span className="text-3xl font-black text-leao-vermelho font-barlow tracking-tighter">
+              RECIFE TELHAS
             </span>
           </div>
           <div className="mt-10">

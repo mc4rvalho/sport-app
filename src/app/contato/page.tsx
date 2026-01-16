@@ -49,7 +49,7 @@ export default function ContatoPage() {
                 href="mailto:futmesa@sportrecife.com.br"
                 className="text-zinc-200 font-bold text-lg hover:text-leao-amarelo transition-colors"
               >
-                futmesa@sportrecife.com.br
+                sportrecife.futmesa@gmail.com
               </a>
             </div>
           </div>
