@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import { prisma } from "@/lib/prisma";
 import { Metadata } from "next";
+import { Trophy } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Sala de Troféus | Sport Club do Recife - Futebol de Mesa",
@@ -12,7 +13,7 @@ function formatarImagem(url: string | null | undefined) {
   if (url.includes("drive.google.com") && url.includes("/file/d/")) {
     try {
       const id = url.split("/file/d/")[1].split("/")[0];
-      return `https://drive.google.com/thumbnail?id=${id}&sz=w200`;
+      return `https://drive.google.com/thumbnail?id=${id}&sz=w500`;
     } catch {
       return url;
     }
@@ -85,7 +86,7 @@ export default async function TitulosPage() {
                 key={item.id}
                 className="bg-[#111] border border-zinc-800 p-6 rounded-2xl flex flex-col items-center text-center group hover:border-leao-amarelo hover:-translate-y-2 transition-all duration-300 relative overflow-hidden"
               >
-                <div className="absolute inset-0 bg-linear-to-b from-leao-amarelo/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                <div className="absolute inset-0 bg-gradient-to-b from-leao-amarelo/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
                 <span className="text-4xl font-black text-zinc-800 absolute top-2 right-4 group-hover:text-leao-amarelo/20 transition-colors select-none">
                   {item.ano}
                 </span>
@@ -98,7 +99,7 @@ export default async function TitulosPage() {
                       className="h-full object-contain drop-shadow-[0_10px_10px_rgba(0,0,0,0.5)] group-hover:scale-110 transition-transform duration-500"
                     />
                   ) : (
-                    <span className="text-6xl grayscale opacity-20">🏆</span>
+                    <Trophy className="w-16 h-16 text-zinc-700/50" />
                   )}
                 </div>
                 <div className="relative z-10">

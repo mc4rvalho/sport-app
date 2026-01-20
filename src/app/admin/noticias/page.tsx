@@ -1,6 +1,16 @@
 import { prisma } from "@/lib/prisma";
 import { salvarNoticia, excluirNoticia } from "./actions";
 import Link from "next/link";
+import {
+  ArrowLeft,
+  Image as ImageIcon,
+  Link as LinkIcon,
+  Newspaper,
+  Pencil,
+  Trash2,
+  FileText,
+  AlignLeft,
+} from "lucide-react";
 
 function formatarImagem(url: string | null | undefined) {
   if (!url) return "";
@@ -32,9 +42,9 @@ export default async function AdminNoticias({
         <div className="flex items-center gap-4 mb-8">
           <Link
             href="/admin"
-            className="text-2xl hover:scale-110 transition-transform"
+            className="text-2xl hover:scale-110 transition-transform text-zinc-400 hover:text-white"
           >
-            ⬅️
+            <ArrowLeft className="w-8 h-8" />
           </Link>
           <h1 className="font-barlow text-4xl text-leao-amarelo uppercase font-bold">
             Mural de Notícias
@@ -48,7 +58,16 @@ export default async function AdminNoticias({
         >
           <div className="flex justify-between items-center mb-6 border-b border-zinc-700 pb-4">
             <h3 className="text-white font-bold uppercase text-lg flex items-center gap-2">
-              {itemEdit ? `✏️ Editando Post` : "📰 Nova Publicação"}
+              {itemEdit ? (
+                <>
+                  <Pencil className="w-5 h-5 text-leao-amarelo" /> Editando Post
+                </>
+              ) : (
+                <>
+                  <Newspaper className="w-5 h-5 text-leao-amarelo" /> Nova
+                  Publicação
+                </>
+              )}
             </h3>
             {itemEdit && (
               <Link
@@ -65,8 +84,8 @@ export default async function AdminNoticias({
 
             <div className="grid md:grid-cols-2 gap-6">
               <div>
-                <label className="text-xs text-zinc-500 uppercase font-bold block mb-2 tracking-wider">
-                  Manchete (Título)
+                <label className="text-xs text-zinc-500 uppercase font-bold mb-2 tracking-wider flex items-center gap-2">
+                  <FileText className="w-3 h-3" /> Manchete (Título)
                 </label>
                 <input
                   name="titulo"
@@ -77,8 +96,8 @@ export default async function AdminNoticias({
                 />
               </div>
               <div>
-                <label className="text-xs text-zinc-500 uppercase font-bold block mb-2 tracking-wider">
-                  Subtítulo (Resumo)
+                <label className="text-xs text-zinc-500 uppercase font-bold mb-2 tracking-wider flex items-center gap-2">
+                  <AlignLeft className="w-3 h-3" /> Subtítulo (Resumo)
                 </label>
                 <input
                   name="subtitulo"
@@ -91,8 +110,8 @@ export default async function AdminNoticias({
 
             <div className="grid md:grid-cols-2 gap-6">
               <div>
-                <label className="text-xs text-zinc-500 uppercase font-bold block mb-2 tracking-wider">
-                  URL da Imagem
+                <label className="text-xs text-zinc-500 uppercase font-bold mb-2 tracking-wider flex items-center gap-2">
+                  <ImageIcon className="w-3 h-3" /> URL da Imagem
                 </label>
                 <input
                   name="imagemUrl"
@@ -102,8 +121,8 @@ export default async function AdminNoticias({
                 />
               </div>
               <div>
-                <label className="text-xs text-zinc-500 uppercase font-bold block mb-2 tracking-wider">
-                  Link Externo (Opcional)
+                <label className="text-xs text-zinc-500 uppercase font-bold mb-2 tracking-wider flex items-center gap-2">
+                  <LinkIcon className="w-3 h-3" /> Link Externo (Opcional)
                 </label>
                 <input
                   name="link"
@@ -164,7 +183,7 @@ export default async function AdminNoticias({
                     />
                   ) : (
                     <div className="flex items-center justify-center h-full text-zinc-700">
-                      <span className="text-4xl">📷</span>
+                      <ImageIcon className="w-10 h-10" />
                     </div>
                   )}
                   {!item.publicada && (
@@ -188,9 +207,9 @@ export default async function AdminNoticias({
                   <div className="flex justify-between items-center pt-4 border-t border-zinc-900">
                     <Link
                       href={`/admin/noticias?editId=${item.id}`}
-                      className="text-xs font-bold text-zinc-400 hover:text-white uppercase transition-colors bg-zinc-900 px-3 py-1.5 rounded"
+                      className="text-xs font-bold text-zinc-400 hover:text-white uppercase transition-colors bg-zinc-900 px-3 py-1.5 rounded flex items-center gap-1"
                     >
-                      Editar
+                      <Pencil className="w-3 h-3" /> Editar
                     </Link>
                     <form
                       action={async () => {
@@ -198,8 +217,8 @@ export default async function AdminNoticias({
                         await excluirNoticia(item.id);
                       }}
                     >
-                      <button className="text-xs font-bold text-red-900 hover:text-red-500 uppercase transition-colors px-2">
-                        Excluir
+                      <button className="text-xs font-bold text-red-900 hover:text-red-500 uppercase transition-colors px-2 flex items-center gap-1">
+                        <Trash2 className="w-3 h-3" /> Excluir
                       </button>
                     </form>
                   </div>

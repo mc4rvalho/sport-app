@@ -1,5 +1,7 @@
+/* eslint-disable @next/next/no-img-element */
 import { gerarRanking } from "@/lib/ranking-logic";
 import Link from "next/link";
+import { Trophy, User, Medal } from "lucide-react";
 
 function formatarFoto(url: string | null | undefined) {
   if (!url) return "";
@@ -35,8 +37,8 @@ export default async function RankingPage({
     <main className="min-h-screen bg-[#0a0a0a] pb-20 pt-10">
       <div className="max-w-7xl mx-auto px-4">
         <div className="text-center mb-10">
-          <h1 className="font-barlow text-5xl uppercase font-black">
-            <span className="text-leao-amarelo">Classificação</span>{" "}
+          <h1 className="font-barlow text-5xl uppercase font-black flex items-center justify-center gap-3">
+            <span className="text-leao-amarelo">Classificação</span>
             <span className="text-leao-vermelho">Oficial</span>
           </h1>
         </div>
@@ -45,12 +47,17 @@ export default async function RankingPage({
             <Link
               key={aba.id}
               href={`/ranking?filtro=${aba.id}`}
-              className={`px-6 py-2 rounded-full font-bold uppercase text-xs tracking-widest border transition-all ${
+              className={`px-6 py-2 rounded-full font-bold uppercase text-xs tracking-widest border transition-all flex items-center gap-2 ${
                 filtroAtual === aba.id
                   ? "bg-leao-vermelho text-white border-red-900"
                   : "bg-zinc-900 text-zinc-500 border-zinc-800 hover:text-white"
               }`}
             >
+              {aba.id === "GERAL" ? (
+                <Trophy className="w-3 h-3" />
+              ) : (
+                <Medal className="w-3 h-3" />
+              )}
               {aba.label}
             </Link>
           ))}
@@ -100,13 +107,16 @@ export default async function RankingPage({
                       href={`/atleta/${atleta.id}`}
                       className="flex items-center gap-3"
                     >
-                      <div className="w-8 h-8 rounded-full overflow-hidden border border-zinc-700">
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img
-                          src={formatarFoto(atleta.fotoUrl)}
-                          alt=""
-                          className="w-full h-full object-cover"
-                        />
+                      <div className="w-8 h-8 rounded-full overflow-hidden border border-zinc-700 flex items-center justify-center bg-zinc-800">
+                        {atleta.fotoUrl ? (
+                          <img
+                            src={formatarFoto(atleta.fotoUrl)}
+                            alt=""
+                            className="w-full h-full object-cover"
+                          />
+                        ) : (
+                          <User className="w-4 h-4 text-zinc-500" />
+                        )}
                       </div>
                       <span className="font-bold text-white uppercase group-hover:text-leao-amarelo transition-colors">
                         {atleta.nome}

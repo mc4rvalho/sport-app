@@ -1,5 +1,14 @@
 import { Metadata } from "next";
 import Link from "next/link";
+import {
+  Shield,
+  Trophy,
+  Users,
+  Briefcase,
+  ClipboardList,
+  Brain,
+  Smartphone,
+} from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Sobre | Sport Club do Recife",
@@ -8,7 +17,7 @@ export const metadata: Metadata = {
 
 export default function SobrePage() {
   return (
-    <main className="min-h-screen pb-20">
+    <main className="min-h-screen pb-20 bg-[#0a0a0a]">
       <section className="bg-black border-b border-zinc-900 py-24 px-6 relative overflow-hidden">
         <div className="absolute top-0 right-0 opacity-5 pointer-events-none">
           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -53,53 +62,43 @@ export default function SobrePage() {
               </strong>{" "}
               , localizada sob a vibração da geral da Jovem, transformou-se em
               uma das equipes mais tradicionais do futebol de mesa pernambucano.
-              Aquele grupo pioneiro — formado por Alexandre Freitas, Nando,
-              Marcellus, Pertinho, Adolfo, Léo, Pedro, Kilmer e os demais
-              fundadores — plantou a semente do que somos hoje.
-            </p>
-            <p>
-              Eles trouxeram para a mesa o mesmo espírito que move a Ilha do
-              Retiro: a paixão, a técnica e a vontade de vencer.
             </p>
           </div>
         </div>
 
         <div className="grid md:grid-cols-3 gap-6">
           <div className="bg-[#111] p-8 rounded-xl border border-zinc-800 hover:border-leao-vermelho transition-colors group">
-            <span className="text-4xl mb-6 block group-hover:scale-110 transition-transform w-fit">
-              🦁
-            </span>
+            <div className="mb-6 block group-hover:scale-110 transition-transform w-fit text-zinc-500 group-hover:text-leao-vermelho">
+              <Shield className="w-12 h-12" />
+            </div>
             <h3 className="text-leao-amarelo font-barlow font-bold uppercase text-xl mb-3 group-hover:text-leao-vermelho transition-colors">
               Raça
             </h3>
             <p className="text-zinc-500 text-sm leading-relaxed">
               Entrega total em cada partida. Defendemos as cores rubro-negras
-              até o último segundo, mantendo a energia daquela primeira sala
-              embaixo da arquibancada.
+              até o último segundo.
             </p>
           </div>
           <div className="bg-[#111] p-8 rounded-xl border border-zinc-800 hover:border-leao-amarelo transition-colors group">
-            <span className="text-4xl mb-6 block group-hover:scale-110 transition-transform w-fit">
-              🏆
-            </span>
+            <div className="mb-6 block group-hover:scale-110 transition-transform w-fit text-zinc-500 group-hover:text-leao-amarelo">
+              <Trophy className="w-12 h-12" />
+            </div>
             <h3 className="text-leao-vermelho font-barlow font-bold uppercase text-xl mb-3 group-hover:text-leao-amarelo transition-colors">
               Excelência
             </h3>
             <p className="text-zinc-500 text-sm leading-relaxed">
-              A busca incessante por títulos. Nossa missão é formar campeões e
-              evoluir técnica e taticamente nossos atletas.
+              A busca incessante por títulos. Nossa missão é formar campeões.
             </p>
           </div>
           <div className="bg-[#111] p-8 rounded-xl border border-zinc-800 hover:border-blue-500 transition-colors group">
-            <span className="text-4xl mb-6 block group-hover:scale-110 transition-transform w-fit">
-              🤝
-            </span>
+            <div className="mb-6 block group-hover:scale-110 transition-transform w-fit text-zinc-500 group-hover:text-blue-500">
+              <Users className="w-12 h-12" />
+            </div>
             <h3 className="text-leao-verde font-barlow font-bold uppercase text-xl mb-3 group-hover:text-blue-500 transition-colors">
               União
             </h3>
             <p className="text-zinc-500 text-sm leading-relaxed">
-              Mais que um time, somos uma família unida pelo amor ao esporte. Do
-              grupo de amigos fundadores à gestão atual, a lealdade permanece.
+              Mais que um time, somos uma família unida pelo amor ao esporte.
             </p>
           </div>
         </div>
@@ -111,7 +110,7 @@ export default function SobrePage() {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             <div className="bg-[#111] p-5 rounded-xl border border-zinc-800 flex items-center gap-4 hover:border-leao-vermelho transition-colors group hover:-translate-y-1 duration-300">
               <div className="w-12 h-12 bg-zinc-900 rounded-full flex items-center justify-center text-xl border border-zinc-700 group-hover:border-leao-vermelho group-hover:text-leao-vermelho transition-colors">
-                👔
+                <Briefcase className="w-5 h-5" />
               </div>
               <div>
                 <strong className="text-leao-vermelho text-lg block uppercase font-barlow leading-none mb-1">
@@ -124,7 +123,7 @@ export default function SobrePage() {
             </div>
             <div className="bg-[#111] p-5 rounded-xl border border-zinc-800 flex items-center gap-4 hover:border-leao-vermelho transition-colors group hover:-translate-y-1 duration-300">
               <div className="w-12 h-12 bg-zinc-900 rounded-full flex items-center justify-center text-xl border border-zinc-700 group-hover:border-leao-vermelho group-hover:text-leao-vermelho transition-colors">
-                📋
+                <ClipboardList className="w-5 h-5" />
               </div>
               <div>
                 <strong className="text-leao-vermelho text-lg block uppercase font-barlow leading-none mb-1">
@@ -137,7 +136,7 @@ export default function SobrePage() {
             </div>
             <div className="bg-[#111] p-5 rounded-xl border border-zinc-800 flex items-center gap-4 hover:border-leao-vermelho transition-colors group hover:-translate-y-1 duration-300">
               <div className="w-12 h-12 bg-zinc-900 rounded-full flex items-center justify-center text-xl border border-zinc-700 group-hover:border-leao-vermelho group-hover:text-leao-vermelho transition-colors">
-                🧠
+                <Brain className="w-5 h-5" />
               </div>
               <div>
                 <strong className="text-leao-vermelho text-lg block uppercase font-barlow leading-none mb-1">
@@ -150,7 +149,7 @@ export default function SobrePage() {
             </div>
             <div className="bg-[#111] p-5 rounded-xl border border-zinc-800 flex items-center gap-4 hover:border-leao-vermelho transition-colors group hover:-translate-y-1 duration-300">
               <div className="w-12 h-12 bg-zinc-900 rounded-full flex items-center justify-center text-xl border border-zinc-700 group-hover:border-leao-vermelho group-hover:text-leao-vermelho transition-colors">
-                ©️
+                <Shield className="w-5 h-5" />
               </div>
               <div>
                 <strong className="text-leao-vermelho text-lg block uppercase font-barlow leading-none mb-1">
@@ -163,7 +162,7 @@ export default function SobrePage() {
             </div>
             <div className="bg-[#111] p-5 rounded-xl border border-zinc-800 flex items-center gap-4 hover:border-leao-vermelho transition-colors group hover:-translate-y-1 duration-300">
               <div className="w-12 h-12 bg-zinc-900 rounded-full flex items-center justify-center text-xl border border-zinc-700 group-hover:border-leao-vermelho group-hover:text-leao-vermelho transition-colors">
-                📱
+                <Smartphone className="w-5 h-5" />
               </div>
               <div>
                 <strong className="text-leao-vermelho text-lg block uppercase font-barlow leading-none mb-1">

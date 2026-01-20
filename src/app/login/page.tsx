@@ -3,6 +3,7 @@
 import { useActionState } from "react";
 import { loginAction } from "./actions";
 import Link from "next/link";
+import { Mail, Lock, LogIn } from "lucide-react";
 
 const initialState = {
   erro: "",
@@ -11,11 +12,11 @@ const initialState = {
 export default function LoginPage() {
   const [state, formAction, isPending] = useActionState(
     loginAction,
-    initialState
+    initialState,
   );
 
   return (
-    <div className="flex items-center justify-center min-h-[80vh] px-4">
+    <div className="flex items-center justify-center min-h-[80vh] px-4 bg-[#0a0a0a]">
       <div className="w-full max-w-md bg-[#111] p-8 rounded-lg border border-[#333] shadow-2xl relative overflow-hidden">
         <div className="absolute top-0 left-0 w-full h-1 bg-leao-vermelho"></div>
 
@@ -30,8 +31,8 @@ export default function LoginPage() {
 
         <form action={formAction} className="flex flex-col gap-5">
           <div>
-            <label className="block text-gray-400 text-xs uppercase font-bold mb-2 ml-1">
-              E-mail Oficial
+            <label className="text-gray-400 text-xs uppercase font-bold mb-2 ml-1 flex items-center gap-1">
+              <Mail className="w-3 h-3" /> E-mail Oficial
             </label>
             <input
               name="email"
@@ -43,8 +44,8 @@ export default function LoginPage() {
           </div>
 
           <div>
-            <label className="block text-gray-400 text-xs uppercase font-bold mb-2 ml-1">
-              Senha de Acesso
+            <label className="text-gray-400 text-xs uppercase font-bold mb-2 ml-1 flex items-center gap-1">
+              <Lock className="w-3 h-3" /> Senha de Acesso
             </label>
             <input
               name="senha"
@@ -64,9 +65,15 @@ export default function LoginPage() {
           <button
             type="submit"
             disabled={isPending}
-            className="mt-2 bg-leao-vermelho text-white font-bold font-barlow uppercase py-3 rounded hover:bg-red-700 transition-colors disabled:opacity-50 cursor-pointer"
+            className="mt-2 bg-leao-vermelho text-white font-bold font-barlow uppercase py-3 rounded hover:bg-red-700 transition-colors disabled:opacity-50 cursor-pointer flex items-center justify-center gap-2"
           >
-            {isPending ? "Validando..." : "ENTRAR NO SISTEMA"}
+            {isPending ? (
+              "Validando..."
+            ) : (
+              <>
+                <LogIn className="w-4 h-4" /> ENTRAR NO SISTEMA
+              </>
+            )}
           </button>
         </form>
 

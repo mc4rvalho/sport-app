@@ -1,5 +1,6 @@
 import { prisma } from "@/lib/prisma";
 import { Metadata } from "next";
+import { Award, CalendarDays, Gamepad2, MapPin, Trophy } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Calendário Oficial | Sport Club do Recife",
@@ -21,9 +22,9 @@ function getEstiloEvento(nome: string, tipo: string) {
   // 1. TGR
   if (nomeUpper.includes("TGR") || tipoUpper === "TGR") {
     return {
-      border: "border-l-blue-400",
-      badge: "bg-blue-400 text-white",
-      icon: "⚽",
+      border: "border-l-blue-500",
+      badge: "bg-blue-500 text-white",
+      icon: <Gamepad2 className="w-8 h-8" />,
       label: "TGR",
     };
   }
@@ -33,7 +34,7 @@ function getEstiloEvento(nome: string, tipo: string) {
     return {
       border: "border-l-leao-vermelho",
       badge: "bg-leao-vermelho text-black",
-      icon: "🦁",
+      icon: <Award className="w-8 h-8" />,
       label: "Interno",
     };
   }
@@ -41,9 +42,9 @@ function getEstiloEvento(nome: string, tipo: string) {
   // 3. Copa PE
   if (nomeUpper.includes("COPA") && nomeUpper.includes("PE")) {
     return {
-      border: "border-l-blue-500",
-      badge: "bg-blue-500 text-white",
-      icon: "🥈",
+      border: "border-l-blue-600",
+      badge: "bg-blue-600 text-white",
+      icon: <Trophy className="w-8 h-8" />,
       label: "Copa PE",
     };
   }
@@ -57,7 +58,7 @@ function getEstiloEvento(nome: string, tipo: string) {
     return {
       border: "border-l-blue-700",
       badge: "bg-blue-700 text-white",
-      icon: "🏆",
+      icon: <Trophy className="w-8 h-8" />,
       label: "Estadual",
     };
   }
@@ -67,7 +68,7 @@ function getEstiloEvento(nome: string, tipo: string) {
     return {
       border: "border-l-emerald-600",
       badge: "bg-emerald-600 text-white",
-      icon: "🇧🇷",
+      icon: <Trophy className="w-8 h-8" />,
       label: "Nacional",
     };
   }
@@ -77,7 +78,7 @@ function getEstiloEvento(nome: string, tipo: string) {
     return {
       border: "border-l-purple-600",
       badge: "bg-purple-600 text-white",
-      icon: "🌎",
+      icon: <Trophy className="w-8 h-8" />,
       label: "Mundial",
     };
   }
@@ -85,7 +86,7 @@ function getEstiloEvento(nome: string, tipo: string) {
   return {
     border: "border-l-zinc-700",
     badge: "bg-zinc-800 text-zinc-400",
-    icon: "📅",
+    icon: <CalendarDays className="w-8 h-8" />,
     label: "Evento",
   };
 }
@@ -100,12 +101,11 @@ export default async function CalendarioPage() {
     nome: c.nome,
     data: c.data,
     tipo: c.tipo,
-    // @ts-expect-error (Caso o prisma ainda não tenha tipado)
     local: c.local || "Ilha do Retiro",
   }));
 
   todosEventos.sort(
-    (a, b) => new Date(a.data).getTime() - new Date(b.data).getTime()
+    (a, b) => new Date(a.data).getTime() - new Date(b.data).getTime(),
   );
 
   const eventosPorMes: Record<string, EventoCalendario[]> = {};
@@ -180,14 +180,14 @@ export default async function CalendarioPage() {
                             {estilo.label}
                           </span>
                           <span className="text-xs text-zinc-500 font-bold uppercase flex items-center gap-1">
-                            📍 {evento.local}
+                            <MapPin className="w-3 h-3" /> {evento.local}
                           </span>
                         </div>
                         <h3 className="text-xl md:text-2xl font-barlow font-bold text-white uppercase group-hover:text-leao-amarelo transition-colors">
                           {evento.nome}
                         </h3>
                       </div>
-                      <div className="hidden md:block text-4xl opacity-20 group-hover:opacity-100 group-hover:scale-110 transition-all grayscale group-hover:grayscale-0">
+                      <div className="hidden md:block opacity-20 group-hover:opacity-100 group-hover:scale-110 transition-all grayscale group-hover:grayscale-0">
                         {estilo.icon}
                       </div>
                     </div>

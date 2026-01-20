@@ -5,6 +5,13 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { getSessionData } from "@/app/actions/session";
+import {
+  LogOut,
+  User as UserIcon,
+  Settings,
+  UserCircle,
+  LogIn,
+} from "lucide-react";
 
 export function Navbar() {
   const router = useRouter();
@@ -52,7 +59,7 @@ export function Navbar() {
   const navLinkClass =
     "text-gray-400 font-bold font-barlow text-lg no-underline transition-colors uppercase hover:text-leao-amarelo tracking-wide";
   const menuItemClass =
-    "flex items-center gap-3 text-gray-300 px-4 py-3 rounded-lg hover:bg-zinc-800 block text-sm transition-colors font-bold uppercase";
+    "flex items-center gap-3 text-gray-300 px-4 py-3 rounded-lg hover:bg-zinc-800 block text-sm transition-colors font-bold uppercase w-full text-left";
 
   return (
     <nav className="bg-leao-preto border-b-4 border-leao-vermelho px-6 lg:px-12 py-4 flex justify-between items-center flex-wrap gap-5 shadow-2xl sticky top-0 z-50 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]">
@@ -132,7 +139,7 @@ export function Navbar() {
                   />
                   <div className="absolute top-16 right-0 w-72 bg-[#111] border border-zinc-800 border-t-4 border-t-leao-vermelho rounded-xl p-2 flex flex-col gap-1 shadow-2xl z-50 animate-in slide-in-from-top-2 fade-in duration-200">
                     <div className="px-4 py-3 border-b border-zinc-800 mb-2 flex items-center gap-3 bg-zinc-900/50 rounded-t-lg">
-                      <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-zinc-700">
+                      <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-zinc-700 bg-zinc-800 flex items-center justify-center">
                         {avatarUrl ? (
                           <img
                             src={avatarUrl}
@@ -140,9 +147,7 @@ export function Navbar() {
                             className="w-full h-full object-cover"
                           />
                         ) : (
-                          <span className="text-xl flex items-center justify-center h-full bg-zinc-800">
-                            👤
-                          </span>
+                          <UserIcon className="w-5 h-5 text-zinc-500" />
                         )}
                       </div>
                       <div className="overflow-hidden">
@@ -161,7 +166,7 @@ export function Navbar() {
                       onClick={() => setMenuAberto(false)}
                       className={menuItemClass}
                     >
-                      👤 Meu Perfil
+                      <UserCircle className="w-4 h-4" /> Meu Perfil
                     </Link>
                     {usuario.role === "ADMIN" && (
                       <Link
@@ -169,7 +174,7 @@ export function Navbar() {
                         onClick={() => setMenuAberto(false)}
                         className={`${menuItemClass} text-leao-amarelo hover:bg-yellow-900/20`}
                       >
-                        ⚙️ Painel do Diretor
+                        <Settings className="w-4 h-4" /> Painel do Diretor
                       </Link>
                     )}
                     <div className="border-t border-zinc-800 my-1"></div>
@@ -177,7 +182,7 @@ export function Navbar() {
                       onClick={handleLogout}
                       className={`${menuItemClass} text-red-500 hover:bg-red-950/30 hover:text-red-400 w-full text-left cursor-pointer`}
                     >
-                      ⬅️ Sair da Conta
+                      <LogOut className="w-4 h-4" /> Sair da Conta
                     </button>
                   </div>
                 </>
@@ -192,7 +197,7 @@ export function Navbar() {
                 href="/login"
                 className="flex items-center gap-2 text-leao-amarelo border-2 border-leao-amarelo px-6 py-2 rounded-full hover:bg-leao-amarelo hover:text-black transition-all uppercase font-black font-barlow text-sm tracking-wider hover:shadow-[0_0_15px_rgba(255,215,0,0.4)]"
               >
-                <span>🦁</span> Login
+                <LogIn className="w-4 h-4" /> Login
               </Link>
             </li>
           </>

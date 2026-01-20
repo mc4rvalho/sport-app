@@ -1,14 +1,23 @@
 import { prisma } from "@/lib/prisma";
 import Link from "next/link";
 import { gerarRanking } from "@/lib/ranking-logic";
+// CORREÇÃO: Adicionado Gamepad2 aos imports
+import {
+  Crown,
+  Trophy,
+  Calendar,
+  ArrowRight,
+  Image as ImageIcon,
+  User as UserIcon,
+  Gamepad2,
+} from "lucide-react";
 
-// Função para formatar a foto
 function formatarFoto(url: string | null | undefined) {
-  if (!url) return "";
+  if (!url) return null;
   if (url.includes("drive.google.com") && url.includes("/file/d/")) {
     try {
       const id = url.split("/file/d/")[1].split("/")[0];
-      return `https://drive.google.com/thumbnail?id=${id}&sz=w200`;
+      return `https://drive.google.com/thumbnail?id=${id}&sz=w1000`;
     } catch {
       return url;
     }
@@ -17,7 +26,6 @@ function formatarFoto(url: string | null | undefined) {
 }
 
 export default async function Home() {
-  // 1. LÓGICA DA PRÓXIMA PARTIDA
   const hoje = new Date();
   hoje.setHours(0, 0, 0, 0);
 
@@ -36,6 +44,7 @@ export default async function Home() {
     ? new Date(proximoCampeonato.data).toLocaleDateString("pt-BR", {
         day: "2-digit",
         month: "2-digit",
+        timeZone: "UTC",
       })
     : "EM BREVE";
 
@@ -43,7 +52,6 @@ export default async function Home() {
     ? proximoCampeonato.nome
     : "Calendário a definir";
 
-  // 2. DADOS DO PÓDIO E NOTÍCIAS
   const rankingCompleto = await gerarRanking();
   const top3 = rankingCompleto.slice(0, 3);
 
@@ -58,7 +66,6 @@ export default async function Home() {
     orderBy: { data: "desc" },
   });
 
-  // Prepara as URLs (Evita erro no JSX)
   const imgTop1 = top3[0] ? formatarFoto(top3[0].fotoUrl) : null;
   const imgTop2 = top3[1] ? formatarFoto(top3[1].fotoUrl) : null;
   const imgTop3 = top3[2] ? formatarFoto(top3[2].fotoUrl) : null;
@@ -68,18 +75,16 @@ export default async function Home() {
 
   return (
     <main className="min-h-screen pb-12 bg-[#0a0a0a]">
-      {/* HERO SECTION DINÂMICA COM LINK PARA CALENDÁRIO */}
       <Link href="/calendario" className="block cursor-pointer group">
         <section className="bg-black border-b-4 border-leao-vermelho py-10 text-center relative overflow-hidden shadow-xl z-10 hover:bg-[#0f0f0f] transition-colors">
           <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-40 mix-blend-overlay"></div>
-
-          {/* Efeito Hover: Borda Amarela sutil ao passar o mouse */}
           <div className="absolute top-0 left-0 w-full h-1 bg-transparent group-hover:bg-leao-amarelo transition-colors duration-500"></div>
 
           <div className="relative z-10 flex flex-col items-center">
             <div className="inline-flex items-center gap-2 bg-zinc-900/80 border border-zinc-700 px-4 py-1 rounded-full text-zinc-400 text-[10px] font-bold tracking-[3px] uppercase mb-2 group-hover:border-leao-amarelo group-hover:text-leao-amarelo transition-colors">
+              <Calendar className="w-3 h-3" />
               <span>Próxima Partida</span>
-              <span className="text-xs">↗</span>
+              <ArrowRight className="w-3 h-3" />
             </div>
 
             {proximoCampeonato ? (
@@ -105,14 +110,12 @@ export default async function Home() {
         </section>
       </Link>
 
-      {/* CONTAINER PRINCIPAL */}
       <div className="max-w-6xl mx-auto px-4 mt-12 relative z-20">
-        {/* PÓDIO */}
         {top3.length > 0 && (
           <div className="mb-16 border-b border-zinc-900/50 pb-8">
             <div className="text-center mb-16">
               <h3 className="font-barlow text-3xl uppercase font-bold text-white inline-flex items-center gap-3 before:h-px before:w-12 before:bg-zinc-700 after:h-px after:w-12 after:bg-zinc-700 tracking-wider">
-                <span className="text-leao-amarelo text-xl">♛</span>
+                <Crown className="w-6 h-6 text-leao-amarelo" />
                 <span className="text-leao-amarelo">Líderes da </span>
                 <span className="text-leao-vermelho">Temporada</span>
               </h3>
@@ -139,7 +142,7 @@ export default async function Home() {
                           className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
                         />
                       ) : (
-                        <span className="text-4xl text-zinc-600">👤</span>
+                        <UserIcon className="w-10 h-10 text-zinc-600" />
                       )}
                     </div>
                   </Link>
@@ -165,10 +168,10 @@ export default async function Home() {
                     <div className="w-10 h-10 absolute -top-3 -right-3 bg-leao-amarelo text-black rounded-full flex items-center justify-center font-black text-lg border-4 border-[#0a0a0a] z-10 shadow-md">
                       1º
                     </div>
-                    <div className="absolute -top-10 left-1/2 -translate-x-1/2 text-4xl text-leao-amarelo drop-shadow-md animate-pulse">
-                      ♔
+                    <div className="absolute -top-10 left-1/2 -translate-x-1/2 text-leao-amarelo drop-shadow-md animate-pulse">
+                      <Crown className="w-10 h-10" />
                     </div>
-                    <div className="w-32 h-32 md:w-36 md:h-36 rounded-full border-4 border-leao-amarelo overflow-hidden bg-zinc-900 shadow-[0_0_30px_rgba(255,215,0,0.2)] ring-4 ring-leao-amarelo/10 ring-offset-4 ring-offset-black group-hover:ring-leao-amarelo/40 transition-all flex items-center justify-center">
+                    <div className="w-32 h-32 md:w-36 md:h-36 rounded-full border-4 border-leao-vermelho overflow-hidden bg-zinc-900 shadow-[0_0_30px_rgba(255,215,0,0.2)] ring-4 ring-leao-vermelho/30 ring-offset-4 ring-offset-black group-hover:ring-leao-vermelho/60 transition-all flex items-center justify-center">
                       {imgTop1 ? (
                         // eslint-disable-next-line @next/next/no-img-element
                         <img
@@ -178,7 +181,7 @@ export default async function Home() {
                           className="w-full h-full object-cover"
                         />
                       ) : (
-                        <span className="text-5xl text-zinc-600">👤</span>
+                        <UserIcon className="w-12 h-12 text-zinc-600" />
                       )}
                     </div>
                   </Link>
@@ -214,7 +217,7 @@ export default async function Home() {
                           className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
                         />
                       ) : (
-                        <span className="text-4xl text-zinc-600">👤</span>
+                        <UserIcon className="w-10 h-10 text-zinc-600" />
                       )}
                     </div>
                   </Link>
@@ -233,9 +236,7 @@ export default async function Home() {
           </div>
         )}
 
-        {/* RESTO DO CONTEÚDO */}
         <div className="grid lg:grid-cols-2 gap-10 mt-8">
-          {/* ÚLTIMOS JOGOS */}
           <div>
             <div className="flex items-center justify-between mb-6 border-l-4 border-leao-vermelho pl-4 bg-gradient-to-r from-zinc-900 to-transparent py-2 rounded-r-lg">
               <h3 className="font-barlow text-2xl uppercase font-bold tracking-wide text-leao-amarelo">
@@ -245,7 +246,7 @@ export default async function Home() {
                 href="/ranking"
                 className="text-[10px] font-bold text-zinc-400 hover:text-leao-amarelo uppercase tracking-wider flex items-center gap-1 transition-colors border border-zinc-800 px-2 py-0.5 rounded hover:border-leao-amarelo"
               >
-                Ver Ranking →
+                Ver Ranking <ArrowRight className="w-3 h-3" />
               </Link>
             </div>
 
@@ -258,8 +259,12 @@ export default async function Home() {
                   }`}
                 >
                   <div className="flex items-center gap-4">
-                    <div className="w-10 h-10 bg-zinc-900 rounded flex items-center justify-center text-lg group-hover:scale-105 transition-transform shadow-inner border border-zinc-800">
-                      {jogo.campeonato.tipo.includes("PE") ? "🏆" : "⚽"}
+                    <div className="w-10 h-10 bg-zinc-900 rounded flex items-center justify-center text-zinc-500 group-hover:scale-105 transition-transform shadow-inner border border-zinc-800">
+                      {jogo.campeonato.tipo.includes("PE") ? (
+                        <Trophy className="w-5 h-5" />
+                      ) : (
+                        <Gamepad2 className="w-5 h-5" />
+                      )}
                     </div>
                     <div>
                       <Link
@@ -291,7 +296,6 @@ export default async function Home() {
             </div>
           </div>
 
-          {/* DESTAQUE */}
           <div>
             <div className="flex items-center justify-between mb-6 border-l-4 border-leao-vermelho pl-4 bg-gradient-to-r from-zinc-900 to-transparent py-2 rounded-r-lg">
               <h3 className="font-barlow text-2xl uppercase font-bold tracking-wide text-leao-amarelo">
@@ -301,7 +305,7 @@ export default async function Home() {
                 href="/noticias"
                 className="text-[10px] font-bold text-zinc-400 hover:text-leao-amarelo uppercase tracking-wider flex items-center gap-1 transition-colors border border-zinc-800 px-2 py-0.5 rounded hover:border-leao-amarelo"
               >
-                Mais Notícias →
+                Mais Notícias <ArrowRight className="w-3 h-3" />
               </Link>
             </div>
 
@@ -321,7 +325,7 @@ export default async function Home() {
                       className="w-full h-full object-cover group-hover:scale-105 group-hover:rotate-1 transition-transform duration-700 ease-out"
                     />
                   ) : (
-                    <span className="text-5xl grayscale opacity-20">📰</span>
+                    <ImageIcon className="w-16 h-16 text-zinc-700" />
                   )}
 
                   <div className="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-transparent opacity-90"></div>
@@ -341,7 +345,7 @@ export default async function Home() {
               </Link>
             ) : (
               <div className="h-64 bg-[#111] border border-dashed border-zinc-800 rounded-2xl flex flex-col items-center justify-center text-zinc-500 gap-3">
-                <span className="text-4xl grayscale opacity-30">📰</span>
+                <ImageIcon className="w-10 h-10 opacity-30" />
                 <p className="font-bold uppercase text-xs tracking-widest opacity-50">
                   Sem notícias no momento.
                 </p>

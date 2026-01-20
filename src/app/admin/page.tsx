@@ -1,45 +1,65 @@
 import Link from "next/link";
+import {
+  ClipboardList,
+  Trophy,
+  Users,
+  Newspaper,
+  Award,
+  ShieldCheck,
+} from "lucide-react";
 
 export default async function AdminDashboard() {
   const menuItems = [
     {
       label: "Lançar Súmula",
-      icon: <span className="text-4xl">📝 </span>,
+      icon: (
+        <ClipboardList className="w-8 h-8 opacity-80 group-hover:opacity-100 text-leao-vermelho" />
+      ),
       desc: "Resultados & Estatísticas",
       href: "/admin/resultados",
       color: "border-red-900 bg-red-900/10",
     },
     {
       label: "Campeonatos",
-      icon: <span className="text-4xl">⚽</span>,
+      icon: (
+        <Trophy className="w-8 h-8 opacity-80 group-hover:opacity-100 text-zinc-300" />
+      ),
       desc: "Criar competições",
       href: "/admin/campeonatos",
       color: "border-zinc-800 bg-zinc-900",
     },
     {
       label: "Botonistas",
-      icon: <span className="text-4xl">👤</span>,
+      icon: (
+        <Users className="w-8 h-8 opacity-80 group-hover:opacity-100 text-zinc-300" />
+      ),
       desc: "Gerenciar elenco",
       href: "/admin/jogadores",
       color: "border-zinc-800 bg-zinc-900",
     },
     {
       label: "Notícias",
-      icon: <span className="text-4xl">📰</span>,
+      icon: (
+        <Newspaper className="w-8 h-8 opacity-80 group-hover:opacity-100 text-zinc-300" />
+      ),
       desc: "Publicar no Boletim",
       href: "/admin/noticias",
       color: "border-zinc-800 bg-zinc-900",
     },
     {
       label: "Sala de Troféus",
-      icon: <span className="text-4xl">🏆</span>,
+      icon: (
+        <Award className="w-8 h-8 opacity-80 group-hover:opacity-100 text-zinc-300" />
+      ),
       desc: "Gerenciar Conquistas",
       href: "/admin/trofeus",
       color: "border-zinc-800 bg-zinc-900",
     },
     {
       label: "Usuários",
-      icon: <span className="text-4xl">🔐</span>,
+      icon: (
+        <ShieldCheck className="w-8 h-8 opacity-80 group-hover:opacity-100 text-zinc-300" />
+      ),
       desc: "Criar Contas de Acesso",
       href: "/admin/usuarios",
       color: "border-zinc-800 bg-zinc-900",
@@ -50,7 +70,10 @@ export default async function AdminDashboard() {
     <div className="min-h-screen bg-[#0a0a0a] p-8 pt-10">
       <div className="max-w-6xl mx-auto">
         <h1 className="font-barlow text-4xl text-white uppercase font-bold mb-2 flex items-center gap-3">
-          <span className="text-zinc-500">⚙️</span> Painel de Controle
+          <span className="text-zinc-500">
+            <ShieldCheck className="w-8 h-8" />
+          </span>{" "}
+          Painel de Controle
         </h1>
         <p className="text-zinc-500 mb-12 uppercase tracking-widest text-sm">
           Gerenciamento do Departamento

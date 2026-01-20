@@ -1,6 +1,7 @@
 import { prisma } from "@/lib/prisma";
 import { salvarResultado, excluirResultado } from "./actions";
 import Link from "next/link";
+import { ArrowLeft, ClipboardList, Pencil, Trash2 } from "lucide-react";
 
 export default async function AdminResultados({
   searchParams,
@@ -28,9 +29,9 @@ export default async function AdminResultados({
         <div className="flex items-center gap-4 mb-8">
           <Link
             href="/admin"
-            className="text-2xl hover:scale-110 transition-transform"
+            className="text-2xl hover:scale-110 transition-transform text-zinc-400 hover:text-white"
           >
-            ⬅️
+            <ArrowLeft className="w-8 h-8" />
           </Link>
           <h1 className="font-barlow text-4xl text-leao-amarelo uppercase font-bold">
             Lançar Súmula
@@ -44,7 +45,17 @@ export default async function AdminResultados({
         >
           <div className="flex justify-between items-center mb-6 border-b border-zinc-700 pb-4">
             <h3 className="text-white font-bold uppercase text-lg flex items-center gap-2">
-              {itemEdit ? `✏️ Editando Lançamento` : "📝 Novo Resultado"}
+              {itemEdit ? (
+                <>
+                  <Pencil className="w-5 h-5 text-leao-amarelo" /> Editando
+                  Lançamento
+                </>
+              ) : (
+                <>
+                  <ClipboardList className="w-5 h-5 text-leao-amarelo" /> Novo
+                  Resultado
+                </>
+              )}
             </h3>
             {itemEdit && (
               <Link
@@ -238,7 +249,7 @@ export default async function AdminResultados({
                   href={`/admin/resultados?editId=${r.id}`}
                   className="p-2 bg-zinc-800 text-zinc-300 hover:text-white rounded hover:bg-zinc-700 transition-colors"
                 >
-                  ✏️
+                  <Pencil className="w-4 h-4" />
                 </Link>
 
                 <form
@@ -248,7 +259,7 @@ export default async function AdminResultados({
                   }}
                 >
                   <button className="p-2 bg-red-900/20 text-red-500 hover:text-red-400 rounded hover:bg-red-900/40 transition-colors cursor-pointer">
-                    🗑️
+                    <Trash2 className="w-4 h-4" />
                   </button>
                 </form>
               </div>

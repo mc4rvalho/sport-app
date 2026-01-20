@@ -2,7 +2,7 @@
 
 import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
-import { hash } from "bcryptjs";
+import { hash } from "bcryptjs"; // Importante
 import { verificarAdmin } from "@/lib/auth";
 
 export async function salvarUsuario(formData: FormData) {
@@ -22,23 +22,24 @@ export async function salvarUsuario(formData: FormData) {
         role,
       };
 
+    // SE tiver senha digitada, criptografa
     if (senha) {
-      data.senha = await hash(senha, 8);
+      data.senha = await hash(senha, 10);
     }
 
     if (id) {
+      // Edição: só atualiza senha se o usuário digitou nova
       await prisma.usuario.update({ where: { id }, data });
     } else {
-      if (!senha) return; // Senha obrigatória na criação
-      data.senha = await hash(senha, 8);
-      // Usando 'any' de forma controlada apenas na criação
+      // Criação: senha é obrigatória
+      if (!senha) return;
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       await prisma.usuario.create({ data: data as any });
     }
 
     revalidatePath("/admin/usuarios");
   } catch (error) {
-    console.error("Erro ao salvar:", error);
+    console.error("Erro ao salvar usuário:", error);
   }
 }
 

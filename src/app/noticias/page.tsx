@@ -1,5 +1,6 @@
 import { prisma } from "@/lib/prisma";
 import { Metadata } from "next";
+import { Image as ImageIcon, CalendarDays, ExternalLink } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Notícias | Sport Club do Recife - Futebol de Mesa",
@@ -19,7 +20,7 @@ function formatarImagem(url: string | null | undefined) {
   if (url.includes("drive.google.com") && url.includes("/file/d/")) {
     try {
       const id = url.split("/file/d/")[1].split("/")[0];
-      return `https://drive.google.com/thumbnail?id=${id}&sz=w200`;
+      return `https://drive.google.com/thumbnail?id=${id}&sz=w1000`;
     } catch {
       return url;
     }
@@ -72,11 +73,12 @@ export default async function NoticiasPage() {
                       className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-700"
                     />
                   ) : (
-                    <div className="w-full h-full flex items-center justify-center bg-zinc-900/50">
-                      <span className="text-5xl grayscale opacity-20">🦁</span>
+                    <div className="w-full h-full flex items-center justify-center bg-zinc-900/50 text-zinc-700">
+                      <ImageIcon className="w-16 h-16" />
                     </div>
                   )}
-                  <div className="absolute top-4 left-4 bg-leao-vermelho text-white text-xs font-bold uppercase px-3 py-1.5 rounded-full shadow-lg z-10">
+                  <div className="absolute top-4 left-4 bg-leao-vermelho text-white text-xs font-bold uppercase px-3 py-1.5 rounded-full shadow-lg z-10 flex items-center gap-1">
+                    <CalendarDays className="w-3 h-3" />
                     {formatarData(noticia.data)}
                   </div>
                 </div>
@@ -94,7 +96,7 @@ export default async function NoticiasPage() {
                       rel="noopener noreferrer"
                       className="inline-flex items-center gap-2 text-leao-amarelo font-bold uppercase text-sm tracking-wider hover:underline w-fit"
                     >
-                      Leia mais <span className="text-lg">↗</span>
+                      Leia mais <ExternalLink className="w-4 h-4" />
                     </a>
                   )}
                 </div>

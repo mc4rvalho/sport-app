@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import { Mail, MapPin, BadgeDollarSign } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Contato | Sport Club do Recife",
@@ -7,7 +8,7 @@ export const metadata: Metadata = {
 
 export default function ContatoPage() {
   return (
-    <main className="min-h-screen py-20 px-6">
+    <main className="min-h-screen py-20 px-6 bg-[#0a0a0a]">
       <div className="max-w-5xl mx-auto">
         <div className="text-center mb-16">
           <h1 className="text-5xl text-leao-amarelo uppercase font-black mb-2">
@@ -21,10 +22,10 @@ export default function ContatoPage() {
         <div className="grid md:grid-cols-2 gap-12 bg-[#111] p-8 md:p-12 rounded-2xl border border-zinc-800 shadow-2xl">
           <div className="flex flex-col justify-center space-y-10">
             <div>
-              <h3 className="text-leao-amarelo font-barlow text-2xl font-bold uppercase mb-3">
-                Sala Otávio Coutinho
+              <h3 className="text-leao-amarelo font-barlow text-2xl font-bold uppercase mb-3 flex items-center gap-2">
+                <MapPin className="w-6 h-6" /> Sala Otávio Coutinho
               </h3>
-              <p className="text-zinc-400 leading-relaxed text-sm">
+              <p className="text-zinc-400 leading-relaxed text-sm ml-8">
                 Av. Sport Club do Recife
                 <br />
                 Ilha do Retiro, Recife - PE
@@ -33,17 +34,18 @@ export default function ContatoPage() {
               </p>
             </div>
             <div>
-              <h3 className="text-leao-vermelho font-barlow text-2xl font-bold uppercase mb-3">
-                Seja Patrocinador
+              <h3 className="text-leao-vermelho font-barlow text-2xl font-bold uppercase mb-3 flex items-center gap-2">
+                <BadgeDollarSign className="w-6 h-6" /> Seja Patrocinador
               </h3>
-              <p className="text-zinc-400 leading-relaxed text-sm">
+              <p className="text-zinc-400 leading-relaxed text-sm ml-8">
                 Associe sua marca ao maior clube do Nordeste. Preencha o
                 formulário e selecione o assunto &quot;Patrocínio&quot;.
               </p>
             </div>
             <div className="pt-4 border-t border-zinc-800">
-              <span className="text-zinc-500 text-xs font-bold uppercase block mb-1">
-                E-mail Direto
+              {/* CORREÇÃO CSS: Removido 'block' para evitar conflito com 'flex' */}
+              <span className="text-zinc-500 text-xs font-bold uppercase mb-1 flex items-center gap-2">
+                <Mail className="w-4 h-4" /> E-mail Direto
               </span>
               <a
                 href="mailto:futmesa@sportrecife.com.br"

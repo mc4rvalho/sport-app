@@ -1,6 +1,14 @@
 import { prisma } from "@/lib/prisma";
 import { salvarConquista, excluirConquista } from "./actions";
 import Link from "next/link";
+import {
+  ArrowLeft,
+  Trophy,
+  Image as ImageIcon,
+  Pencil,
+  Trash2,
+  Calendar,
+} from "lucide-react";
 
 function formatarImagem(url: string | null | undefined) {
   if (!url) return "";
@@ -34,9 +42,9 @@ export default async function AdminTrofeus({
         <div className="flex items-center gap-4 mb-8">
           <Link
             href="/admin"
-            className="text-2xl hover:scale-110 transition-transform"
+            className="text-2xl hover:scale-110 transition-transform text-zinc-400 hover:text-white"
           >
-            ⬅️
+            <ArrowLeft className="w-8 h-8" />
           </Link>
           <h1 className="font-barlow text-4xl text-leao-amarelo uppercase font-bold">
             Sala de Troféus
@@ -50,7 +58,16 @@ export default async function AdminTrofeus({
         >
           <div className="flex justify-between items-center mb-6 border-b border-zinc-700 pb-4">
             <h3 className="text-white font-bold uppercase text-lg flex items-center gap-2">
-              {itemEdit ? `✏️ Editando Taça` : "🏆 Adicionar Taça"}
+              {itemEdit ? (
+                <>
+                  <Pencil className="w-5 h-5 text-leao-amarelo" /> Editando Taça
+                </>
+              ) : (
+                <>
+                  <Trophy className="w-5 h-5 text-leao-amarelo" /> Adicionar
+                  Taça
+                </>
+              )}
             </h3>
             {itemEdit && (
               <Link
@@ -69,8 +86,8 @@ export default async function AdminTrofeus({
             <input type="hidden" name="id" value={itemEdit?.id || ""} />
 
             <div className="md:col-span-2">
-              <label className="text-xs text-zinc-500 uppercase font-bold block mb-2 tracking-wider">
-                Nome da Conquista
+              <label className="text-xs text-zinc-500 uppercase font-bold mb-2 tracking-wider flex items-center gap-2">
+                <Trophy className="w-3 h-3" /> Nome da Conquista
               </label>
               <input
                 name="nome"
@@ -82,8 +99,8 @@ export default async function AdminTrofeus({
             </div>
 
             <div>
-              <label className="text-xs text-zinc-500 uppercase font-bold block mb-2 tracking-wider">
-                Ano
+              <label className="text-xs text-zinc-500 uppercase font-bold mb-2 tracking-wider flex items-center gap-2">
+                <Calendar className="w-3 h-3" /> Ano
               </label>
               <input
                 name="ano"
@@ -110,8 +127,8 @@ export default async function AdminTrofeus({
             </div>
 
             <div className="md:col-span-3">
-              <label className="text-xs text-zinc-500 uppercase font-bold block mb-2 tracking-wider">
-                URL da Imagem
+              <label className="text-xs text-zinc-500 uppercase font-bold mb-2 tracking-wider flex items-center gap-2">
+                <ImageIcon className="w-3 h-3" /> URL da Imagem
               </label>
               <input
                 name="imagemUrl"
@@ -152,7 +169,7 @@ export default async function AdminTrofeus({
                       className="h-full object-contain drop-shadow-md"
                     />
                   ) : (
-                    <span className="text-5xl grayscale opacity-30">🏆</span>
+                    <Trophy className="w-10 h-10 text-zinc-700" />
                   )}
                 </div>
 
@@ -174,7 +191,7 @@ export default async function AdminTrofeus({
                     className="p-1.5 hover:bg-zinc-700 rounded text-zinc-300 hover:text-white transition-colors"
                     title="Editar"
                   >
-                    ✏️
+                    <Pencil className="w-3 h-3" />
                   </Link>
                   <form
                     action={async () => {
@@ -186,7 +203,7 @@ export default async function AdminTrofeus({
                       className="p-1.5 hover:bg-red-900/50 rounded text-red-500 hover:text-red-400 transition-colors cursor-pointer"
                       title="Excluir"
                     >
-                      🗑️
+                      <Trash2 className="w-3 h-3" />
                     </button>
                   </form>
                 </div>

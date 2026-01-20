@@ -1,6 +1,14 @@
 import { prisma } from "@/lib/prisma";
 import { salvarBotonista, excluirBotonista } from "./actions";
 import Link from "next/link";
+import {
+  ArrowLeft,
+  User,
+  Link as LinkIcon,
+  Pencil,
+  Trash2,
+  UserPlus,
+} from "lucide-react";
 
 function formatarFoto(url: string | null | undefined) {
   if (!url) return "";
@@ -38,9 +46,9 @@ export default async function AdminJogadores({
         <div className="flex items-center gap-4 mb-8">
           <Link
             href="/admin"
-            className="text-2xl hover:scale-110 transition-transform"
+            className="text-2xl hover:scale-110 transition-transform text-zinc-400 hover:text-white"
           >
-            ⬅️
+            <ArrowLeft className="w-8 h-8" />
           </Link>
           <h1 className="font-barlow text-4xl text-leao-amarelo uppercase font-bold">
             Gerenciar Elenco
@@ -56,9 +64,17 @@ export default async function AdminJogadores({
         >
           <div className="flex justify-between items-center mb-6 border-b border-zinc-700 pb-4">
             <h3 className="text-white font-bold uppercase text-lg flex items-center gap-2">
-              {jogadorEditando
-                ? `✏️ Editando: ${jogadorEditando.nome}`
-                : "➕ Novo Contratado"}
+              {jogadorEditando ? (
+                <>
+                  <Pencil className="w-5 h-5 text-leao-amarelo" />
+                  Editando: {jogadorEditando.nome}
+                </>
+              ) : (
+                <>
+                  <UserPlus className="w-5 h-5 text-leao-amarelo" />
+                  Novo Contratado
+                </>
+              )}
             </h3>
             {jogadorEditando && (
               <Link
@@ -116,8 +132,9 @@ export default async function AdminJogadores({
             </div>
 
             <div className="md:col-span-2 bg-zinc-900/50 p-5 rounded-lg border border-zinc-800 border-dashed mt-2">
-              <label className="text-xs text-leao-amarelo uppercase font-bold block mb-2 tracking-wider">
-                🔐 Vincular Login (Área do Atleta)
+              {/* CORREÇÃO CSS: Removido 'block' para evitar conflito com 'flex' */}
+              <label className="text-xs text-leao-amarelo uppercase font-bold mb-2 tracking-wider flex items-center gap-2">
+                <LinkIcon className="w-3 h-3" /> Vincular Login (Área do Atleta)
               </label>
               <p className="text-[10px] text-zinc-500 mb-3">
                 Digite o e-mail do usuário cadastrado para que ele veja este
@@ -164,7 +181,7 @@ export default async function AdminJogadores({
                       className="w-full h-full object-cover"
                     />
                   ) : (
-                    <span className="text-2xl text-zinc-600">👤</span>
+                    <User className="w-8 h-8 text-zinc-600" />
                   )}
                 </div>
 
@@ -177,7 +194,7 @@ export default async function AdminJogadores({
                   </span>
                   {j.usuario ? (
                     <div className="text-[9px] text-green-500 flex items-center gap-1 mt-1 font-mono font-bold">
-                      🔗 {j.usuario.email}
+                      <LinkIcon className="w-2 h-2" /> {j.usuario.email}
                     </div>
                   ) : (
                     <div className="text-[9px] text-zinc-600 mt-1 block font-mono">
@@ -189,9 +206,9 @@ export default async function AdminJogadores({
                 <div className="flex flex-col gap-2">
                   <Link
                     href={`/admin/jogadores?editId=${j.id}`}
-                    className="bg-zinc-800 hover:bg-zinc-700 text-white text-[10px] uppercase font-bold px-3 py-1.5 rounded text-center transition-colors"
+                    className="bg-zinc-800 hover:bg-zinc-700 text-white text-[10px] uppercase font-bold px-3 py-1.5 rounded text-center transition-colors flex justify-center items-center gap-1"
                   >
-                    Editar
+                    <Pencil className="w-3 h-3" /> Editar
                   </Link>
 
                   <form
@@ -200,8 +217,8 @@ export default async function AdminJogadores({
                       await excluirBotonista(j.id);
                     }}
                   >
-                    <button className="bg-red-900/20 hover:bg-red-900 text-red-500 hover:text-white text-[10px] uppercase font-bold px-3 py-1.5 rounded w-full transition-colors cursor-pointer">
-                      Demitir
+                    <button className="bg-red-900/20 hover:bg-red-900 text-red-500 hover:text-white text-[10px] uppercase font-bold px-3 py-1.5 rounded w-full transition-colors cursor-pointer flex justify-center items-center gap-1">
+                      <Trash2 className="w-3 h-3" /> Demitir
                     </button>
                   </form>
                 </div>

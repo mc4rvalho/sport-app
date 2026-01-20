@@ -1,7 +1,14 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { prisma } from "@/lib/prisma";
 import { salvarCampeonato, excluirCampeonato } from "./actions";
 import Link from "next/link";
+import {
+  ArrowLeft,
+  Calendar,
+  MapPin,
+  Pencil,
+  Trash2,
+  Trophy,
+} from "lucide-react";
 
 export default async function AdminCampeonatos({
   searchParams,
@@ -23,9 +30,9 @@ export default async function AdminCampeonatos({
         <div className="flex items-center gap-4 mb-8">
           <Link
             href="/admin"
-            className="text-2xl hover:scale-110 transition-transform"
+            className="text-2xl hover:scale-110 transition-transform text-zinc-400 hover:text-white"
           >
-            ⬅️
+            <ArrowLeft className="w-8 h-8" />
           </Link>
           <h1 className="font-barlow text-4xl text-leao-amarelo uppercase font-bold">
             Campeonatos
@@ -39,9 +46,17 @@ export default async function AdminCampeonatos({
         >
           <div className="flex justify-between items-center mb-6 border-b border-zinc-700 pb-4">
             <h3 className="text-white font-bold uppercase text-lg flex items-center gap-2">
-              {campEditando
-                ? `✏️ Editando: ${campEditando.nome}`
-                : "🏆 Nova Competição"}
+              {campEditando ? (
+                <>
+                  <Pencil className="w-5 h-5 text-leao-amarelo" />
+                  Editando: {campEditando.nome}
+                </>
+              ) : (
+                <>
+                  <Trophy className="w-5 h-5 text-leao-amarelo" />
+                  Nova Competição
+                </>
+              )}
             </h3>
             {campEditando && (
               <Link
@@ -78,7 +93,7 @@ export default async function AdminCampeonatos({
               </label>
               <input
                 name="local"
-                // @ts-ignore (Ignora erro se o type ainda não atualizou no TS)
+                // CORREÇÃO: Removido @ts-ignore pois o campo já existe no banco
                 defaultValue={campEditando?.local || "Ilha do Retiro"}
                 required
                 className="w-full bg-black border border-zinc-800 text-white p-3 rounded-lg focus:border-leao-amarelo outline-none transition-all placeholder:text-zinc-700"
@@ -124,7 +139,7 @@ export default async function AdminCampeonatos({
             <div className="md:col-span-2 lg:col-span-4 flex justify-end mt-2">
               <button
                 type="submit"
-                className="w-full md:w-auto bg-black text-leao-amarelo border-2 border-leao-amarelo font-black uppercase px-8 py-3 rounded-lg hover:bg-leao-vermelho hover:text-white hover:border-leao-vermelho transition-all cursor-pointer shadow-lg tracking-widest"
+                className="w-full md:w-auto bg-black text-leao-amarelo border-2 border-leao-amarelo font-black uppercase px-8 py-3 rounded-lg hover:bg-leao-vermelho hover:text-white hover:border-leao-vermelho transition-all cursor-pointer shadow-lg tracking-widest flex items-center justify-center gap-2"
               >
                 {campEditando ? "Salvar Alterações" : "Criar Campeonato"}
               </button>
@@ -146,7 +161,7 @@ export default async function AdminCampeonatos({
                       : "bg-zinc-900 text-gray-400"
                   }`}
                 >
-                  {camp.tipo.includes("PE") ? "🏆" : "⚽"}
+                  <Trophy className="w-6 h-6" />
                 </div>
                 <div>
                   <strong className="text-white block text-lg uppercase font-barlow leading-none mb-1">
@@ -156,14 +171,15 @@ export default async function AdminCampeonatos({
                     <span className="text-[10px] bg-zinc-900 text-zinc-500 px-2 py-0.5 rounded uppercase font-bold tracking-wider border border-zinc-800">
                       {camp.tipo}
                     </span>
-                    <span className="text-[10px] text-zinc-500 py-0.5 font-bold uppercase tracking-wider">
-                      📅{" "}
+                    <span className="text-[10px] text-zinc-500 py-0.5 font-bold uppercase tracking-wider flex items-center gap-1">
+                      <Calendar className="w-3 h-3" />
                       {new Date(camp.data).toLocaleDateString("pt-BR", {
                         timeZone: "UTC",
                       })}
                     </span>
-                    <span className="text-[10px] text-zinc-600 py-0.5 font-bold uppercase tracking-wider ml-1">
-                      📍 {/* @ts-ignore */}
+                    <span className="text-[10px] text-zinc-600 py-0.5 font-bold uppercase tracking-wider ml-1 flex items-center gap-1">
+                      <MapPin className="w-3 h-3" />
+                      {/* CORREÇÃO: Removido @ts-ignore */}
                       {camp.local || "Ilha do Retiro"}
                     </span>
                   </div>
@@ -175,7 +191,7 @@ export default async function AdminCampeonatos({
                   href={`/admin/campeonatos?editId=${camp.id}`}
                   className="p-2 bg-zinc-800 text-zinc-300 hover:text-white rounded hover:bg-zinc-700 transition-colors"
                 >
-                  ✏️
+                  <Pencil className="w-4 h-4" />
                 </Link>
                 <form
                   action={async () => {
@@ -184,7 +200,7 @@ export default async function AdminCampeonatos({
                   }}
                 >
                   <button className="p-2 bg-red-900/20 text-red-500 hover:text-red-400 rounded hover:bg-red-900/40 transition-colors cursor-pointer">
-                    🗑️
+                    <Trash2 className="w-4 h-4" />
                   </button>
                 </form>
               </div>

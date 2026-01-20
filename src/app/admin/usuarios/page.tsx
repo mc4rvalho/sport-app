@@ -1,6 +1,18 @@
 import { prisma } from "@/lib/prisma";
 import { salvarUsuario, excluirUsuario } from "./actions";
 import Link from "next/link";
+import {
+  ArrowLeft,
+  User,
+  Mail,
+  Lock,
+  ShieldCheck,
+  Pencil,
+  Trash2,
+  Shield,
+  Link as LinkIcon,
+  UserPlus,
+} from "lucide-react";
 
 function formatarFoto(url: string | null | undefined) {
   if (!url) return "";
@@ -36,11 +48,11 @@ export default async function AdminUsuarios({
         <div className="flex items-center gap-4 mb-8">
           <Link
             href="/admin"
-            className="text-2xl hover:scale-110 transition-transform"
+            className="text-2xl hover:scale-110 transition-transform text-zinc-400 hover:text-white"
           >
-            ⬅️
+            <ArrowLeft className="w-8 h-8" />
           </Link>
-          <h1 className="font-barlow text-4xl text-(--leao-amarelo) uppercase font-bold">
+          <h1 className="font-barlow text-4xl text-leao-amarelo uppercase font-bold">
             Controle de Acesso
           </h1>
         </div>
@@ -52,7 +64,17 @@ export default async function AdminUsuarios({
         >
           <div className="flex justify-between items-center mb-6 border-b border-zinc-700 pb-4">
             <h3 className="text-white font-bold uppercase text-lg flex items-center gap-2">
-              {userEdit ? `✏️ Editando: ${userEdit.nome}` : "👤 Novo Usuário"}
+              {userEdit ? (
+                <>
+                  <Pencil className="w-5 h-5 text-leao-amarelo" /> Editando:{" "}
+                  {userEdit.nome}
+                </>
+              ) : (
+                <>
+                  <UserPlus className="w-5 h-5 text-leao-amarelo" /> Novo
+                  Usuário
+                </>
+              )}
             </h3>
             {userEdit && (
               <Link
@@ -71,40 +93,40 @@ export default async function AdminUsuarios({
             <input type="hidden" name="id" value={userEdit?.id || ""} />
 
             <div>
-              <label className="text-xs text-zinc-500 uppercase font-bold block mb-2 tracking-wider">
-                Nome Completo
+              <label className="text-xs text-zinc-500 uppercase font-bold mb-2 tracking-wider flex items-center gap-2">
+                <User className="w-3 h-3" /> Nome Completo
               </label>
               <input
                 name="nome"
                 defaultValue={userEdit?.nome}
                 required
-                className="w-full bg-black border border-zinc-800 text-white p-3 rounded-lg focus:border-(--leao-amarelo) outline-none transition-all placeholder:text-zinc-700"
+                className="w-full bg-black border border-zinc-800 text-white p-3 rounded-lg focus:border-leao-amarelo outline-none transition-all placeholder:text-zinc-700"
                 placeholder="Ex: João Silva"
               />
             </div>
 
             <div>
-              <label className="text-xs text-zinc-500 uppercase font-bold block mb-2 tracking-wider">
-                E-mail de Login
+              <label className="text-xs text-zinc-500 uppercase font-bold mb-2 tracking-wider flex items-center gap-2">
+                <Mail className="w-3 h-3" /> E-mail de Login
               </label>
               <input
                 name="email"
                 type="email"
                 defaultValue={userEdit?.email}
                 required
-                className="w-full bg-black border border-zinc-800 text-white p-3 rounded-lg focus:border-(--leao-amarelo) outline-none transition-all placeholder:text-zinc-700"
+                className="w-full bg-black border border-zinc-800 text-white p-3 rounded-lg focus:border-leao-amarelo outline-none transition-all placeholder:text-zinc-700"
                 placeholder="joao@sport.com"
               />
             </div>
 
             <div>
-              <label className="text-xs text-zinc-500 uppercase font-bold block mb-2 tracking-wider">
-                Senha de Acesso
+              <label className="text-xs text-zinc-500 uppercase font-bold mb-2 tracking-wider flex items-center gap-2">
+                <Lock className="w-3 h-3" /> Senha de Acesso
               </label>
               <input
                 name="senha"
                 type="password"
-                className="w-full bg-black border border-zinc-800 text-white p-3 rounded-lg focus:border-(--leao-amarelo) outline-none transition-all placeholder:text-zinc-700"
+                className="w-full bg-black border border-zinc-800 text-white p-3 rounded-lg focus:border-leao-amarelo outline-none transition-all placeholder:text-zinc-700"
                 placeholder={
                   userEdit ? "Deixe em branco para manter a atual" : "******"
                 }
@@ -113,13 +135,13 @@ export default async function AdminUsuarios({
             </div>
 
             <div>
-              <label className="text-xs text-zinc-500 uppercase font-bold block mb-2 tracking-wider">
-                Nível de Permissão
+              <label className="text-xs text-zinc-500 uppercase font-bold mb-2 tracking-wider flex items-center gap-2">
+                <ShieldCheck className="w-3 h-3" /> Nível de Permissão
               </label>
               <select
                 name="role"
                 defaultValue={userEdit?.role || "USER"}
-                className="w-full bg-black border border-zinc-800 text-white p-3 rounded-lg focus:border-(--leao-amarelo) outline-none transition-all cursor-pointer"
+                className="w-full bg-black border border-zinc-800 text-white p-3 rounded-lg focus:border-leao-amarelo outline-none transition-all cursor-pointer"
               >
                 <option value="USER">Atleta (Apenas visualiza)</option>
                 <option value="ADMIN">Diretor (Acesso Total)</option>
@@ -129,7 +151,7 @@ export default async function AdminUsuarios({
             <div className="md:col-span-2 flex justify-end mt-2">
               <button
                 type="submit"
-                className="w-full md:w-auto bg-black text-(--leao-amarelo) border-2 border-(--leao-amarelo) font-black uppercase px-8 py-3 rounded-lg hover:bg-(--leao-vermelho) hover:text-white hover:border-(--leao-vermelho) transition-all cursor-pointer shadow-lg tracking-widest"
+                className="w-full md:w-auto bg-black text-leao-amarelo border-2 border-leao-amarelo font-black uppercase px-8 py-3 rounded-lg hover:bg-leao-vermelho hover:text-white hover:border-leao-vermelho transition-all cursor-pointer shadow-lg tracking-widest"
               >
                 {userEdit ? "Salvar Alterações" : "Criar Login"}
               </button>
@@ -152,7 +174,7 @@ export default async function AdminUsuarios({
                 key={user.id}
                 className={`bg-[#111] border p-5 rounded-xl flex items-center gap-4 group transition-all hover:-translate-y-1 ${
                   userEdit?.id === user.id
-                    ? "border-(--leao-amarelo) bg-yellow-900/10"
+                    ? "border-leao-amarelo bg-yellow-900/10"
                     : "border-zinc-800 hover:border-zinc-600"
                 }`}
               >
@@ -187,22 +209,23 @@ export default async function AdminUsuarios({
                       {user.nome}
                     </strong>
                     {user.role === "ADMIN" && (
-                      <span className="text-[9px] bg-red-900 text-white px-1.5 py-0.5 rounded font-bold uppercase tracking-wider">
-                        Admin
+                      <span className="text-[9px] bg-red-900 text-white px-1.5 py-0.5 rounded font-bold uppercase tracking-wider flex items-center gap-1">
+                        <Shield className="w-2 h-2" /> Admin
                       </span>
                     )}
                   </div>
-                  <span className="text-xs text-zinc-500 block truncate font-mono">
-                    {user.email}
+                  {/* CORREÇÃO CSS: Removido 'block' que conflitava com flex */}
+                  <span className="text-xs text-zinc-500 truncate font-mono flex items-center gap-1">
+                    <Mail className="w-2 h-2" /> {user.email}
                   </span>
 
                   {fotoVinculada ? (
-                    <span className="text-[9px] text-(--leao-verde) flex items-center gap-1 mt-1 font-bold uppercase">
-                      ● Atleta Vinculado
+                    <span className="text-[9px] text-leao-verde flex items-center gap-1 mt-1 font-bold uppercase">
+                      <LinkIcon className="w-2 h-2" /> Atleta Vinculado
                     </span>
                   ) : (
                     <span className="text-[9px] text-zinc-700 flex items-center gap-1 mt-1 font-bold uppercase">
-                      ○ Apenas Usuário
+                      <User className="w-2 h-2" /> Apenas Usuário
                     </span>
                   )}
                 </div>
@@ -210,9 +233,9 @@ export default async function AdminUsuarios({
                 <div className="flex flex-col gap-2">
                   <Link
                     href={`/admin/usuarios?editId=${user.id}`}
-                    className="bg-zinc-900 hover:bg-zinc-800 text-zinc-400 hover:text-white text-[10px] uppercase font-bold px-3 py-2 rounded text-center transition-colors border border-zinc-800"
+                    className="bg-zinc-900 hover:bg-zinc-800 text-zinc-400 hover:text-white text-[10px] uppercase font-bold px-3 py-2 rounded text-center transition-colors border border-zinc-800 flex justify-center items-center gap-1"
                   >
-                    Editar
+                    <Pencil className="w-3 h-3" /> Editar
                   </Link>
 
                   <form
@@ -221,8 +244,8 @@ export default async function AdminUsuarios({
                       await excluirUsuario(user.id);
                     }}
                   >
-                    <button className="bg-red-900/10 hover:bg-red-900 text-red-700 hover:text-white text-[10px] uppercase font-bold px-3 py-2 rounded w-full transition-colors cursor-pointer border border-red-900/20 hover:border-red-900">
-                      Excluir
+                    <button className="bg-red-900/10 hover:bg-red-900 text-red-700 hover:text-white text-[10px] uppercase font-bold px-3 py-2 rounded w-full transition-colors cursor-pointer border border-red-900/20 hover:border-red-900 flex justify-center items-center gap-1">
+                      <Trash2 className="w-3 h-3" /> Excluir
                     </button>
                   </form>
                 </div>
